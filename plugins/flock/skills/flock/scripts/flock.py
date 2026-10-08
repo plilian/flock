@@ -53,7 +53,19 @@ def workspace_path(value: str | Path) -> Path:
 
 
 def data_dir(workspace: Path) -> Path:
-    return workspace / ".flock"
+    workspace = workspace.resolve()
+    root = workspace / ".flock"
+    if root.is_symlink():
+        fail("Flock data directory `.flock` must not be a symbolic link.")
+    if root.exists() and not root.is_dir():
+        fail("Flock data path `.flock` exists but is not a directory.")
+    try:
+        resolved_root = root.resolve()
+    except (OSError, RuntimeError):
+        fail("Flock data directory `.flock` could not be resolved safely.")
+    if resolved_root != root:
+        fail("Flock data directory `.flock` must stay inside the selected workspace.")
+    return root
 
 
 def database_path(workspace: Path) -> Path:

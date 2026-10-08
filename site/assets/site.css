@@ -11,6 +11,10 @@
   --sans: "Manrope", Inter, ui-sans-serif, system-ui, sans-serif;
 }
 
+@font-face { font-family: "Manrope"; font-style: normal; font-weight: 400 800; font-display: swap; src: url("fonts/manrope-latin.woff2") format("woff2"); }
+@font-face { font-family: "DM Mono"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/dm-mono-400-latin.woff2") format("woff2"); }
+@font-face { font-family: "DM Mono"; font-style: normal; font-weight: 500; font-display: swap; src: url("fonts/dm-mono-500-latin.woff2") format("woff2"); }
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; font-family: var(--sans); color: var(--text); background: var(--paper); -webkit-font-smoothing: antialiased; }
@@ -215,7 +219,11 @@ h1 em,h2 em { color: var(--coral); font-style: normal; }
 .docs-content a { transition: color .2s ease, text-decoration-color .2s ease; }
 .docs-content a:hover { color: #813426; text-decoration-color: currentColor; }
 :focus-visible { outline: 2px solid var(--coral); outline-offset: 4px; }
-.reveal { transition-delay: var(--reveal-delay, 0ms); }
+.reveal { transition-delay: 0ms; }
+.reveal-delay-1 { transition-delay: 55ms; }
+.reveal-delay-2 { transition-delay: 110ms; }
+.reveal-delay-3 { transition-delay: 165ms; }
+.reveal-delay-4 { transition-delay: 220ms; }
 @keyframes grid-drift { to { background-position: 57px 57px; } }
 @keyframes visual-drift { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
 @keyframes agent-glow { 0%,100% { filter: drop-shadow(0 0 9px rgba(243,191,122,.25)); } 50% { filter: drop-shadow(0 0 18px rgba(243,191,122,.72)); } }

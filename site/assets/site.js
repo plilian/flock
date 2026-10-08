@@ -16,8 +16,7 @@
   }
 
   document.querySelectorAll('.docs-content section').forEach((section, index) => {
-    section.classList.add('reveal');
-    section.style.setProperty('--reveal-delay', `${Math.min(index * 55, 220)}ms`);
+    section.classList.add('reveal', `reveal-delay-${Math.min(index, 4)}`);
   });
   const items = document.querySelectorAll('.reveal');
   if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
