@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e12">
+  <meta name="description" content="Install Flock as a Codex plugin and learn how its graph, simulation, and privacy workflows operate.">
+  <title>Flock Docs — install and use the Codex plugin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body class="docs-page">
+  <header class="site-header docs-header">
+    <a class="brand" href="index.html" aria-label="Flock home">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg>
+      <span>Flock</span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html#workflow">Workflow</a>
+      <a href="index.html#principles">Principles</a>
+      <a href="docs.html" aria-current="page">Docs</a>
+      <a class="nav-cta" href="#install">Install plugin <span aria-hidden="true">↗</span></a>
+    </nav>
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main>
+    <section class="docs-hero">
+      <p class="eyebrow"><span class="live-dot"></span> FLOCK / DOCUMENTATION</p>
+      <h1>Start with your<br><em>Codex workspace.</em></h1>
+      <p>Install the plugin, open a workspace with your sources, and use Flock in the Codex conversation. There is no separate web app to launch.</p>
+    </section>
+
+    <div class="docs-layout">
+      <nav class="docs-toc" aria-label="Documentation sections">
+        <span>ON THIS PAGE</span>
+        <a href="#install">Install</a>
+        <a href="#first-project">First project</a>
+        <a href="#workflows">Workflows</a>
+        <a href="#simulation">Simulation engine</a>
+        <a href="#privacy">Privacy and data</a>
+        <a href="#troubleshooting">Troubleshooting</a>
+        <a href="#license">License</a>
+      </nav>
+
+      <article class="docs-content">
+        <section id="install">
+          <p class="eyebrow dark-eyebrow">01 / INSTALLATION</p>
+          <h2>Install Flock in Codex</h2>
+          <p>Flock is a Codex plugin that packages a workflow skill and a small Python helper. The model work happens in the active Codex conversation using that user's Codex account.</p>
+          <h3>Requirements</h3>
+          <ul>
+            <li>Codex desktop or Codex CLI with workspace and terminal access.</li>
+            <li>Python 3.11 or newer available to Codex. The graph helper uses only the Python standard library.</li>
+            <li>A signed-in Codex account. Each person uses their own account and its usage limits.</li>
+          </ul>
+          <div class="doc-step"><span>1</span><div><h3>Add the Flock marketplace</h3><pre><code>codex plugin marketplace add plilian/flock</code></pre></div></div>
+          <div class="doc-step"><span>2</span><div><h3>Install the plugin</h3><pre><code>codex plugin add flock@flock</code></pre></div></div>
+          <div class="doc-step"><span>3</span><div><h3>Open or restart Codex</h3><p>Start a conversation in the workspace where you want the graph and simulation files stored. Ask Codex to use Flock or invoke the <code>$flock</code> skill.</p></div></div>
+          <p class="docs-note">Installing the plugin does not run a local web server. Flock stores its own graph and run records in a <code>.flock/</code> directory inside the workspace you choose.</p>
+        </section>
+
+        <section id="first-project">
+          <p class="eyebrow dark-eyebrow">02 / FIRST PROJECT</p>
+          <h2>Initialize a workspace</h2>
+          <p>Place or attach the source documents you want Codex to analyze, then say:</p>
+          <pre><code>$flock Initialize a Flock workspace named “Transit study”.</code></pre>
+          <p>Flock creates a SQLite graph database and run directory under <code>.flock/</code>. One Codex workspace holds one Flock project; use separate workspace folders for separate projects. The generated <code>.gitignore</code> keeps graph and run data out of normal Git commits by default. Source documents stay where you put them; Flock stores source names and citations, not full copies.</p>
+        </section>
+
+        <section id="workflows">
+          <p class="eyebrow dark-eyebrow">03 / WORKFLOWS</p>
+          <h2>From evidence to a run</h2>
+          <h3>Build the graph</h3>
+          <p>Ask Codex to extract a graph from selected sources. Flock asks Codex to identify an ontology, entities, and relationships, then validates and stores source references in its SQLite graph. Inspect it with a Mermaid diagram, search, or graph statistics.</p>
+          <pre><code>$flock Build a knowledge graph from the reports in ./sources and show me its strongest relationships.</code></pre>
+          <h3>Create a synthetic population</h3>
+          <p>Describe the population and question you want to explore. Codex generates profiles grounded in graph entities and marks details that are assumptions rather than source facts.</p>
+          <h3>Explore a scenario</h3>
+          <p>Choose a Reddit-like or Twitter-like discussion, define its scenario and round count, and review the profile assumptions before a run. Codex generates each round's actions. Flock validates actions and records the feed, reactions, and engagement counts.</p>
+          <h3>Review and interview</h3>
+          <p>Codex uses the recorded timeline to write a report, answer questions, or role-play an interview with a synthetic agent. Reports keep computed counts separate from qualitative interpretation.</p>
+        </section>
+
+        <section id="simulation">
+          <p class="eyebrow dark-eyebrow">04 / SIMULATION ENGINE</p>
+          <h2>How a run works</h2>
+          <p>Flock separates model reasoning from persistent state. Codex reads the selected evidence and profiles, proposes agent actions, and writes narrative analysis. The Flock helper stores graph records, checks action formats, advances rounds, and computes activity totals.</p>
+          <ul>
+            <li><strong>Reddit-like actions:</strong> posts, comments, upvotes, downvotes, and community joins.</li>
+            <li><strong>Twitter-like actions:</strong> posts, replies, likes, reposts, and follows.</li>
+            <li><strong>Saved outputs:</strong> ontology, entities, relationships, agent profiles, round-by-round events, activity statistics, and Markdown reports.</li>
+          </ul>
+          <p class="docs-note">The simulation is an in-product, synthetic social interaction model. It is not an observation of real people, a poll, or a forecast. Results depend on the Codex model, prompts, source quality, profiles, and chosen settings.</p>
+        </section>
+
+        <section id="privacy">
+          <p class="eyebrow dark-eyebrow">05 / PRIVACY AND DATA</p>
+          <h2>Your workspace, your account</h2>
+          <ul>
+            <li>Codex processes the source excerpts and prompts needed for the requested workflow under the signed-in user's Codex account settings and policies.</li>
+            <li>The Flock helper makes no network calls and does not read Codex credentials. It stores graph and simulation data in <code>.flock/</code> in the selected workspace.</li>
+            <li>No LLM provider key, Zep key, or hosted Flock account is required.</li>
+            <li>Flock's Git configuration ignores <code>.flock/</code>. In other workspaces, the helper adds a nested ignore file so private graph data is not accidentally tracked.</li>
+            <li>Review your workspace backup and Git settings before sharing any source material or generated graph.</li>
+          </ul>
+        </section>
+
+        <section id="troubleshooting">
+          <p class="eyebrow dark-eyebrow">06 / TROUBLESHOOTING</p>
+          <h2>If something does not work</h2>
+          <h3>Codex cannot find Flock</h3>
+          <p>Check <code>codex plugin list</code>. If needed, refresh the source with <code>codex plugin marketplace upgrade flock</code>, then install or enable the plugin from the Codex Plugins panel.</p>
+          <h3>Python is missing or too old</h3>
+          <p>Install Python 3.11 or newer and make sure the <code>python</code> command resolves in the environment Codex uses. No additional graph or database package is required.</p>
+          <h3>Graph validation reports a missing source</h3>
+          <p>Make sure every entity and relationship reference uses a <code>source_id</code> that exists in the candidate graph's <code>sources</code> array. Run graph validation again before importing.</p>
+          <h3>Uninstall</h3>
+          <pre><code>codex plugin remove flock
+codex plugin marketplace remove flock</code></pre>
+          <p>Uninstalling the plugin does not delete workspace data. Remove <code>.flock/</code> yourself only after you have backed up or no longer need those graphs and runs.</p>
+        </section>
+
+        <section id="license">
+          <p class="eyebrow dark-eyebrow">07 / PROJECT</p>
+          <h2>License and attribution</h2>
+          <p>Flock is distributed under <a href="https://github.com/plilian/flock/blob/main/LICENSE">AGPL-3.0</a>. It is a substantially modified, independently maintained derivative of the open-source <a href="https://github.com/666ghj/MiroFish">MiroFish</a> project and is not endorsed by its maintainers. See the repository README for attribution and acknowledgements.</p>
+          <p><a href="https://github.com/plilian/flock">Browse the source on GitHub ↗</a> · <a href="https://github.com/plilian/flock/issues">Report a problem ↗</a></p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="docs-footer">
+    <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg><span>Flock</span></a>
+    <p>Plugin docs · English · AGPL-3.0</p>
+  </footer>
+  <script src="assets/site.js" defer></script>
+</body>
+</html>

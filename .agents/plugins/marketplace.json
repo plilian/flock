@@ -1,0 +1,16 @@
+{
+  "name": "flock",
+  "interface": {
+    "displayName": "Flock"
+  },
+  "plugins": [
+    {
+      "name": "flock",
+      "source": {
+        "source": "local",
+        "path": "./plugins/flock"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
