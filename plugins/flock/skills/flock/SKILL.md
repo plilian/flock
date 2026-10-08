@@ -27,13 +27,15 @@ Flock is a Codex-native workflow for exploring how a synthetic population could 
 1. Read the graph and source references. Ask for the scenario, population size, platform style (`reddit` or `twitter`), and number of rounds when these materially affect the result and are missing. Use conservative defaults only when the user asks you to choose.
 2. With Codex, create diverse synthetic agent profiles grounded in graph entities and sources. Clearly distinguish source-backed traits from simulated assumptions. Save a spec JSON in `.flock/staging/` and validate it with `python <helper> --workspace . simulation validate --spec <spec>`.
 3. Create a run with `python <helper> --workspace . simulation create --spec <spec>`. For each round, fetch `python <helper> --workspace . simulation prompt --id <run_id>`, use Codex reasoning to produce one JSON action per active agent, and submit the batch with `python <helper> --workspace . simulation advance --id <run_id> --actions <file>`. Follow the platform action schema and keep each agent's knowledge limited to information it has encountered in the simulation.
-4. Continue until the requested rounds complete or the user asks to stop. Never claim that synthetic behavior predicts what real people will do.
-5. Fetch `python <helper> --workspace . simulation report-data --id <run_id>`, use Codex to write an evidence-linked Markdown report, then save it with `python <helper> --workspace . simulation save-report --id <run_id> --input <report>`. Include assumptions, limits, source references, and observed synthetic outcomes.
+4. After each successful round, refresh an interactive snapshot with `python <helper> --workspace . simulation visualize --id <run_id>`. The snapshot is written to .flock/runs/<run_id>/visualization.html. Open it in the available local browser or file preview; if that is unavailable in the current Codex host, give the user its path. Refresh it again after later rounds. Do not start a web server.
+5. Continue until the requested rounds complete or the user asks to stop. Never claim that synthetic behavior predicts what real people will do.
+6. Fetch `python <helper> --workspace . simulation report-data --id <run_id>`, use Codex to write an evidence-linked Markdown report, then save it with `python <helper> --workspace . simulation save-report --id <run_id> --input <report>`. Include assumptions, limits, source references, and observed synthetic outcomes.
 
 ## Explore and interview
 
 - For graph questions, query the saved graph and cite source references. Do not invent missing nodes or relationships.
 - For questions about a run, read its actions, agent profiles, and report data first. An agent interview is a new Codex-generated interpretation of that synthetic agent's saved profile and observed history; label it as simulated.
+- When the user asks to revisit a run visually, refresh its snapshot before opening it so the displayed rounds and actions are current.
 - Export the graph or simulation only when requested. Ask before deleting a project, graph, or run.
 
 ## Privacy and model use

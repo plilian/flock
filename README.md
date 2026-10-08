@@ -29,6 +29,7 @@ Flock asks for **no LLM provider key and no Zep key**. Each person uses their ow
 | **Source-grounded graph** | An ontology, cited entities, and typed relationships in a project-owned SQLite graph. |
 | **Synthetic population** | Distinct agent profiles tied to graph entities, with assumptions marked separately from evidence. |
 | **Social simulation** | Round-based Reddit-like or Twitter-like discussions, recorded actions, reactions, and timelines. |
+| **Interactive run view** | A self-contained local HTML snapshot with round playback, the interaction graph, agent profiles, and a searchable event feed. |
 | **Report and follow-up** | A Markdown report, activity statistics, graph questions, and clearly labeled synthetic-agent interviews. |
 
 ## How it works
@@ -68,7 +69,7 @@ $flock Initialize a Flock project named “Transit study” in this workspace.
 
 Use one Codex workspace folder per Flock project. The `.flock/` database in that workspace holds its graph and simulation history.
 
-Use the plugin to build or update a graph, prepare an agent population, run a scenario, inspect the timeline, or create a report. See the [installation and workflow guide](https://plilian.github.io/flock/docs.html).
+Use the plugin to build or update a graph, prepare an agent population, run a scenario, inspect the interactive timeline, or create a report. The run view is saved as `.flock/runs/<run_id>/visualization.html` and opens directly in a browser without a server. See the [installation and workflow guide](https://plilian.github.io/flock/docs.html).
 
 ## The graph and simulation engine
 
@@ -86,7 +87,7 @@ Flock keeps the graph and simulation mechanics in its own code. It does not depe
 
 - Codex receives the source excerpts and prompts needed for the workflow under the signed-in user's Codex account settings and policies.
 - The Flock helper itself makes no network calls and does not access Codex credentials.
-- Project data is stored under `.flock/` in the workspace selected by that user: a SQLite database, staging files, simulation records, and reports. No Flock-hosted service receives it.
+- Project data is stored under `.flock/` in the workspace selected by that user: a SQLite database, staging files, simulation records, reports, and self-contained HTML visualizations. No Flock-hosted service receives it.
 - The repository `.gitignore` excludes `.flock/`; the helper adds an ignore rule inside `.flock/` for other Git workspaces.
 - Source files remain where the user placed them. The graph stores source metadata and short citations, not full document copies.
 
@@ -97,7 +98,8 @@ plugins/flock/                    Codex plugin package
   plugin.json                     Plugin identity and install metadata
   skills/flock/SKILL.md           Codex workflow
   skills/flock/references/        Graph schema and simulation guide
-  skills/flock/scripts/flock.py   Model-free graph and run store
+  skills/flock/scripts/flock.py   Model-free graph, run store, and view generator
+  skills/flock/scripts/visualizer_template.html  Offline interactive run view
 site/                             Public landing page and separate setup docs
 .agents/plugins/marketplace.json  GitHub-installable Codex marketplace
 ```
@@ -115,6 +117,7 @@ Validate a workspace graph or simulation spec before importing/starting it:
 ```bash
 python plugins/flock/skills/flock/scripts/flock.py --workspace . graph validate --input .flock/staging/graph.json
 python plugins/flock/skills/flock/scripts/flock.py --workspace . simulation validate --spec .flock/staging/run.json
+python plugins/flock/skills/flock/scripts/flock.py --workspace . simulation visualize --id <run_id>
 ```
 
 The helper is model-free by design. New AI-dependent steps belong in the Codex skill workflow; do not add API-key settings or direct provider calls.

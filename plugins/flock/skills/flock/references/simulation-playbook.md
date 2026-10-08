@@ -44,7 +44,8 @@ Use varied but plausible profiles. Do not assign real people's names or claim th
 3. Read the next round context: `python <helper> --workspace . simulation prompt --id <run_id>`.
 4. Generate one action for each agent as a JSON array. Agents act simultaneously from the feed shown at the start of the round. Do not let them react to another action from that same round. Keep each agent's voice, goals, and knowledge distinct.
 5. Save the JSON array under `.flock/staging/actions-<round>.json` and submit it: `python <helper> --workspace . simulation advance --id <run_id> --actions .flock/staging/actions-<round>.json`.
-6. Repeat until the requested rounds finish or the user stops the run. The helper reports `status: complete` at the configured round count.
+6. Refresh the visual snapshot after each completed round: `python <helper> --workspace . simulation visualize --id <run_id>`.
+7. Repeat until the requested rounds finish or the user stops the run. The helper reports `status: complete` at the configured round count.
 
 Example action batch for Reddit:
 
@@ -63,6 +64,14 @@ Example action types:
 | Twitter-like | `post`, `reply`, `like`, `repost`, `follow` | `content` for posts/replies; `target_id` for replies/reactions/follows |
 
 Posts and comments can include optional `stance` and `emotion`. Keep content suitable for a synthetic scenario. Reactions target content IDs returned by earlier rounds; each agent gets one action per round.
+
+## Visualize a run
+
+Refresh the local view after each completed round and after any later edits to the run:
+
+    python <helper> --workspace . simulation visualize --id <run_id>
+
+This writes .flock/runs/<run_id>/visualization.html by default. The self-contained snapshot has round playback, an agent inspector, an interaction graph based on recorded replies/reactions/follows, a searchable event feed, and JSON download. It embeds a point-in-time copy of the run, makes no network requests, and opens in a browser without a server. Share its path with the user and open it in the available local browser or file preview when supported.
 
 ## Report and interview
 

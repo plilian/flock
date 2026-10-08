@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "flock",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Build knowledge graphs and explore synthetic social simulations from inside Codex.",
   "author": {
     "name": "pili"
@@ -14,7 +14,7 @@
       "interface": {
         "displayName": "Flock",
         "shortDescription": "Knowledge graphs and social simulations inside Codex.",
-        "longDescription": "Turn source documents into a cited knowledge graph, simulate synthetic communities in Reddit-like or Twitter-like spaces, and create reports—all from inside Codex. Codex performs language-model reasoning in the user's session. Flock's model-free helper stores the graph and run history in the chosen Codex workspace. No provider API key, external graph service, or separate local web app is required.",
+        "longDescription": "Turn source documents into a cited knowledge graph, simulate synthetic communities in Reddit-like or Twitter-like spaces, explore interactive local visualizations, and create reports—all from inside Codex. Codex performs language-model reasoning in the user's session. Flock's model-free helper stores the graph and run history in the chosen Codex workspace. No provider API key, external graph service, or separate local web app is required.",
         "developerName": "pili",
         "category": "Productivity",
         "websiteURL": "https://plilian.github.io/flock/",

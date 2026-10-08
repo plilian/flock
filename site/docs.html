@@ -82,6 +82,8 @@
           <p>Choose a Reddit-like or Twitter-like discussion, define its scenario and round count, and review the profile assumptions before a run. Codex generates each round's actions. Flock validates actions and records the feed, reactions, and engagement counts.</p>
           <h3>Review and interview</h3>
           <p>Codex uses the recorded timeline to write a report, answer questions, or role-play an interview with a synthetic agent. Reports keep computed counts separate from qualitative interpretation.</p>
+          <h3>See the run</h3>
+          <p>After each round, Flock refreshes an interactive HTML snapshot in <code>.flock/runs/&lt;run_id&gt;/visualization.html</code>. Scrub or play rounds, inspect a synthetic profile, trace recorded replies and reactions, search the feed, and download the run data. The file opens directly in a browser and makes no external requests.</p>
         </section>
 
         <section id="simulation">
@@ -91,7 +93,7 @@
           <ul>
             <li><strong>Reddit-like actions:</strong> posts, comments, upvotes, downvotes, and community joins.</li>
             <li><strong>Twitter-like actions:</strong> posts, replies, likes, reposts, and follows.</li>
-            <li><strong>Saved outputs:</strong> ontology, entities, relationships, agent profiles, round-by-round events, activity statistics, and Markdown reports.</li>
+            <li><strong>Saved outputs:</strong> ontology, entities, relationships, agent profiles, round-by-round events, activity statistics, interactive HTML snapshots, and Markdown reports.</li>
           </ul>
           <p class="docs-note">The simulation is an in-product, synthetic social interaction model. It is not an observation of real people, a poll, or a forecast. Results depend on the Codex model, prompts, source quality, profiles, and chosen settings.</p>
         </section>

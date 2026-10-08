@@ -623,6 +623,54 @@ def report_data(workspace: Path, run_id: str) -> dict[str, Any]:
         }
 
 
+def simulation_visualize(workspace: Path, run_id: str, output: str | None = None) -> dict[str, Any]:
+    payload = report_data(workspace, run_id)
+    if output:
+        output_path = Path(output).expanduser()
+        if not output_path.is_absolute():
+            output_path = workspace / output_path
+        output_path = output_path.resolve()
+        if output_path.suffix.lower() != ".html":
+            fail("Visualization output must be an HTML file.")
+    else:
+        output_path = data_dir(workspace) / "runs" / run_id / "visualization.html"
+
+    template_path = Path(__file__).with_name("visualizer_template.html")
+    try:
+        template = template_path.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        fail(f"Visualization template is missing: {template_path}")
+    placeholder = "__FLOCK_DATA__"
+    if template.count(placeholder) != 1:
+        fail(f"Visualization template must contain exactly one {placeholder} placeholder.")
+
+    embedded_data = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+    for character, replacement in (
+        ("&", "\\u0026"),
+        ("<", "\\u003c"),
+        (">", "\\u003e"),
+        ("\u2028", "\\u2028"),
+        ("\u2029", "\\u2029"),
+    ):
+        embedded_data = embedded_data.replace(character, replacement)
+    document = template.replace(placeholder, embedded_data)
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    temporary_path = output_path.with_suffix(output_path.suffix + ".tmp")
+    temporary_path.write_text(document, encoding="utf-8")
+    temporary_path.replace(output_path)
+    return {
+        "run_id": run_id,
+        "visualization": str(output_path),
+        "self_contained": True,
+        "external_requests": 0,
+        "agents": len(payload["agents"]),
+        "events": len(payload["events"]),
+        "current_round": payload["run"]["current_round"],
+        "total_rounds": payload["run"]["total_rounds"],
+    }
+
+
 def save_report(workspace: Path, run_id: str, report_file: Path) -> dict[str, Any]:
     content = report_file.read_text(encoding="utf-8")
     if not content.strip():
@@ -679,6 +727,9 @@ def parser() -> argparse.ArgumentParser:
     report = sim_commands.add_parser("save-report")
     report.add_argument("--id", required=True)
     report.add_argument("--input", required=True)
+    visualize = sim_commands.add_parser("visualize", help="Create a self-contained interactive HTML view of a run")
+    visualize.add_argument("--id", required=True)
+    visualize.add_argument("--output", help="HTML output path; defaults to .flock/runs/<run_id>/visualization.html")
     sim_commands.add_parser("list")
     return root
 
@@ -726,6 +777,8 @@ def main(argv: list[str] | None = None) -> int:
                 result = report_data(workspace, args.id)
             elif args.simulation_command == "save-report":
                 result = save_report(workspace, args.id, Path(args.input).expanduser().resolve())
+            elif args.simulation_command == "visualize":
+                result = simulation_visualize(workspace, args.id, args.output)
             else:
                 result = run_list(workspace)
         else:
