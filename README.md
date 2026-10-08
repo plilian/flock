@@ -4,7 +4,7 @@
 
 ### Evidence in. Possibilities out.
 
-**A native plugin workflow for knowledge graphs and synthetic social simulations.**
+**A multi-host AI agent plugin for source-grounded knowledge graphs, evidence audits, and synthetic social simulations.**
 
 [Install](#install-as-a-plugin) · [How it works](#how-it-works) · [Docs site](https://flock.daalgp.com/) · [Privacy](#privacy-and-data) · [License](#license-and-attribution)
 
