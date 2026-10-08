@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0e12">
-  <meta name="description" content="Install Flock in Codex, Claude Code, Gemini CLI, Qwen Code, or DeepSeek Harness. Learn the workflow, requirements, and data model.">
+  <meta name="description" content="Install Flock in Codex, Claude Code, Gemini CLI, Qwen Code, or DeepSeek Harness. Audit graph evidence and compare synthetic scenarios.">
   <title>Flock Docs — install for your AI host</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="apple-touch-icon" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/site.css?v=0.5.0">
+  <link rel="stylesheet" href="assets/site.css?v=0.6.0">
 </head>
 <body class="docs-page">
   <header class="site-header docs-header">
@@ -41,6 +41,8 @@
         <a href="#install">Install</a>
         <a href="#first-project">First project</a>
         <a href="#workflows">Workflows</a>
+        <a href="#evidence-audit">Evidence Audit</a>
+        <a href="#scenario-lab">Scenario Lab</a>
         <a href="#simulation">Simulation engine</a>
         <a href="#privacy">Privacy and data</a>
         <a href="#troubleshooting">Troubleshooting</a>
@@ -131,24 +133,48 @@ dsh plugin --profile web add ./plugins/deepseek-harness</code></pre>
           <p>After each round, Flock refreshes an interactive HTML snapshot in <code>.flock/runs/&lt;run_id&gt;/visualization.html</code>. Scrub or play rounds, inspect a synthetic profile, trace replies and reactions, search the feed, and download the run data. It opens directly in a browser and makes no external requests.</p>
         </section>
 
+        <section id="evidence-audit">
+          <p class="eyebrow dark-eyebrow">04 / EVIDENCE AUDIT</p>
+          <h2>Trace claims to sources</h2>
+          <p>Label each graph entity and relationship as <code>observed</code>, <code>inferred</code>, or <code>assumption</code>. Older records stay <code>unclassified</code> until reviewed. The audit checks source-reference coverage, missing locators or excerpts, unused sources, and unclassified graph records.</p>
+          <pre><code>python &lt;helper&gt; --workspace . graph audit</code></pre>
+          <p>The helper saves a local JSON audit under <code>.flock/audits/</code>. Ask the active host to check the cited excerpts against the selected source documents, identify disagreements and missing viewpoints, and write a concise Markdown review beside the audit file. A citation indicates traceability; it does not verify a claim or prove the source is accurate.</p>
+          <p>During simulations, factual posts can carry graph-backed <code>evidence_refs</code>. Flock validates those IDs and saves the original source name, locator, and short excerpt with the event, so a run replay can show where a synthetic agent's factual claim came from.</p>
+        </section>
+
+        <section id="scenario-lab">
+          <p class="eyebrow dark-eyebrow">05 / SCENARIO LAB</p>
+          <h2>Compare a baseline with alternatives</h2>
+          <p>Scenario Lab starts each variant and replicate with the same synthetic profiles, platform, round count, and empty feed. Change one major condition at a time, such as whether a correction appears or a moderator intervenes. Keep run histories separate.</p>
+          <p>Save an experiment spec under <code>.flock/staging/experiment.json</code> with a research question, shared agent roster, 2–6 variants, one baseline, and 1–5 replicates per variant. Each variant includes its scenario and explicit assumptions. The number of host-model runs grows with variants × replicates × rounds × agents.</p>
+          <pre><code>python &lt;helper&gt; --workspace . scenario validate --spec .flock/staging/experiment.json
+python &lt;helper&gt; --workspace . scenario create --spec .flock/staging/experiment.json
+python &lt;helper&gt; --workspace . scenario status --id &lt;experiment_id&gt;
+python &lt;helper&gt; --workspace . scenario compare --id &lt;experiment_id&gt;
+python &lt;helper&gt; --workspace . scenario visualize --id &lt;experiment_id&gt;
+python &lt;helper&gt; --workspace . scenario save-report --id &lt;experiment_id&gt; --input .flock/staging/report.md</code></pre>
+          <p>The comparison reports computed action counts, participation, stance counts, round activity, and baseline deltas. It shows each metric's median and min/max across the saved replicates and creates an interactive comparison at <code>.flock/experiments/&lt;experiment_id&gt;/comparison.html</code>, with links to each run replay.</p>
+          <p class="docs-note">Replicate ranges summarize only these synthetic runs. They are not confidence intervals or probabilities about real-world outcomes. Keep computed counts separate from the host's interpretation and cite graph sources and run/event IDs in any written conclusions.</p>
+        </section>
+
         <section id="simulation">
-          <p class="eyebrow dark-eyebrow">04 / SIMULATION ENGINE</p>
+          <p class="eyebrow dark-eyebrow">06 / SIMULATION ENGINE</p>
           <h2>How a run works</h2>
           <p>Flock separates model reasoning from persistent state. Your host's active model reads selected evidence and profiles, proposes agent actions, and writes narrative analysis. The Python helper stores graph records, checks action formats, advances rounds, and computes activity totals.</p>
           <ul>
             <li><strong>Reddit-like actions:</strong> posts, comments, upvotes, downvotes, and community joins.</li>
             <li><strong>Twitter-like actions:</strong> posts, replies, likes, reposts, and follows.</li>
-            <li><strong>Saved outputs:</strong> ontology, entities, relationships, agent profiles, round-by-round events, activity statistics, interactive HTML snapshots, and Markdown reports.</li>
+            <li><strong>Saved outputs:</strong> evidence statuses and citations, structural audit files, agent profiles, round-by-round events, validated source references on factual actions, scenario experiments, interactive HTML comparisons, per-run replays, and Markdown reports.</li>
           </ul>
           <p class="docs-note">A Flock simulation is a structured thought experiment. It is not an observation of real people, a poll, or a forecast. Results depend on the selected model, prompts, source quality, profiles, and settings.</p>
         </section>
 
         <section id="privacy">
-          <p class="eyebrow dark-eyebrow">05 / PRIVACY AND DATA</p>
+          <p class="eyebrow dark-eyebrow">07 / PRIVACY AND DATA</p>
           <h2>Your workspace, your host</h2>
           <ul>
             <li>The selected host processes source excerpts and prompts through the user's own active session and provider setup. Its account settings, model policies, plan, and limits apply.</li>
-            <li>The Flock Python helper makes no network or model calls and does not read host credentials. It stores graph and simulation data in <code>.flock/</code> in the selected workspace.</li>
+            <li>The Flock Python helper makes no network or model calls and does not read host credentials. It stores graph data, evidence audits, scenario experiments, visualizations, and reports in <code>.flock/</code> in the selected workspace.</li>
             <li>Flock requires no separate provider API key, Zep key, or Flock account. Some host configurations may require their own provider credentials.</li>
             <li>The public website serves information and installation instructions. Simulations run in each user's workspace; the Flock website server does not receive project sources, graphs, or run history.</li>
             <li>Review your workspace backups and Git settings before sharing source material or generated graphs.</li>
@@ -156,7 +182,7 @@ dsh plugin --profile web add ./plugins/deepseek-harness</code></pre>
         </section>
 
         <section id="troubleshooting">
-          <p class="eyebrow dark-eyebrow">06 / TROUBLESHOOTING</p>
+          <p class="eyebrow dark-eyebrow">08 / TROUBLESHOOTING</p>
           <h2>If something does not work</h2>
           <h3>The host cannot find Flock</h3>
           <p>Confirm the package installed successfully and restart the host. In Codex, check <code>codex plugin list</code>; in Claude Code, check <code>/plugin</code>; in Gemini CLI and Qwen Code, check their extension list commands. DeepSeek Harness plugins are still in developer preview.</p>
@@ -169,7 +195,7 @@ dsh plugin --profile web add ./plugins/deepseek-harness</code></pre>
         </section>
 
         <section id="license">
-          <p class="eyebrow dark-eyebrow">07 / PROJECT</p>
+          <p class="eyebrow dark-eyebrow">09 / PROJECT</p>
           <h2>License and attribution</h2>
           <p>Flock is distributed under <a href="https://github.com/plilian/flock/blob/main/LICENSE">AGPL-3.0</a>. It is an independently maintained, substantially modified derivative of the open-source <a href="https://github.com/666ghj/MiroFish">MiroFish</a> project. Flock replaces the earlier web-app delivery and Zep-backed graph workflow with native packages for supported agent hosts and a workspace-local SQLite graph. Flock is not affiliated with or endorsed by MiroFish or its maintainers. See the <a href="https://github.com/plilian/flock/blob/main/ATTRIBUTION.md">attribution notice</a> for project lineage.</p>
           <p><a href="https://github.com/plilian/flock">Browse the source on GitHub ↗</a> · <a href="https://github.com/plilian/flock/issues">Report a problem ↗</a></p>

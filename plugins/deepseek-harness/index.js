@@ -14,7 +14,7 @@ export const inject = ['skills'];
 export function apply(ctx) {
   ctx.skills.register({
     name: 'flock',
-    description: 'Build source-grounded knowledge graphs and run synthetic social scenario simulations.',
+    description: 'Audit source evidence and compare controlled synthetic social scenarios.',
     content: `${skillContent}\n\n## Installed helper path\n\nThe Flock Python helper for this installation is at \`${helperPath}\`. Run it from the user's selected workspace with \`--workspace .\`.`,
     path: skillPath,
   });

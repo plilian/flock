@@ -1,7 +1,7 @@
 {
   "name": "flock",
-  "version": "0.5.0",
-  "description": "Source-grounded knowledge graphs and synthetic social simulations for Qwen Code.",
+  "version": "0.6.0",
+  "description": "Audited source graphs and controlled synthetic scenario comparisons for Qwen Code.",
   "contextFileName": "QWEN.md",
   "skills": "skills"
 }

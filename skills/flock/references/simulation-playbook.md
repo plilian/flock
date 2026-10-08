@@ -65,6 +65,56 @@ Example action types:
 
 Posts and comments can include optional `stance` and `emotion`. Keep content suitable for a synthetic scenario. Reactions target content IDs returned by earlier rounds; each agent gets one action per round.
 
+For a source-grounded factual claim, an action may include graph `evidence_refs`. Use only IDs that appear in the agent's `grounding` records in `simulation prompt`:
+
+```json
+{"agent_id":"resident-01","type":"post","content":"The late service change affects the east branch.","stance":"concerned","evidence_refs":[{"record_type":"entity","record_id":"entity-transit-riders","source_id":"src-report-2026"}]}
+```
+
+The helper verifies that the source is cited by that graph record, rejects assumptions as source evidence, and saves the source name, locator, and short excerpt alongside the event. Do not add a reference to opinions, generated details, or claims without graph support. Replies already link to their target content in the recorded event graph.
+
+## Compare variants with Scenario Lab
+
+Build the agent roster once, then compare a baseline with focused alternatives. Each variant contains an independent scenario; the experiment begins with this shared configuration:
+
+```json
+{
+  "title": "Transit proposal response",
+  "research_question": "How does a correction change the discussion?",
+  "platform": "reddit",
+  "rounds": 4,
+  "replicates": 3,
+  "agents": [
+    {"id":"resident-01","name":"Maya Chen","persona":"A bus rider who follows local planning news.","source_entities":["entity-transit-riders"],"beliefs":["Reliable service matters."],"goals":["Understand the effect on her route."],"assumptions":["Lives near the east branch."]},
+    {"id":"shop-owner-01","name":"Ravi Patel","persona":"A shop owner near the proposed corridor.","source_entities":["entity-corridor-merchants"],"beliefs":["Construction may disrupt visits."],"goals":["Understand the construction plan."],"assumptions":["Runs a small shop."]}
+  ],
+  "variants": [
+    {"id":"baseline","label":"Proposal only","baseline":true,"scenario":"The city releases its proposal. No correction is posted.","assumptions":[]},
+    {"id":"correction","label":"Correction added","baseline":false,"scenario":"The same proposal is released. At the start of round 2, a source-linked correction is posted.","assumptions":["The correction reaches the discussion at the start of round 2."]}
+  ]
+}
+```
+
+Validate and create it with:
+
+```text
+python <helper> --workspace . scenario validate --spec .flock/staging/experiment.json
+python <helper> --workspace . scenario create --spec .flock/staging/experiment.json
+```
+
+The returned experiment ID and run IDs identify each independent variant and replicate. Use the normal `simulation prompt`, `advance`, and `status` commands for every run. All runs start with identical profiles and settings; keep feeds and memories separate. Model usage scales with variants × replicates × rounds × agents.
+
+Track progress and compare after the runs complete:
+
+```text
+python <helper> --workspace . scenario status --id <experiment_id>
+python <helper> --workspace . scenario compare --id <experiment_id>
+python <helper> --workspace . scenario visualize --id <experiment_id>
+python <helper> --workspace . scenario save-report --id <experiment_id> --input .flock/staging/report.md
+```
+
+The comparison reports computed action metrics, median and min/max across replicates, and deltas against the baseline. A single replicate has no range. These ranges describe only the configured synthetic runs; they are not statistical confidence intervals or real-world probabilities. The visualization creates `.flock/experiments/<experiment_id>/comparison.html` and linked per-run HTML replays.
+
 ## Visualize a run
 
 Refresh the local view after each completed round and after any later edits to the run:
@@ -81,7 +131,7 @@ Use `python <helper> --workspace . simulation report-data --id <run_id>` for the
 python <helper> --workspace . simulation save-report --id <run_id> --input .flock/staging/report-<run_id>.md
 ```
 
-A report should include the scenario, settings, assumptions, main interaction patterns, disagreement, changes over rounds, and limitations. Distinguish computed activity counts from the host model's qualitative interpretation. Cite source IDs, page/section locators, or short excerpts for claims grounded in the source graph.
+A report should include the scenario, settings, assumptions, main interaction patterns, disagreement, changes over rounds, and limitations. Distinguish computed activity counts from the host model's qualitative interpretation. Cite source IDs and page/section locators for graph-grounded claims; the saved event payload includes validated evidence references with the source excerpt and locator. Cite run, round, and event IDs for outcomes observed in the synthetic feed. Do not present unreferenced generated dialogue as verified source evidence.
 
 For an agent interview, retrieve the agent profile and its authored posts/comments/reactions from `report-data`. Answer in that synthetic persona's voice, clearly label the answer as a role-play, and do not claim it reflects an actual person.
 

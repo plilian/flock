@@ -586,6 +586,19 @@
           note.textContent = detail;
           content.appendChild(note);
         }
+        const evidenceRefs = event.payload && Array.isArray(event.payload.evidence_refs) ? event.payload.evidence_refs : [];
+        evidenceRefs.forEach(function (reference) {
+          const citation = document.createElement("div");
+          citation.className = "feed-detail";
+          citation.textContent = "Evidence · " + (reference.source_name || reference.source_id) + (reference.locator ? " · " + reference.locator : "") + " · " + (reference.record_label || reference.record_id);
+          content.appendChild(citation);
+          if (reference.quote) {
+            const quote = document.createElement("p");
+            quote.className = "feed-text";
+            quote.textContent = "“" + reference.quote + "”";
+            content.appendChild(quote);
+          }
+        });
         row.appendChild(content);
         list.appendChild(row);
       });

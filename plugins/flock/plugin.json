@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "flock",
-  "version": "0.5.0",
-  "description": "Build knowledge graphs and explore synthetic social simulations from inside Codex.",
+  "version": "0.6.0",
+  "description": "Audit source evidence and compare synthetic social scenarios from inside Codex.",
   "author": {
     "name": "pili"
   },
@@ -14,7 +14,7 @@
       "interface": {
         "displayName": "Flock",
         "shortDescription": "Knowledge graphs & simulations",
-        "longDescription": "Turn source documents into a cited knowledge graph, simulate synthetic communities in Reddit-like or Twitter-like spaces, explore interactive local visualizations, and create reports inside a supported agent host. The active host session performs model reasoning, while each user configures their own host and provider access. Flock's model-free helper stores graph and run history in the chosen workspace. No separate Flock API key, Zep key, external graph service, or local web app is required.",
+          "longDescription": "Turn source documents into an evidence-labeled knowledge graph, audit its source trail, and compare controlled synthetic community scenarios with interactive local replays. The active host session performs model reasoning, while each user configures their own host and provider access. Flock's model-free helper stores graph, audits, and experiment runs in the chosen workspace. No separate Flock API key, Zep key, external graph service, or local web app is required.",
         "developerName": "pili",
         "category": "Productivity",
         "capabilities": [],

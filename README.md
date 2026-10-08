@@ -27,8 +27,10 @@ Flock itself requires **no Flock API key, Zep key, or Flock account**. Model acc
 | Workflow | What it produces |
 |---|---|
 | **Source-grounded graph** | An ontology, cited entities, and typed relationships in a project-owned SQLite graph. |
+| **Evidence Audit** | Citation coverage checks plus a host-model review for quote accuracy, contradictions, assumptions, and missing viewpoints. |
 | **Synthetic population** | Distinct agent profiles tied to graph entities, with assumptions marked separately from evidence. |
 | **Social simulation** | Round-based Reddit-like or Twitter-like discussions, recorded actions, reactions, and timelines. |
+| **Scenario Lab** | Baseline-versus-alternative experiments with a shared synthetic roster, independent replicates, median/range comparisons, and an interactive replay. |
 | **Interactive run view** | A self-contained local HTML snapshot with round playback, the interaction graph, agent profiles, and a searchable event feed. |
 | **Report and follow-up** | A Markdown report, activity statistics, graph questions, and clearly labeled synthetic-agent interviews. |
 
@@ -51,6 +53,8 @@ flowchart LR
 ```
 
 The active host performs extraction, profile design, agent actions, and narrative analysis in the user's session. Flock's Python helper validates and stores graph/run data; it uses only the standard library and makes no network or model calls. There is **no separate web app to start**.
+
+Each graph record has an evidence status: `observed`, `inferred`, `assumption`, or `unclassified`. The audit checks citation structure, then asks the active host to review source meaning. Scenario Lab starts every variant with the same profiles and an empty feed; its replicate ranges describe only the configured synthetic runs, not real-world odds.
 
 ## Install as a plugin
 
@@ -118,7 +122,7 @@ Flock keeps the graph and simulation mechanics in its own code. It does not depe
 
 - The selected host processes the source excerpts and prompts under its own account, provider, and data policies. Review the host's settings before sharing sensitive source material.
 - The Flock helper itself makes no network calls and does not access host credentials.
-- Project data is stored under `.flock/` in the workspace selected by that user: a SQLite database, staging files, simulation records, reports, and self-contained HTML visualizations. No Flock-hosted service receives it.
+- Project data is stored under `.flock/` in the workspace selected by that user: a SQLite database, staging files, evidence audit files, scenario experiments, simulation records, reports, and self-contained HTML visualizations. No Flock-hosted service receives it.
 - The repository `.gitignore` excludes `.flock/`; the helper adds an ignore rule inside `.flock/` for other Git workspaces.
 - Source files remain where the user placed them. The graph stores source metadata and short citations, not full document copies.
 
@@ -131,6 +135,7 @@ plugins/flock/                    Codex plugin package
   skills/flock/references/        Graph schema and simulation guide
   skills/flock/scripts/flock.py   Model-free graph, run store, and view generator
   skills/flock/scripts/visualizer_template.html  Offline interactive run view
+  skills/flock/scripts/experiment_visualizer_template.html  Offline Scenario Lab comparison view
 plugins/claude/                   Claude Code plugin package
 plugins/deepseek-harness/         DeepSeek Harness bundle (developer preview)
 skills/flock/                     Gemini CLI and Qwen Code skill package
@@ -153,8 +158,14 @@ Validate a workspace graph or simulation spec before importing/starting it:
 
 ```bash
 python plugins/flock/skills/flock/scripts/flock.py --workspace . graph validate --input .flock/staging/graph.json
+python plugins/flock/skills/flock/scripts/flock.py --workspace . graph audit
 python plugins/flock/skills/flock/scripts/flock.py --workspace . simulation validate --spec .flock/staging/run.json
 python plugins/flock/skills/flock/scripts/flock.py --workspace . simulation visualize --id <run_id>
+python plugins/flock/skills/flock/scripts/flock.py --workspace . scenario validate --spec .flock/staging/experiment.json
+python plugins/flock/skills/flock/scripts/flock.py --workspace . scenario create --spec .flock/staging/experiment.json
+python plugins/flock/skills/flock/scripts/flock.py --workspace . scenario compare --id <experiment_id>
+python plugins/flock/skills/flock/scripts/flock.py --workspace . scenario visualize --id <experiment_id>
+python plugins/flock/skills/flock/scripts/flock.py --workspace . scenario save-report --id <experiment_id> --input .flock/staging/report.md
 ```
 
 The helper is model-free by design. New AI-dependent steps belong in the host's Flock skill workflow; do not add API-key settings or direct provider calls.

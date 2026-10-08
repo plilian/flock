@@ -10,7 +10,7 @@
       "name": "flock",
       "source": "./plugins/claude",
       "description": "Build source-grounded knowledge graphs and explore synthetic social scenarios.",
-      "version": "0.5.0"
+      "version": "0.6.0"
     }
   ]
 }

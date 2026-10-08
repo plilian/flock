@@ -1,6 +1,6 @@
 {
   "name": "flock",
-  "version": "0.5.0",
-  "description": "Build source-grounded knowledge graphs and synthetic social simulations in Claude Code.",
+  "version": "0.6.0",
+  "description": "Audit source evidence and compare synthetic social scenarios in Claude Code.",
   "license": "AGPL-3.0"
 }
