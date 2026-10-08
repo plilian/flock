@@ -4,14 +4,46 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0e12">
-  <meta name="description" content="Install Flock in Codex, Claude Code, Gemini CLI, Qwen Code, or DeepSeek Harness. Audit graph evidence and compare synthetic scenarios.">
-  <title>Flock Docs — install for your AI host</title>
+  <meta name="description" content="Install Flock for Codex, Claude Code, Gemini CLI, Qwen Code, or DeepSeek Harness. Learn Evidence Audit, Scenario Lab, local graphs, and synthetic social simulations.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://flock.daalgp.com/docs.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Flock">
+  <meta property="og:title" content="Flock Documentation — Install, Graphs, Audits &amp; Simulations">
+  <meta property="og:description" content="Installation instructions and practical guides to Flock's knowledge graph, Evidence Audit, Scenario Lab, simulation workflow, and local data model.">
+  <meta property="og:url" content="https://flock.daalgp.com/docs.html">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Flock Documentation">
+  <meta name="twitter:description" content="Install and use Flock in your AI agent host. Learn how evidence audits, scenario comparisons, and local graph storage work.">
+  <title>Flock Docs — Install &amp; Use the AI Agent Plugin</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="apple-touch-icon" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/site.css?v=0.6.0">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Flock Documentation: Install, Evidence Audit, and Scenario Lab",
+    "description": "Installation and workflow documentation for Flock, an open-source AI agent plugin for evidence-grounded knowledge graphs and synthetic social simulations.",
+    "url": "https://flock.daalgp.com/docs.html",
+    "inLanguage": "en",
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": "Flock",
+      "url": "https://flock.daalgp.com/",
+      "applicationCategory": "DeveloperApplication"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Flock",
+      "url": "https://flock.daalgp.com/"
+    }
+  }
+  </script>
 </head>
 <body class="docs-page">
   <header class="site-header docs-header">
@@ -44,6 +76,7 @@
         <a href="#evidence-audit">Evidence Audit</a>
         <a href="#scenario-lab">Scenario Lab</a>
         <a href="#simulation">Simulation engine</a>
+        <a href="#faq">Common questions</a>
         <a href="#privacy">Privacy and data</a>
         <a href="#troubleshooting">Troubleshooting</a>
         <a href="#license">License</a>
@@ -167,6 +200,21 @@ python &lt;helper&gt; --workspace . scenario save-report --id &lt;experiment_id&
             <li><strong>Saved outputs:</strong> evidence statuses and citations, structural audit files, agent profiles, round-by-round events, validated source references on factual actions, scenario experiments, interactive HTML comparisons, per-run replays, and Markdown reports.</li>
           </ul>
           <p class="docs-note">A Flock simulation is a structured thought experiment. It is not an observation of real people, a poll, or a forecast. Results depend on the selected model, prompts, source quality, profiles, and settings.</p>
+        </section>
+
+        <section id="faq">
+          <p class="eyebrow dark-eyebrow">QUICK ANSWERS</p>
+          <h2>Common questions about Flock</h2>
+          <h3>What is Flock?</h3>
+          <p>Flock is an open-source AI agent plugin workflow for building source-grounded knowledge graphs, reviewing evidence, creating synthetic populations, and exploring social scenarios. It stores project graphs and simulation runs locally in a workspace-owned SQLite database.</p>
+          <h3>Does Flock predict what real people will do?</h3>
+          <p>No. Flock runs structured thought experiments with synthetic agents. Results are not polls, observations of real people, or forecasts, and replicate ranges do not represent real-world probabilities.</p>
+          <h3>Does Flock require an AI API key or Zep?</h3>
+          <p>Flock has no separate API key, model service, hosted graph service, or Zep dependency. The selected host's own sign-in and provider setup handle model access; any requirements, plans, and usage limits from that host still apply.</p>
+          <h3>Which AI agent hosts can use Flock?</h3>
+          <p>Flock has installable packages for Codex, Claude Code, Gemini CLI, and Qwen Code. A separate DeepSeek Harness package is marked as a developer preview; it is not an integration for the DeepSeek chat website or API.</p>
+          <h3>Where are Flock's graphs and simulation data stored?</h3>
+          <p>Flock stores its SQLite graph, evidence audits, scenario experiments, run history, and visualizations under <code>.flock/</code> in the workspace you select. The Flock website does not receive this project data.</p>
         </section>
 
         <section id="privacy">

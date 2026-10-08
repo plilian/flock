@@ -1,0 +1,18 @@
+# Flock
+
+> Flock is an open-source AI agent plugin workflow for source-grounded knowledge graphs, evidence audits, synthetic social simulations, and scenario comparison.
+
+## Canonical pages
+
+- [Home](https://flock.daalgp.com/): Product overview, supported hosts, and workflow.
+- [Documentation](https://flock.daalgp.com/docs.html): Installation, first project, Evidence Audit, Scenario Lab, privacy, and license.
+- [Source repository](https://github.com/plilian/flock): Source code and release details.
+
+## Product facts
+
+- Installable packages are available for Codex, Claude Code, Gemini CLI, and Qwen Code. DeepSeek Harness support is a developer preview, not an integration for the DeepSeek chat website or API.
+- Flock has no separate model API key, hosted model, Zep dependency, or Flock account. The selected AI host's sign-in, provider configuration, plan, and usage limits apply.
+- Flock stores graph and simulation data in a workspace-local SQLite database under `.flock/`. The helper makes no model or network calls.
+- Evidence Audit checks citation structure and supports a host-model review of source meaning; citations do not prove a claim is true.
+- Scenario Lab compares controlled variants and replicate runs using synthetic agents. Results are thought experiments, not polls, observations, or forecasts about real people.
+- Flock is licensed under AGPL-3.0 and is an independent, substantially modified derivative of MiroFish. See the documentation and repository attribution notice.

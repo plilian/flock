@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://flock.daalgp.com/sitemap.xml
