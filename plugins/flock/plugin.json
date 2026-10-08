@@ -14,7 +14,7 @@
       "interface": {
         "displayName": "Flock",
         "shortDescription": "Knowledge graphs and social simulations inside Codex.",
-        "longDescription": "Turn source documents into a cited knowledge graph, simulate synthetic communities in Reddit-like or Twitter-like spaces, explore interactive local visualizations, and create reports—all from inside Codex. Codex performs language-model reasoning in the user's session. Flock's model-free helper stores the graph and run history in the chosen Codex workspace. No provider API key, external graph service, or separate local web app is required.",
+        "longDescription": "Turn source documents into a cited knowledge graph, simulate synthetic communities in Reddit-like or Twitter-like spaces, explore interactive local visualizations, and create reports—all from inside Codex. Codex performs model reasoning through each user's own ChatGPT account signed into Codex, subject to that account's plan and limits. Flock's model-free helper stores the graph and run history in the chosen Codex workspace. No separate LLM-provider API key, Zep key, external graph service, or separate local web app is required.",
         "developerName": "pili",
         "category": "Productivity",
         "websiteURL": "https://plilian.github.io/flock/",

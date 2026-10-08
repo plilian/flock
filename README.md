@@ -18,7 +18,7 @@
 
 Flock helps you explore a question by grounding it in source material, mapping the relationships that matter, and simulating how a **synthetic** community could respond. You use it in Codex; the active Codex session handles language-model reasoning, while Flock stores the graph and run history in the workspace you choose.
 
-Flock asks for **no LLM provider key and no Zep key**. Each person uses their own Codex sign-in and account limits.
+Flock requires **no separate LLM-provider API key or Zep key**. Each user signs into Codex with their own ChatGPT account; model usage follows that account's plan and limits. Flock does not use a shared developer account.
 
 > **A simulation is a structured thought experiment. It is not a poll, evidence about real people, or a forecast.**
 
@@ -124,7 +124,7 @@ The helper is model-free by design. New AI-dependent steps belong in the Codex s
 
 ## License and attribution
 
-Flock is released under **GNU Affero General Public License v3.0**; see [`LICENSE`](LICENSE). It is a substantially modified, independently maintained derivative of [MiroFish](https://github.com/666ghj/MiroFish). Attribution and project lineage are documented in [`ATTRIBUTION.md`](ATTRIBUTION.md). Flock is not endorsed by the original maintainers.
+Flock is released under **GNU Affero General Public License v3.0**; see [`LICENSE`](LICENSE). It is an independently maintained, substantially modified derivative of [MiroFish](https://github.com/666ghj/MiroFish). Flock replaces the earlier web-app delivery and Zep-backed graph workflow with a Codex plugin and a workspace-local SQLite graph. Attribution and project lineage are documented in [`ATTRIBUTION.md`](ATTRIBUTION.md). Flock is not affiliated with or endorsed by the original maintainers.
 
 If you run a modified version of Flock for users over a network, AGPL-3.0 requires offering those users the corresponding source code. Third-party components remain subject to their own licenses.
 

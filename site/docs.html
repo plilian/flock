@@ -6,6 +6,8 @@
   <meta name="theme-color" content="#0b0e12">
   <meta name="description" content="Install Flock as a Codex plugin and learn how its graph, simulation, and privacy workflows operate.">
   <title>Flock Docs — install and use the Codex plugin</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="apple-touch-icon" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -30,7 +32,7 @@
     <section class="docs-hero">
       <p class="eyebrow"><span class="live-dot"></span> FLOCK / DOCUMENTATION</p>
       <h1>Start with your<br><em>Codex workspace.</em></h1>
-      <p>Install the plugin, open a workspace with your sources, and use Flock in the Codex conversation. There is no separate web app to launch.</p>
+      <p>This site provides setup instructions and plugin information; it does not run simulations. Install Flock in Codex, open a workspace with your sources, and use it in the Codex conversation.</p>
     </section>
 
     <div class="docs-layout">
@@ -49,17 +51,17 @@
         <section id="install">
           <p class="eyebrow dark-eyebrow">01 / INSTALLATION</p>
           <h2>Install Flock in Codex</h2>
-          <p>Flock is a Codex plugin that packages a workflow skill and a small Python helper. The model work happens in the active Codex conversation using that user's Codex account.</p>
+          <p>Flock is a Codex plugin that packages a workflow skill and a small Python helper. Model reasoning happens in the active Codex conversation through the ChatGPT account you signed into Codex with. There is no Flock login and no shared account.</p>
           <h3>Requirements</h3>
           <ul>
             <li>Codex desktop or Codex CLI with workspace and terminal access.</li>
             <li>Python 3.11 or newer available to Codex. The graph helper uses only the Python standard library.</li>
-            <li>A signed-in Codex account. Each person uses their own account and its usage limits.</li>
+            <li>Your own ChatGPT sign-in to Codex. Every user signs in separately; model usage counts against that account's plan and limits.</li>
           </ul>
           <div class="doc-step"><span>1</span><div><h3>Add the Flock marketplace</h3><pre><code>codex plugin marketplace add plilian/flock</code></pre></div></div>
           <div class="doc-step"><span>2</span><div><h3>Install the plugin</h3><pre><code>codex plugin add flock@flock</code></pre></div></div>
           <div class="doc-step"><span>3</span><div><h3>Open or restart Codex</h3><p>Start a conversation in the workspace where you want the graph and simulation files stored. Ask Codex to use Flock or invoke the <code>$flock</code> skill.</p></div></div>
-          <p class="docs-note">Installing the plugin does not run a local web server. Flock stores its own graph and run records in a <code>.flock/</code> directory inside the workspace you choose.</p>
+          <p class="docs-note">No separate LLM-provider API key or Zep key is required. Installing the plugin does not run a local web server. Flock stores its own graph and run records in a <code>.flock/</code> directory inside the workspace you choose.</p>
         </section>
 
         <section id="first-project">
@@ -102,9 +104,10 @@
           <p class="eyebrow dark-eyebrow">05 / PRIVACY AND DATA</p>
           <h2>Your workspace, your account</h2>
           <ul>
-            <li>Codex processes the source excerpts and prompts needed for the requested workflow under the signed-in user's Codex account settings and policies.</li>
+            <li>Codex processes the source excerpts and prompts needed for the workflow under the individual user's signed-in ChatGPT account settings and plan limits. See <a href="https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan">OpenAI's Codex plan guide</a> for current account and usage details.</li>
             <li>The Flock helper makes no network calls and does not read Codex credentials. It stores graph and simulation data in <code>.flock/</code> in the selected workspace.</li>
-            <li>No LLM provider key, Zep key, or hosted Flock account is required.</li>
+            <li>No separate LLM-provider API key, Zep key, or Flock account is required. Users provide their own Codex sign-in; Flock does not use a shared developer account.</li>
+            <li>This public website only serves information and installation instructions. The simulation runs in each user's Codex workspace; the VPS does not receive project sources, graphs, or run history.</li>
             <li>Flock's Git configuration ignores <code>.flock/</code>. In other workspaces, the helper adds a nested ignore file so private graph data is not accidentally tracked.</li>
             <li>Review your workspace backup and Git settings before sharing any source material or generated graph.</li>
           </ul>
@@ -128,7 +131,7 @@ codex plugin marketplace remove flock</code></pre>
         <section id="license">
           <p class="eyebrow dark-eyebrow">07 / PROJECT</p>
           <h2>License and attribution</h2>
-          <p>Flock is distributed under <a href="https://github.com/plilian/flock/blob/main/LICENSE">AGPL-3.0</a>. It is a substantially modified, independently maintained derivative of the open-source <a href="https://github.com/666ghj/MiroFish">MiroFish</a> project and is not endorsed by its maintainers. See the repository README for attribution and acknowledgements.</p>
+          <p>Flock is distributed under <a href="https://github.com/plilian/flock/blob/main/LICENSE">AGPL-3.0</a>. It is an independently maintained, substantially modified derivative of the open-source <a href="https://github.com/666ghj/MiroFish">MiroFish</a> project. Flock replaces MiroFish's earlier web-app delivery and Zep-backed graph workflow with a Codex plugin and a workspace-local SQLite graph. Flock is not affiliated with or endorsed by MiroFish or its maintainers. See the repository's <a href="https://github.com/plilian/flock/blob/main/ATTRIBUTION.md">attribution notice</a> for project lineage.</p>
           <p><a href="https://github.com/plilian/flock">Browse the source on GitHub ↗</a> · <a href="https://github.com/plilian/flock/issues">Report a problem ↗</a></p>
         </section>
       </article>

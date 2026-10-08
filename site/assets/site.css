@@ -176,3 +176,52 @@ h1 em,h2 em { color: var(--coral); font-style: normal; }
   *,*::before,*::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* Small, purposeful motion: a drifting field, active graph, and responsive details. */
+.main-nav a:not(.nav-cta) { position: relative; }
+.main-nav a:not(.nav-cta)::after { background: var(--coral); bottom: -7px; content: ""; height: 1px; left: 0; position: absolute; transform: scaleX(0); transform-origin: left; transition: transform .28s cubic-bezier(.2,.75,.25,1); width: 100%; }
+.main-nav a:not(.nav-cta):hover::after { transform: scaleX(1); }
+.hero-grid { animation: grid-drift 38s linear infinite; }
+.hero-visual { animation: visual-drift 9s ease-in-out 1.1s infinite; }
+.graph-nodes .node-agent { animation: node-in 1.1s cubic-bezier(.2,.75,.25,1) both, agent-glow 4.2s 1.1s ease-in-out infinite; }
+.graph-nodes .node-agent:nth-of-type(7) { animation-delay: .24s, 1.6s; }
+.graph-nodes .node-small:nth-of-type(odd) { animation: node-in 1s cubic-bezier(.2,.75,.25,1) both, node-glint 5.8s 1.4s ease-in-out infinite; }
+.graph-labels text { animation: label-in .8s ease both; }
+.graph-labels text:nth-child(2n) { animation-delay: .35s; }
+.button-primary:hover { box-shadow: 0 9px 30px rgba(255,121,95,.2); }
+.workflow-row { transition: padding .35s cubic-bezier(.2,.75,.25,1), border-color .3s ease; }
+.workflow-row:hover { border-color: #ed7058; padding-left: 10px; }
+.workflow-row:nth-child(2) { transition-delay: .08s; }
+.workflow-row:nth-child(3) { transition-delay: .16s; }
+.workflow-row:hover .step-document i:last-child { animation: document-scan 1s ease-in-out infinite alternate; }
+.step-network i { animation: mini-node 3s ease-in-out infinite; }
+.step-network i:nth-child(2n) { animation-delay: .5s; }
+.step-ripple i:nth-child(2) { animation: ripple-out 3.4s ease-out infinite; }
+.step-ripple i:nth-child(3) { animation: ripple-out 3.4s 1.1s ease-out infinite; }
+.diagram-node { animation: label-in .65s ease both; }
+.diagram-node:nth-of-type(3) { animation-delay: .18s; }
+.diagram-node:nth-of-type(4) { animation-delay: .36s; }
+.diagram-dot { animation: diagram-pulse 3.7s ease-in-out infinite; }
+.diagram-node:nth-of-type(3) .diagram-dot { animation-delay: .8s; }
+.diagram-node:nth-of-type(4) .diagram-dot { animation-delay: 1.6s; }
+.closing-mark { animation: mark-drift 12s ease-in-out infinite; }
+.site-footer small a { color: #a8acab; text-decoration: underline; text-decoration-color: rgba(255,121,95,.5); text-underline-offset: 3px; }
+.site-footer small a:hover { color: var(--coral); }
+.docs-hero { animation: rise-in .7s cubic-bezier(.2,.75,.25,1) both; }
+.docs-content a { transition: color .2s ease, text-decoration-color .2s ease; }
+.docs-content a:hover { color: #813426; text-decoration-color: currentColor; }
+:focus-visible { outline: 2px solid var(--coral); outline-offset: 4px; }
+.reveal { transition-delay: var(--reveal-delay, 0ms); }
+@keyframes grid-drift { to { background-position: 57px 57px; } }
+@keyframes visual-drift { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+@keyframes agent-glow { 0%,100% { filter: drop-shadow(0 0 9px rgba(243,191,122,.25)); } 50% { filter: drop-shadow(0 0 18px rgba(243,191,122,.72)); } }
+@keyframes node-glint { 0%,100% { opacity: .68; } 50% { opacity: 1; } }
+@keyframes label-in { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes document-scan { to { width: 48px; } }
+@keyframes mini-node { 0%,100% { transform: scale(.88); opacity: .72; } 50% { transform: scale(1.18); opacity: 1; } }
+@keyframes ripple-out { 0% { opacity: .5; transform: translate(-50%,-50%) scale(.78); } 100% { opacity: 0; transform: translate(-50%,-50%) scale(1.34); } }
+@keyframes diagram-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,121,95,0); } 50% { box-shadow: 0 0 0 6px rgba(255,121,95,.1); } }
+@keyframes mark-drift { 0%,100% { transform: translateY(-45%) rotate(-3deg); } 50% { transform: translateY(-48%) rotate(2deg); } }
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+}
