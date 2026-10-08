@@ -1,0 +1,19 @@
+{
+  "name": "flock-deepseek-harness",
+  "version": "0.5.0",
+  "description": "Flock graph and synthetic simulation skill bundle for DeepSeek Harness.",
+  "type": "module",
+  "main": "./index.js",
+  "license": "AGPL-3.0",
+  "files": [
+    "index.js",
+    "cordis.patch.yml",
+    "README.md",
+    "skills/"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

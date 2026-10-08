@@ -4,21 +4,21 @@
 
 ### Evidence in. Possibilities out.
 
-**A Codex plugin for knowledge graphs and synthetic social simulations.**
+**A native plugin workflow for knowledge graphs and synthetic social simulations.**
 
-[Install](#install-in-codex) · [How it works](#how-it-works) · [Docs site](https://plilian.github.io/flock/) · [Privacy](#privacy-and-data) · [License](#license-and-attribution)
+[Install](#install-as-a-plugin) · [How it works](#how-it-works) · [Docs site](https://flock.daalgp.com/) · [Privacy](#privacy-and-data) · [License](#license-and-attribution)
 
 ![AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-5e7656?style=flat-square)
-![Codex plugin](https://img.shields.io/badge/runs%20inside-Codex-171b20?style=flat-square)
-![No provider key](https://img.shields.io/badge/model%20API%20key-none-d66f56?style=flat-square)
+![Agent hosts](https://img.shields.io/badge/agent%20hosts-5-171b20?style=flat-square)
+![No Flock API key](https://img.shields.io/badge/Flock%20API%20key-none-d66f56?style=flat-square)
 
 </div>
 
 ---
 
-Flock helps you explore a question by grounding it in source material, mapping the relationships that matter, and simulating how a **synthetic** community could respond. You use it in Codex; the active Codex session handles language-model reasoning, while Flock stores the graph and run history in the workspace you choose.
+Flock helps you explore a question by grounding it in source material, mapping the relationships that matter, and simulating how a **synthetic** community could respond. Native plugin packages are available for Codex, Claude Code, Gemini CLI, Qwen Code, and DeepSeek Harness. Each host's active model session handles reasoning; Flock stores the graph and run history in the workspace you choose.
 
-Flock requires **no separate LLM-provider API key or Zep key**. Each user signs into Codex with their own ChatGPT account; model usage follows that account's plan and limits. Flock does not use a shared developer account.
+Flock itself requires **no Flock API key, Zep key, or Flock account**. Model access remains with the host you choose: each user signs in or configures that host separately, and its data policies, plan, and usage limits apply; some host configurations may require their own provider credentials. DeepSeek Harness support targets its developer-preview plugin host, not DeepSeek's chat website or API.
 
 > **A simulation is a structured thought experiment. It is not a poll, evidence about real people, or a forecast.**
 
@@ -36,13 +36,13 @@ Flock requires **no separate LLM-provider API key or Zep key**. Each user signs 
 
 ```mermaid
 flowchart LR
-    A[Your source files] --> B[Codex extracts evidence]
+    A[Your source files] --> B[Active host model extracts evidence]
     B --> C[Candidate graph JSON]
     C --> D[Flock validates and stores]
-    D --> E[Codex builds synthetic profiles]
+    D --> E[Active host model builds synthetic profiles]
     E --> F[Round-based social simulation]
     F --> G[Timeline and report]
-    H[Your active Codex session] <--> B
+    H[Your active host session] <--> B
     H <--> E
     H <--> F
     H <--> G
@@ -50,43 +50,74 @@ flowchart LR
     F --> I
 ```
 
-Codex performs extraction, profile design, agent actions, and narrative analysis in the user's session. Flock's Python helper validates and stores graph/run data; it uses only the standard library and makes no network or model calls. There is **no separate web app to start**.
+The active host performs extraction, profile design, agent actions, and narrative analysis in the user's session. Flock's Python helper validates and stores graph/run data; it uses only the standard library and makes no network or model calls. There is **no separate web app to start**.
 
-## Install in Codex
+## Install as a plugin
 
-Requirements: Codex desktop or CLI with workspace/terminal access, a signed-in Codex account, and Python 3.11+.
+All integrations use the host model available in that product. Flock packages install directly from GitHub; they are not yet vendor-directory listings. Flock does not collect or forward sign-in credentials. Python 3.11+ and workspace/terminal access are required.
+
+### Codex
 
 ```bash
 codex plugin marketplace add plilian/flock
 codex plugin add flock@flock
 ```
 
-Open the workspace where Flock should keep its project data, then ask Codex:
+### Claude Code
 
-```text
-$flock Initialize a Flock project named “Transit study” in this workspace.
+```bash
+claude plugin marketplace add plilian/flock
+claude plugin install flock@flock
 ```
 
-Use one Codex workspace folder per Flock project. The `.flock/` database in that workspace holds its graph and simulation history.
+### Gemini CLI
 
-Use the plugin to build or update a graph, prepare an agent population, run a scenario, inspect the interactive timeline, or create a report. The run view is saved as `.flock/runs/<run_id>/visualization.html` and opens directly in a browser without a server. See the [installation and workflow guide](https://plilian.github.io/flock/docs.html).
+```bash
+gemini extensions install https://github.com/plilian/flock
+```
+
+### Qwen Code
+
+```bash
+qwen extensions install https://github.com/plilian/flock
+```
+
+### DeepSeek Harness
+
+DeepSeek Harness is a separate, developer-preview plugin host. Clone the repository, then install its bundle into a Harness profile:
+
+```bash
+git clone https://github.com/plilian/flock.git
+cd flock
+dsh plugin --profile web add ./plugins/deepseek-harness
+```
+
+This integration is for DeepSeek Harness, not the DeepSeek chat website or API. Harness model access follows its own provider configuration and may require additional setup.
+
+Open a project workspace in your chosen host and ask its agent to use Flock, for example:
+
+```text
+Use Flock to initialize a project named “Transit study” in this workspace.
+```
+
+Use one workspace folder per Flock project. The `.flock/` database in that workspace holds its graph and simulation history. Ask the agent to build or update a graph, prepare a synthetic population, run a scenario, inspect the interactive timeline, or create a report. The run view is saved as `.flock/runs/<run_id>/visualization.html` and opens directly in a browser without a server. See the [installation and workflow guide](https://flock.daalgp.com/docs.html).
 
 ## The graph and simulation engine
 
 Flock replaces Zep with its own SQLite graph store. Entities retain stable IDs, typed attributes, and source references. Relationships are validated against those entities and citations before import.
 
-For simulations, Codex proposes one action per synthetic agent per round. Flock checks the platform action schema and records the round in order. The built-in interaction engine supports:
+For simulations, the active host model proposes one action per synthetic agent per round. Flock checks the platform action schema and records the round in order. The built-in interaction engine supports:
 
 - **Reddit-like:** posts, comments, votes, and community joins.
 - **Twitter-like:** posts, replies, likes, reposts, and follows.
-- **Analysis:** agent activity counts, engagement totals, event timelines, and Codex-written reports.
+- **Analysis:** agent activity counts, engagement totals, event timelines, and host-model-written reports.
 
 Flock keeps the graph and simulation mechanics in its own code. It does not depend on a Zep account or a MiroFish service.
 
 ## Privacy and data
 
-- Codex receives the source excerpts and prompts needed for the workflow under the signed-in user's Codex account settings and policies.
-- The Flock helper itself makes no network calls and does not access Codex credentials.
+- The selected host processes the source excerpts and prompts under its own account, provider, and data policies. Review the host's settings before sharing sensitive source material.
+- The Flock helper itself makes no network calls and does not access host credentials.
 - Project data is stored under `.flock/` in the workspace selected by that user: a SQLite database, staging files, simulation records, reports, and self-contained HTML visualizations. No Flock-hosted service receives it.
 - The repository `.gitignore` excludes `.flock/`; the helper adds an ignore rule inside `.flock/` for other Git workspaces.
 - Source files remain where the user placed them. The graph stores source metadata and short citations, not full document copies.
@@ -96,12 +127,18 @@ Flock keeps the graph and simulation mechanics in its own code. It does not depe
 ```text
 plugins/flock/                    Codex plugin package
   plugin.json                     Plugin identity and install metadata
-  skills/flock/SKILL.md           Codex workflow
+  skills/flock/SKILL.md           Shared Flock workflow
   skills/flock/references/        Graph schema and simulation guide
   skills/flock/scripts/flock.py   Model-free graph, run store, and view generator
   skills/flock/scripts/visualizer_template.html  Offline interactive run view
-site/                             Public landing page and separate setup docs
-.agents/plugins/marketplace.json  GitHub-installable Codex marketplace
+plugins/claude/                   Claude Code plugin package
+plugins/deepseek-harness/         DeepSeek Harness bundle (developer preview)
+skills/flock/                     Gemini CLI and Qwen Code skill package
+gemini-extension.json             Gemini CLI extension manifest
+qwen-extension.json               Qwen Code extension manifest
+.claude-plugin/marketplace.json   Claude Code marketplace
+.agents/plugins/marketplace.json  Codex marketplace
+site/                             Public landing page and setup documentation
 ```
 
 ## Development
@@ -120,11 +157,11 @@ python plugins/flock/skills/flock/scripts/flock.py --workspace . simulation vali
 python plugins/flock/skills/flock/scripts/flock.py --workspace . simulation visualize --id <run_id>
 ```
 
-The helper is model-free by design. New AI-dependent steps belong in the Codex skill workflow; do not add API-key settings or direct provider calls.
+The helper is model-free by design. New AI-dependent steps belong in the host's Flock skill workflow; do not add API-key settings or direct provider calls.
 
 ## License and attribution
 
-Flock is released under **GNU Affero General Public License v3.0**; see [`LICENSE`](LICENSE). It is an independently maintained, substantially modified derivative of [MiroFish](https://github.com/666ghj/MiroFish). Flock replaces the earlier web-app delivery and Zep-backed graph workflow with a Codex plugin and a workspace-local SQLite graph. Attribution and project lineage are documented in [`ATTRIBUTION.md`](ATTRIBUTION.md). Flock is not affiliated with or endorsed by the original maintainers.
+Flock is released under **GNU Affero General Public License v3.0**; see [`LICENSE`](LICENSE). It is an independently maintained, substantially modified derivative of [MiroFish](https://github.com/666ghj/MiroFish). Flock replaces the earlier web-app delivery and Zep-backed graph workflow with native agent-host plugins and a workspace-local SQLite graph. Attribution and project lineage are documented in [`ATTRIBUTION.md`](ATTRIBUTION.md). Flock is not affiliated with or endorsed by the original maintainers.
 
 If you run a modified version of Flock for users over a network, AGPL-3.0 requires offering those users the corresponding source code. Third-party components remain subject to their own licenses.
 
@@ -134,6 +171,8 @@ If you run a modified version of Flock for users over a network, AGPL-3.0 requir
 
 **Ask better questions about what could happen.**
 
-[Install Flock](https://plilian.github.io/flock/docs.html#install) · [Browse the code](https://github.com/plilian/flock)
+[Install Flock](https://flock.daalgp.com/docs.html#install) · [Browse the code](https://github.com/plilian/flock)
 
 </div>
+
+

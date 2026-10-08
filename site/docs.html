@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0e12">
-  <meta name="description" content="Install Flock as a Codex plugin and learn how its graph, simulation, and privacy workflows operate.">
-  <title>Flock Docs — install and use the Codex plugin</title>
+  <meta name="description" content="Install Flock in Codex, Claude Code, Gemini CLI, Qwen Code, or DeepSeek Harness. Learn the workflow, requirements, and data model.">
+  <title>Flock Docs — install for your AI host</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="apple-touch-icon" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,7 +21,7 @@
     </a>
     <nav class="main-nav" aria-label="Main navigation">
       <a href="index.html#workflow">Workflow</a>
-      <a href="index.html#principles">Principles</a>
+      <a href="index.html#hosts">Hosts</a>
       <a href="docs.html" aria-current="page">Docs</a>
       <a class="nav-cta" href="#install">Install plugin <span aria-hidden="true">↗</span></a>
     </nav>
@@ -31,8 +31,8 @@
   <main>
     <section class="docs-hero">
       <p class="eyebrow"><span class="live-dot"></span> FLOCK / DOCUMENTATION</p>
-      <h1>Start with your<br><em>Codex workspace.</em></h1>
-      <p>This site provides setup instructions and plugin information; it does not run simulations. Install Flock in Codex, open a workspace with your sources, and use it in the Codex conversation.</p>
+      <h1>Flock, in the<br><em>workspace you choose.</em></h1>
+      <p>Install the native package for your AI host, then work with your own sources and scenarios. Flock is a local workflow, not a hosted simulation service.</p>
     </section>
 
     <div class="docs-layout">
@@ -50,88 +50,128 @@
       <article class="docs-content">
         <section id="install">
           <p class="eyebrow dark-eyebrow">01 / INSTALLATION</p>
-          <h2>Install Flock in Codex</h2>
-          <p>Flock is a Codex plugin that packages a workflow skill and a small Python helper. Model reasoning happens in the active Codex conversation through the ChatGPT account you signed into Codex with. There is no Flock login and no shared account.</p>
-          <h3>Requirements</h3>
+          <h2>Install for your host</h2>
+          <p>Flock ships as a native plugin or extension package for each supported agent host. Each package provides the same workflow skill and model-free Python helper. The active host session handles reasoning; the helper validates and stores graph and simulation data.</p>
+          <p>All packages install directly from the public GitHub repository. Flock does not provide a hosted model or require a Flock API key. Sign in or configure the selected host according to that product's own setup; provider options and usage limits vary by host.</p>
+          <h3>Shared requirements</h3>
           <ul>
-            <li>Codex desktop or Codex CLI with workspace and terminal access.</li>
-            <li>Python 3.11 or newer available to Codex. The graph helper uses only the Python standard library.</li>
-            <li>Your own ChatGPT sign-in to Codex. Every user signs in separately; model usage counts against that account's plan and limits.</li>
+            <li>Python 3.11 or newer and workspace/terminal access in the host environment.</li>
+            <li>Git to install packages from this public repository.</li>
+            <li>A workspace where Flock can create a <code>.flock/</code> folder.</li>
+            <li>Your own supported host installation and model access. Flock never shares the developer's account.</li>
           </ul>
-          <div class="doc-step"><span>1</span><div><h3>Add the Flock marketplace</h3><pre><code>codex plugin marketplace add plilian/flock</code></pre></div></div>
-          <div class="doc-step"><span>2</span><div><h3>Install the plugin</h3><pre><code>codex plugin add flock@flock</code></pre></div></div>
-          <div class="doc-step"><span>3</span><div><h3>Open or restart Codex</h3><p>Start a conversation in the workspace where you want the graph and simulation files stored. Ask Codex to use Flock or invoke the <code>$flock</code> skill.</p></div></div>
-          <p class="docs-note">No separate LLM-provider API key or Zep key is required. Installing the plugin does not run a local web server. Flock stores its own graph and run records in a <code>.flock/</code> directory inside the workspace you choose.</p>
+
+          <div class="host-install" id="codex">
+            <p class="host-install-label">01 / CODEX · NATIVE PLUGIN</p>
+            <h3>Codex</h3>
+            <p>Add the Flock marketplace and install its plugin:</p>
+            <pre><code>codex plugin marketplace add plilian/flock
+codex plugin add flock@flock</code></pre>
+            <p>Open or restart Codex, then ask it to use Flock or invoke the <code>$flock</code> skill.</p>
+          </div>
+
+          <div class="host-install" id="claude-code">
+            <p class="host-install-label">02 / CLAUDE CODE · NATIVE PLUGIN</p>
+            <h3>Claude Code</h3>
+            <p>Add the Flock marketplace and install from a Claude Code terminal:</p>
+            <pre><code>claude plugin marketplace add plilian/flock
+claude plugin install flock@flock</code></pre>
+            <p>Restart or reload Claude Code if needed, open your workspace, and ask Claude to use the <code>flock</code> skill.</p>
+          </div>
+
+          <div class="host-install" id="gemini-cli">
+            <p class="host-install-label">03 / GEMINI CLI · NATIVE EXTENSION</p>
+            <h3>Gemini CLI</h3>
+            <p>Install Flock from the repository URL:</p>
+            <pre><code>gemini extensions install https://github.com/plilian/flock</code></pre>
+            <p>Restart the CLI if prompted, then ask Gemini CLI to use the Flock skill. Gemini CLI authentication and model access follow your Google/Gemini setup.</p>
+          </div>
+
+          <div class="host-install" id="qwen-code">
+            <p class="host-install-label">04 / QWEN CODE · NATIVE EXTENSION</p>
+            <h3>Qwen Code</h3>
+            <p>Install Flock from the repository URL:</p>
+            <pre><code>qwen extensions install https://github.com/plilian/flock</code></pre>
+            <p>Restart the CLI if prompted, then invoke <code>/flock:flock</code> or ask Qwen Code to use that skill. Qwen sign-in, provider configuration, and usage limits are managed by your Qwen Code setup.</p>
+          </div>
+
+          <div class="host-install host-preview" id="deepseek-harness">
+            <p class="host-install-label">05 / DEEPSEEK HARNESS · DEVELOPER PREVIEW</p>
+            <h3>DeepSeek Harness</h3>
+            <p>Harness is a separate developer-preview plugin host. Clone the repository and install Flock into a Harness profile:</p>
+            <pre><code>git clone https://github.com/plilian/flock.git
+cd flock
+dsh plugin --profile web add ./plugins/deepseek-harness</code></pre>
+            <p>This package targets DeepSeek Harness only. It is not a plugin for the DeepSeek chat website, and it does not call the DeepSeek API. Harness model access depends on the provider configuration supported by Harness and may require separate setup.</p>
+          </div>
+          <p class="docs-note">These packages are installable from GitHub. They are not listings in vendor-managed plugin directories. “No Flock API key” means Flock has no separate credential or model service; it does not remove authentication or provider configuration required by an individual host.</p>
         </section>
 
         <section id="first-project">
           <p class="eyebrow dark-eyebrow">02 / FIRST PROJECT</p>
           <h2>Initialize a workspace</h2>
-          <p>Place or attach the source documents you want Codex to analyze, then say:</p>
-          <pre><code>$flock Initialize a Flock workspace named “Transit study”.</code></pre>
-          <p>Flock creates a SQLite graph database and run directory under <code>.flock/</code>. One Codex workspace holds one Flock project; use separate workspace folders for separate projects. The generated <code>.gitignore</code> keeps graph and run data out of normal Git commits by default. Source documents stay where you put them; Flock stores source names and citations, not full copies.</p>
+          <p>Open the host in the workspace where you want Flock data stored. Place or attach the source documents, then ask its agent:</p>
+          <pre><code>Use Flock to initialize a project named “Transit study”.</code></pre>
+          <p>Flock creates a SQLite graph database and run directory under <code>.flock/</code>. Use a separate workspace folder for each project. The helper adds an ignore rule so graph and run data are not accidentally committed to Git. Source documents stay where you put them; Flock stores source names and citations, not full copies.</p>
         </section>
 
         <section id="workflows">
           <p class="eyebrow dark-eyebrow">03 / WORKFLOWS</p>
           <h2>From evidence to a run</h2>
           <h3>Build the graph</h3>
-          <p>Ask Codex to extract a graph from selected sources. Flock asks Codex to identify an ontology, entities, and relationships, then validates and stores source references in its SQLite graph. Inspect it with a Mermaid diagram, search, or graph statistics.</p>
-          <pre><code>$flock Build a knowledge graph from the reports in ./sources and show me its strongest relationships.</code></pre>
+          <p>Ask your host's agent to extract a graph from selected sources. The active model identifies an ontology, entities, and relationships; Flock validates and stores source references in its SQLite graph. Inspect it with a Mermaid diagram, search, or graph statistics.</p>
+          <pre><code>Use Flock to build a knowledge graph from ./sources and show its strongest relationships.</code></pre>
           <h3>Create a synthetic population</h3>
-          <p>Describe the population and question you want to explore. Codex generates profiles grounded in graph entities and marks details that are assumptions rather than source facts.</p>
+          <p>Describe the population and question you want to explore. The host model generates profiles grounded in graph entities and marks details that are assumptions rather than source facts.</p>
           <h3>Explore a scenario</h3>
-          <p>Choose a Reddit-like or Twitter-like discussion, define its scenario and round count, and review the profile assumptions before a run. Codex generates each round's actions. Flock validates actions and records the feed, reactions, and engagement counts.</p>
+          <p>Choose a Reddit-like or Twitter-like discussion, define its scenario and round count, and review the profile assumptions before a run. The host model generates each round's actions. Flock validates actions and records the feed, reactions, and engagement counts.</p>
           <h3>Review and interview</h3>
-          <p>Codex uses the recorded timeline to write a report, answer questions, or role-play an interview with a synthetic agent. Reports keep computed counts separate from qualitative interpretation.</p>
+          <p>Use the recorded timeline to write a report, answer questions, or role-play an interview with a synthetic agent. Reports keep computed counts separate from qualitative interpretation.</p>
           <h3>See the run</h3>
-          <p>After each round, Flock refreshes an interactive HTML snapshot in <code>.flock/runs/&lt;run_id&gt;/visualization.html</code>. Scrub or play rounds, inspect a synthetic profile, trace recorded replies and reactions, search the feed, and download the run data. The file opens directly in a browser and makes no external requests.</p>
+          <p>After each round, Flock refreshes an interactive HTML snapshot in <code>.flock/runs/&lt;run_id&gt;/visualization.html</code>. Scrub or play rounds, inspect a synthetic profile, trace replies and reactions, search the feed, and download the run data. It opens directly in a browser and makes no external requests.</p>
         </section>
 
         <section id="simulation">
           <p class="eyebrow dark-eyebrow">04 / SIMULATION ENGINE</p>
           <h2>How a run works</h2>
-          <p>Flock separates model reasoning from persistent state. Codex reads the selected evidence and profiles, proposes agent actions, and writes narrative analysis. The Flock helper stores graph records, checks action formats, advances rounds, and computes activity totals.</p>
+          <p>Flock separates model reasoning from persistent state. Your host's active model reads selected evidence and profiles, proposes agent actions, and writes narrative analysis. The Python helper stores graph records, checks action formats, advances rounds, and computes activity totals.</p>
           <ul>
             <li><strong>Reddit-like actions:</strong> posts, comments, upvotes, downvotes, and community joins.</li>
             <li><strong>Twitter-like actions:</strong> posts, replies, likes, reposts, and follows.</li>
             <li><strong>Saved outputs:</strong> ontology, entities, relationships, agent profiles, round-by-round events, activity statistics, interactive HTML snapshots, and Markdown reports.</li>
           </ul>
-          <p class="docs-note">The simulation is an in-product, synthetic social interaction model. It is not an observation of real people, a poll, or a forecast. Results depend on the Codex model, prompts, source quality, profiles, and chosen settings.</p>
+          <p class="docs-note">A Flock simulation is a structured thought experiment. It is not an observation of real people, a poll, or a forecast. Results depend on the selected model, prompts, source quality, profiles, and settings.</p>
         </section>
 
         <section id="privacy">
           <p class="eyebrow dark-eyebrow">05 / PRIVACY AND DATA</p>
-          <h2>Your workspace, your account</h2>
+          <h2>Your workspace, your host</h2>
           <ul>
-            <li>Codex processes the source excerpts and prompts needed for the workflow under the individual user's signed-in ChatGPT account settings and plan limits. See <a href="https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan">OpenAI's Codex plan guide</a> for current account and usage details.</li>
-            <li>The Flock helper makes no network calls and does not read Codex credentials. It stores graph and simulation data in <code>.flock/</code> in the selected workspace.</li>
-            <li>No separate LLM-provider API key, Zep key, or Flock account is required. Users provide their own Codex sign-in; Flock does not use a shared developer account.</li>
-            <li>This public website only serves information and installation instructions. The simulation runs in each user's Codex workspace; the VPS does not receive project sources, graphs, or run history.</li>
-            <li>Flock's Git configuration ignores <code>.flock/</code>. In other workspaces, the helper adds a nested ignore file so private graph data is not accidentally tracked.</li>
-            <li>Review your workspace backup and Git settings before sharing any source material or generated graph.</li>
+            <li>The selected host processes source excerpts and prompts through the user's own active session and provider setup. Its account settings, model policies, plan, and limits apply.</li>
+            <li>The Flock Python helper makes no network or model calls and does not read host credentials. It stores graph and simulation data in <code>.flock/</code> in the selected workspace.</li>
+            <li>Flock requires no separate provider API key, Zep key, or Flock account. Some host configurations may require their own provider credentials.</li>
+            <li>The public website serves information and installation instructions. Simulations run in each user's workspace; the Flock website server does not receive project sources, graphs, or run history.</li>
+            <li>Review your workspace backups and Git settings before sharing source material or generated graphs.</li>
           </ul>
         </section>
 
         <section id="troubleshooting">
           <p class="eyebrow dark-eyebrow">06 / TROUBLESHOOTING</p>
           <h2>If something does not work</h2>
-          <h3>Codex cannot find Flock</h3>
-          <p>Check <code>codex plugin list</code>. If needed, refresh the source with <code>codex plugin marketplace upgrade flock</code>, then install or enable the plugin from the Codex Plugins panel.</p>
+          <h3>The host cannot find Flock</h3>
+          <p>Confirm the package installed successfully and restart the host. In Codex, check <code>codex plugin list</code>; in Claude Code, check <code>/plugin</code>; in Gemini CLI and Qwen Code, check their extension list commands. DeepSeek Harness plugins are still in developer preview.</p>
           <h3>Python is missing or too old</h3>
-          <p>Install Python 3.11 or newer and make sure the <code>python</code> command resolves in the environment Codex uses. No additional graph or database package is required.</p>
+          <p>Install Python 3.11 or newer and make sure <code>python</code> resolves in the host's execution environment. No additional graph or database package is required.</p>
           <h3>Graph validation reports a missing source</h3>
-          <p>Make sure every entity and relationship reference uses a <code>source_id</code> that exists in the candidate graph's <code>sources</code> array. Run graph validation again before importing.</p>
-          <h3>Uninstall</h3>
-          <pre><code>codex plugin remove flock
-codex plugin marketplace remove flock</code></pre>
-          <p>Uninstalling the plugin does not delete workspace data. Remove <code>.flock/</code> yourself only after you have backed up or no longer need those graphs and runs.</p>
+          <p>Make sure each entity and relationship reference uses a <code>source_id</code> that exists in the candidate graph's <code>sources</code> array. Run graph validation again before importing.</p>
+          <h3>Remove Flock</h3>
+          <p>Use the host's plugin or extension manager to uninstall Flock. Uninstalling does not delete workspace data. Remove <code>.flock/</code> only after backing up or confirming you no longer need those graphs and runs.</p>
         </section>
 
         <section id="license">
           <p class="eyebrow dark-eyebrow">07 / PROJECT</p>
           <h2>License and attribution</h2>
-          <p>Flock is distributed under <a href="https://github.com/plilian/flock/blob/main/LICENSE">AGPL-3.0</a>. It is an independently maintained, substantially modified derivative of the open-source <a href="https://github.com/666ghj/MiroFish">MiroFish</a> project. Flock replaces MiroFish's earlier web-app delivery and Zep-backed graph workflow with a Codex plugin and a workspace-local SQLite graph. Flock is not affiliated with or endorsed by MiroFish or its maintainers. See the repository's <a href="https://github.com/plilian/flock/blob/main/ATTRIBUTION.md">attribution notice</a> for project lineage.</p>
+          <p>Flock is distributed under <a href="https://github.com/plilian/flock/blob/main/LICENSE">AGPL-3.0</a>. It is an independently maintained, substantially modified derivative of the open-source <a href="https://github.com/666ghj/MiroFish">MiroFish</a> project. Flock replaces the earlier web-app delivery and Zep-backed graph workflow with native packages for supported agent hosts and a workspace-local SQLite graph. Flock is not affiliated with or endorsed by MiroFish or its maintainers. See the <a href="https://github.com/plilian/flock/blob/main/ATTRIBUTION.md">attribution notice</a> for project lineage.</p>
           <p><a href="https://github.com/plilian/flock">Browse the source on GitHub ↗</a> · <a href="https://github.com/plilian/flock/issues">Report a problem ↗</a></p>
         </section>
       </article>
@@ -145,3 +185,4 @@ codex plugin marketplace remove flock</code></pre>
   <script src="assets/site.js" defer></script>
 </body>
 </html>
+

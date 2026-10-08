@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="An interactive, private view of a Flock synthetic simulation.">
+  <title>Flock simulation view</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f1efe9;
+      --paper-deep: #e6e3dc;
+      --ink: #111519;
+      --text: #202428;
+      --muted: #767a7b;
+      --line: #d5d2ca;
+      --coral: #ff795f;
+      --gold: #f3bf7a;
+      --mint: #9bc9b3;
+      --blue: #9db8ed;
+      --violet: #c4a9d9;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--text); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    button, input, select { font: inherit; }
+    button { color: inherit; }
+    .topbar { align-items: center; border-bottom: 1px solid var(--line); display: flex; height: 62px; justify-content: space-between; padding: 0 clamp(18px, 4.8vw, 72px); }
+    .brand { align-items: center; display: flex; font-size: 14px; font-weight: 850; gap: 10px; letter-spacing: -.045em; }
+    .brand-mark { align-items: center; background: var(--ink); color: var(--coral); display: inline-flex; font-size: 14px; height: 27px; justify-content: center; width: 27px; }
+    .brand small { color: var(--muted); font: 9px var(--mono); letter-spacing: .11em; margin-left: 7px; }
+    .top-actions { align-items: center; display: flex; gap: 14px; }
+    .local-note { color: var(--muted); font-size: 11px; }
+    .button { background: transparent; border: 1px solid #aaa79e; cursor: pointer; font-size: 11px; font-weight: 700; padding: 9px 13px; transition: background .16s ease, border-color .16s ease, transform .16s ease; }
+    .button:hover:not(:disabled) { background: white; border-color: var(--ink); transform: translateY(-1px); }
+    .button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #cf5c46; outline-offset: 3px; }
+    main { margin: 0 auto; max-width: 1500px; padding: 0 clamp(18px, 4.8vw, 72px) 60px; }
+    .run-heading { border-bottom: 1px solid var(--line); padding: 35px 0 27px; }
+    .eyebrow { color: #8a8981; font: 9px var(--mono); letter-spacing: .15em; margin: 0 0 15px; text-transform: uppercase; }
+    h1 { font-size: clamp(30px, 4vw, 52px); font-weight: 650; letter-spacing: -.075em; line-height: 1.03; margin: 0 0 10px; max-width: 1000px; overflow-wrap: anywhere; }
+    .scenario { color: #696d6c; font-size: 14px; line-height: 1.65; margin: 0; max-width: 950px; white-space: pre-wrap; }
+    .run-meta { align-items: center; color: #626664; display: flex; flex-wrap: wrap; font: 9px var(--mono); gap: 8px 18px; margin-top: 20px; text-transform: uppercase; }
+    .meta-item { align-items: center; display: inline-flex; gap: 7px; }
+    .meta-dot { background: var(--coral); border-radius: 50%; height: 6px; width: 6px; }
+    .synthetic-label { color: #885f4b; }
+    .metrics { align-items: stretch; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .metric { border-right: 1px solid var(--line); padding: 17px 20px 18px 0; }
+    .metric + .metric { padding-left: 20px; }
+    .metric:last-child { border-right: 0; }
+    .metric-label { color: var(--muted); display: block; font: 9px var(--mono); letter-spacing: .08em; margin-bottom: 6px; text-transform: uppercase; }
+    .metric-value { font-size: 22px; font-weight: 620; letter-spacing: -.055em; }
+    .workspace { align-items: stretch; display: grid; gap: 27px; grid-template-columns: minmax(0, 1fr) 290px; padding-top: 32px; }
+    .section-head { align-items: end; display: flex; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+    .section-head .eyebrow { margin-bottom: 7px; }
+    h2 { font-size: 19px; font-weight: 650; letter-spacing: -.05em; margin: 0; }
+    .section-note { color: var(--muted); font-size: 10px; line-height: 1.5; margin: 5px 0 0; }
+    .network-frame { background: var(--ink); min-height: 420px; overflow: hidden; position: relative; }
+    #network-svg { display: block; height: 480px; max-height: min(60vw, 570px); min-height: 380px; width: 100%; }
+    .network-grid { fill: url(#dots); }
+    .edge { fill: none; opacity: .66; }
+    .edge:hover { opacity: 1; }
+    .edge-label { fill: #aaa9a3; font: 9px var(--mono); }
+    .agent-node { cursor: pointer; }
+    .agent-node circle { stroke: rgba(255,255,255,.88); stroke-width: 1.3; transition: r .18s ease, stroke-width .18s ease, filter .18s ease; }
+    .agent-node:hover circle, .agent-node.is-selected circle { filter: drop-shadow(0 0 9px currentColor); stroke-width: 2.5; }
+    .agent-node text { fill: #e9e6df; font: 10px var(--sans); pointer-events: none; }
+    .agent-node .node-count { fill: #969a99; font: 8px var(--mono); }
+    .network-footer { align-items: center; background: #171c20; color: #aaa9a3; display: flex; flex-wrap: wrap; font: 8px var(--mono); gap: 10px 19px; justify-content: space-between; padding: 11px 14px; }
+    .legend { align-items: center; display: flex; flex-wrap: wrap; gap: 11px; }
+    .legend-item { align-items: center; display: inline-flex; gap: 6px; }
+    .legend-dot { border-radius: 50%; height: 7px; width: 7px; }
+    .network-empty { background: rgba(17,21,25,.83); color: #d2d0c8; font-size: 11px; left: 50%; line-height: 1.6; max-width: 300px; padding: 12px 15px; pointer-events: none; position: absolute; text-align: center; top: 50%; transform: translate(-50%, -50%); width: calc(100% - 40px); }
+    .network-empty strong { color: var(--coral); display: block; font-size: 12px; margin-bottom: 3px; }
+    .inspector { border-left: 1px solid var(--line); min-width: 0; padding-left: 22px; }
+    .inspector-title { align-items: baseline; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; padding: 0 0 12px; }
+    .inspector-title .eyebrow { margin: 0; }
+    .agent-name { font-size: 22px; font-weight: 650; letter-spacing: -.06em; line-height: 1.15; margin: 20px 0 8px; overflow-wrap: anywhere; }
+    .agent-id { color: #90918c; font: 9px var(--mono); overflow-wrap: anywhere; }
+    .persona { color: #626765; font-size: 12px; line-height: 1.65; margin: 16px 0 20px; }
+    .inspector-block { border-top: 1px solid var(--line); padding: 13px 0; }
+    .inspector-block h3 { color: #81817a; font: 9px var(--mono); letter-spacing: .1em; margin: 0 0 9px; text-transform: uppercase; }
+    .inspector-list { color: #4f5451; font-size: 11px; line-height: 1.6; margin: 0; padding-left: 17px; }
+    .inspector-list li + li { margin-top: 5px; }
+    .agent-stats { display: grid; gap: 8px; grid-template-columns: repeat(2, 1fr); }
+    .agent-stat { color: #777a75; font: 9px var(--mono); }
+    .agent-stat strong { color: var(--text); display: block; font: 600 17px var(--sans); letter-spacing: -.04em; margin-top: 3px; }
+    .clear-filter { background: none; border: 0; color: #bd523f; cursor: pointer; font-size: 10px; padding: 0; text-decoration: underline; text-underline-offset: 3px; }
+    .timeline { border-top: 1px solid var(--line); margin-top: 34px; padding-top: 25px; }
+    .timeline-controls { align-items: center; display: grid; gap: 15px; grid-template-columns: 150px minmax(100px, 1fr) auto; margin: 20px 0 10px; }
+    .round-readout { font: 10px var(--mono); }
+    .round-readout strong { color: #bd523f; font-size: 12px; }
+    input[type="range"] { accent-color: #e7755d; cursor: pointer; width: 100%; }
+    .play-button { min-width: 86px; }
+    .round-bars { align-items: end; border-bottom: 1px solid #aaa79e; display: flex; gap: 5px; height: 90px; overflow-x: auto; padding: 0 1px; }
+    .round-bar { align-items: center; background: none; border: 0; cursor: pointer; display: flex; flex: 1 0 14px; height: 100%; justify-content: end; min-width: 14px; padding: 0 1px 12px; position: relative; }
+    .round-bar-fill { background: #b9b7ae; display: block; min-height: 2px; transition: height .2s ease, background .2s ease; width: 100%; }
+    .round-bar:hover .round-bar-fill, .round-bar.is-selected .round-bar-fill { background: var(--coral); }
+    .round-bar::after { bottom: 0; color: #85847c; content: attr(data-round); font: 7px var(--mono); left: 50%; position: absolute; transform: translateX(-50%); }
+    .round-bar.is-selected::after { color: #bd523f; }
+    .feed { border-top: 1px solid var(--line); margin-top: 36px; padding-top: 25px; }
+    .feed-tools { align-items: center; display: flex; flex-wrap: wrap; gap: 8px; }
+    .control { background: transparent; border: 1px solid #c5c2b9; border-radius: 0; color: #4c514f; font-size: 10px; min-height: 32px; padding: 6px 9px; }
+    .search-control { width: min(230px, 100%); }
+    .feed-count { color: var(--muted); font: 9px var(--mono); margin-left: auto; }
+    .feed-list { border-top: 1px solid var(--line); margin-top: 16px; }
+    .feed-row { align-items: start; border-bottom: 1px solid var(--line); display: grid; gap: 15px; grid-template-columns: 48px 1fr; padding: 15px 0; }
+    .feed-round { color: #8a8981; font: 9px var(--mono); padding-top: 3px; }
+    .feed-content { min-width: 0; }
+    .feed-meta { align-items: baseline; display: flex; flex-wrap: wrap; gap: 5px 9px; }
+    .feed-agent { background: none; border: 0; color: var(--text); cursor: pointer; font-size: 11px; font-weight: 700; padding: 0; }
+    .feed-agent:hover { color: #bd523f; text-decoration: underline; }
+    .feed-action { color: #7a7c76; font: 9px var(--mono); text-transform: uppercase; }
+    .feed-target { color: #82837d; font-size: 10px; }
+    .feed-text { color: #454b48; font-size: 12px; line-height: 1.65; margin: 6px 0 0; overflow-wrap: anywhere; white-space: pre-wrap; }
+    .feed-detail { color: #9a7060; font: 9px var(--mono); margin-top: 5px; }
+    .feed-empty { color: var(--muted); font-size: 11px; padding: 23px 0; }
+    footer { border-top: 1px solid var(--line); color: #777a75; font-size: 10px; line-height: 1.6; margin-top: 44px; padding-top: 16px; }
+    footer strong { color: #8b553f; font-weight: 650; }
+    @media (max-width: 850px) {
+      .workspace { gap: 22px; grid-template-columns: minmax(0, 1fr) 250px; }
+      .inspector { padding-left: 17px; }
+      #network-svg { height: 420px; }
+    }
+    @media (max-width: 650px) {
+      .topbar { align-items: flex-start; height: auto; min-height: 58px; padding-bottom: 11px; padding-top: 11px; }
+      .brand { flex-wrap: wrap; }
+      .brand small { display: none; }
+      .local-note { display: none; }
+      main { padding-left: 16px; padding-right: 16px; }
+      .run-heading { padding-top: 27px; }
+      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .metric { border-bottom: 1px solid var(--line); padding: 12px 10px 13px 0; }
+      .metric + .metric { padding-left: 12px; }
+      .metric:nth-child(2) { border-right: 0; }
+      .metric:nth-child(n+3) { border-bottom: 0; }
+      .workspace { grid-template-columns: 1fr; }
+      .inspector { border-left: 0; border-top: 1px solid var(--line); padding: 17px 0 0; }
+      #network-svg { height: 390px; max-height: none; min-height: 330px; }
+      .timeline-controls { gap: 10px; grid-template-columns: 1fr auto; }
+      .round-readout { grid-column: 1 / -1; }
+      .play-button { grid-column: 2; grid-row: 1; }
+      .feed-count { margin-left: 0; }
+      .section-head { align-items: start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">F</span> FLOCK <small>SIMULATION VIEW</small></div>
+    <div class="top-actions">
+      <span class="local-note">Self-contained file · no external requests</span>
+      <button class="button" id="export-button" type="button">Export run data</button>
+    </div>
+  </header>
+  <main>
+    <section class="run-heading" aria-labelledby="run-title">
+      <p class="eyebrow">Simulation / <span id="run-id"></span></p>
+      <h1 id="run-title"></h1>
+      <p class="scenario" id="scenario"></p>
+      <div class="run-meta">
+        <span class="meta-item"><span class="meta-dot" aria-hidden="true"></span><span id="run-status"></span></span>
+        <span class="meta-item" id="run-platform"></span>
+        <span class="meta-item" id="run-dates"></span>
+        <span class="meta-item synthetic-label">Synthetic population · exploratory only</span>
+      </div>
+    </section>
+
+    <section class="metrics" aria-label="Run summary">
+      <div class="metric"><span class="metric-label">Synthetic agents</span><strong class="metric-value" id="metric-agents"></strong></div>
+      <div class="metric"><span class="metric-label">Recorded actions</span><strong class="metric-value" id="metric-actions"></strong></div>
+      <div class="metric"><span class="metric-label">Rounds recorded</span><strong class="metric-value" id="metric-rounds"></strong></div>
+      <div class="metric"><span class="metric-label">Agents active</span><strong class="metric-value" id="metric-active"></strong></div>
+    </section>
+
+    <section class="workspace">
+      <div class="network-panel">
+        <div class="section-head">
+          <div><p class="eyebrow">01 / SOCIAL GRAPH</p><h2>Who interacted with whom</h2><p class="section-note" id="network-summary"></p></div>
+          <span class="section-note" id="network-selection-hint">Select a person to inspect their profile</span>
+        </div>
+        <div class="network-frame">
+          <svg id="network-svg" viewBox="0 0 1000 520" role="img" aria-label="Network of synthetic agents and their recorded interactions">
+            <defs>
+              <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1" fill="#293035"></circle>
+              </pattern>
+              <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#c9c6bc"></path>
+              </marker>
+            </defs>
+            <rect class="network-grid" width="1000" height="520"></rect>
+            <g id="edges"></g>
+            <g id="nodes"></g>
+          </svg>
+          <div class="network-empty" id="network-empty" hidden></div>
+        </div>
+        <div class="network-footer">
+          <span>Line width = interaction count</span>
+          <div class="legend" aria-label="Interaction types">
+            <span class="legend-item"><i class="legend-dot" style="background:var(--coral)"></i>Replies</span>
+            <span class="legend-item"><i class="legend-dot" style="background:var(--gold)"></i>Reactions</span>
+            <span class="legend-item"><i class="legend-dot" style="background:var(--mint)"></i>Follows</span>
+          </div>
+        </div>
+      </div>
+      <aside class="inspector" aria-live="polite">
+        <div class="inspector-title"><p class="eyebrow">02 / AGENT INSPECTOR</p><button class="clear-filter" id="clear-filter" type="button">Clear selection</button></div>
+        <div id="agent-inspector"></div>
+      </aside>
+    </section>
+
+    <section class="timeline" aria-labelledby="timeline-title">
+      <div class="section-head">
+        <div><p class="eyebrow">03 / ROUND PLAYBACK</p><h2 id="timeline-title">Activity over time</h2><p class="section-note">Choose a round to update the network and event feed.</p></div>
+      </div>
+      <div class="timeline-controls">
+        <div class="round-readout">VIEWING <strong id="round-label"></strong></div>
+        <input id="round-slider" type="range" min="1" max="1" step="1" aria-label="Select simulation round">
+        <button class="button play-button" id="play-button" type="button">Play rounds</button>
+      </div>
+      <div class="round-bars" id="round-bars" aria-label="Actions recorded per round"></div>
+    </section>
+
+    <section class="feed" aria-labelledby="feed-title">
+      <div class="section-head">
+        <div><p class="eyebrow">04 / EVENT FEED</p><h2 id="feed-title">What happened</h2></div>
+        <div class="feed-tools">
+          <select class="control" id="action-filter" aria-label="Filter by action"></select>
+          <input class="control search-control" id="feed-search" type="search" placeholder="Search this round" aria-label="Search this round">
+          <span class="feed-count" id="feed-count"></span>
+        </div>
+      </div>
+      <div class="feed-list" id="feed-list" aria-live="polite"></div>
+    </section>
+
+    <footer><strong>Interpret with care.</strong> Flock personas and actions are synthetic. This view is a structured exploration, not a poll, evidence about real people, or a forecast. Network links show recorded replies, reactions, and follows; they do not imply agreement.</footer>
+  </main>
+  <script>
+    "use strict";
+    const data = __FLOCK_DATA__;
+    const run = data.run || {};
+    const agents = data.agents || [];
+    const events = data.events || [];
+    const posts = data.posts || [];
+    const comments = data.comments || [];
+    const agentById = new Map(agents.map(function (agent) { return [agent.id, agent]; }));
+    const contentById = new Map();
+    posts.forEach(function (post) { contentById.set(post.id, post); });
+    comments.forEach(function (comment) { contentById.set(comment.id, comment); });
+    const actionColors = {
+      post: "#ff795f", comment: "#ff795f", reply: "#ff795f",
+      upvote: "#f3bf7a", downvote: "#d9a65f", like: "#f3bf7a", repost: "#e5ad61",
+      follow: "#9bc9b3", join_community: "#9bc9b3"
+    };
+    let selectedRound = Math.max(1, Number(run.current_round) || 0);
+    let selectedAgent = null;
+    let playTimer = null;
+
+    function byId(id) { return document.getElementById(id); }
+    function setText(id, value) { byId(id).textContent = value == null ? "" : String(value); }
+    function formatAction(action) { return String(action || "").replace(/_/g, " "); }
+    function padRound(value) { return String(value).padStart(2, "0"); }
+    function actionCount(round) {
+      return events.reduce(function (total, event) { return total + (event.round === round ? 1 : 0); }, 0);
+    }
+    function targetAgent(event) {
+      if (event.action_type === "follow") return agentById.get(event.target_id) || null;
+      if (event.action_type === "comment" || event.action_type === "reply") {
+        const reply = contentById.get(event.target_id);
+        const parent = reply && contentById.get(reply.parent_id);
+        return parent ? agentById.get(parent.author_id) || null : null;
+      }
+      const target = contentById.get(event.target_id);
+      return target ? agentById.get(target.author_id) || null : null;
+    }
+    function edgesThrough(round) {
+      const grouped = new Map();
+      events.filter(function (event) { return event.round <= round; }).forEach(function (event) {
+        const target = targetAgent(event);
+        if (!target || target.id === event.agent_id) return;
+        const key = event.agent_id + "\u0000" + target.id;
+        if (!grouped.has(key)) grouped.set(key, { source: event.agent_id, target: target.id, count: 0, types: {} });
+        const edge = grouped.get(key);
+        edge.count += 1;
+        edge.types[event.action_type] = (edge.types[event.action_type] || 0) + 1;
+      });
+      return Array.from(grouped.values());
+    }
+    function dominantAction(edge) {
+      return Object.keys(edge.types).sort(function (a, b) { return edge.types[b] - edge.types[a]; })[0] || "reply";
+    }
+    function positionsForRoster() {
+      const centerX = 500;
+      const centerY = 256;
+      const radiusX = agents.length > 42 ? 405 : agents.length > 24 ? 365 : 325;
+      const radiusY = agents.length > 42 ? 208 : 190;
+      const positions = new Map();
+      agents.forEach(function (agent, index) {
+        const angle = -Math.PI / 2 + (2 * Math.PI * index / Math.max(agents.length, 1));
+        positions.set(agent.id, { x: centerX + Math.cos(angle) * radiusX, y: centerY + Math.sin(angle) * radiusY });
+      });
+      return positions;
+    }
+    const rosterPositions = positionsForRoster();
+
+    function renderNetwork() {
+      const edgeGroup = byId("edges");
+      const nodeGroup = byId("nodes");
+      edgeGroup.replaceChildren();
+      nodeGroup.replaceChildren();
+      const visibleEdges = edgesThrough(selectedRound);
+      const activity = new Map();
+      events.filter(function (event) { return event.round <= selectedRound; }).forEach(function (event) {
+        activity.set(event.agent_id, (activity.get(event.agent_id) || 0) + 1);
+      });
+      visibleEdges.forEach(function (edge) {
+        const source = rosterPositions.get(edge.source);
+        const target = rosterPositions.get(edge.target);
+        if (!source || !target) return;
+        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        line.setAttribute("x1", source.x);
+        line.setAttribute("y1", source.y);
+        line.setAttribute("x2", target.x);
+        line.setAttribute("y2", target.y);
+        line.setAttribute("stroke", actionColors[dominantAction(edge)] || "#c9c6bc");
+        line.setAttribute("stroke-width", String(Math.min(5, 1.1 + Math.sqrt(edge.count) * 1.2)));
+        line.setAttribute("marker-end", "url(#arrow)");
+        line.setAttribute("class", "edge");
+        const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+        title.textContent = agentById.get(edge.source).name + " → " + agentById.get(edge.target).name + " · " + edge.count + " recorded interaction(s)";
+        line.appendChild(title);
+        edgeGroup.appendChild(line);
+      });
+      agents.forEach(function (agent, index) {
+        const point = rosterPositions.get(agent.id);
+        if (!point) return;
+        const isSelected = selectedAgent === agent.id;
+        const actions = activity.get(agent.id) || 0;
+        const radius = 7 + Math.min(10, Math.sqrt(actions) * 1.8);
+        const group = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        group.setAttribute("class", "agent-node" + (isSelected ? " is-selected" : ""));
+        group.setAttribute("tabindex", "0");
+        group.setAttribute("role", "button");
+        group.setAttribute("aria-label", "Inspect " + agent.name + ", " + actions + " recorded action(s)");
+        group.setAttribute("transform", "translate(" + point.x + " " + point.y + ")");
+        group.addEventListener("click", function () { selectAgent(agent.id); });
+        group.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" || event.key === " ") { event.preventDefault(); selectAgent(agent.id); }
+        });
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("r", String(radius));
+        circle.setAttribute("fill", isSelected ? "#fff0d5" : (actions ? "#f3bf7a" : "#687174"));
+        circle.setAttribute("stroke", isSelected ? "#ff795f" : "rgba(255,255,255,.88)");
+        group.appendChild(circle);
+        const title = document.createElementNS("http://www.w3.org/2000/svg", "title");
+        title.textContent = agent.name + " · " + actions + " action(s) through round " + selectedRound;
+        group.appendChild(title);
+        if (agents.length <= 32 || isSelected) {
+          const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+          label.setAttribute("text-anchor", point.x < 500 ? "end" : "start");
+          label.setAttribute("x", point.x < 500 ? String(-radius - 7) : String(radius + 7));
+          label.setAttribute("y", "-2");
+          label.textContent = agent.name;
+          group.appendChild(label);
+          if (agents.length <= 22) {
+            const count = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            count.setAttribute("class", "node-count");
+            count.setAttribute("text-anchor", point.x < 500 ? "end" : "start");
+            count.setAttribute("x", point.x < 500 ? String(-radius - 7) : String(radius + 7));
+            count.setAttribute("y", "11");
+            count.textContent = actions + " actions";
+            group.appendChild(count);
+          }
+        }
+        nodeGroup.appendChild(group);
+      });
+      const hasRecordedInteractions = visibleEdges.length > 0;
+      const empty = byId("network-empty");
+      empty.hidden = hasRecordedInteractions;
+      if (!hasRecordedInteractions) {
+        const heading = document.createElement("strong");
+        heading.textContent = "No direct interactions recorded";
+        empty.replaceChildren(heading, document.createTextNode("The feed may contain posts or community joins. Links appear only when an agent replies, reacts, or follows."));
+      }
+      const interactionCount = visibleEdges.reduce(function (total, edge) { return total + edge.count; }, 0);
+      setText("network-summary", interactionCount + " recorded replies, reactions, or follows through round " + selectedRound);
+    }
+
+    function addListBlock(parent, title, values) {
+      if (!Array.isArray(values) || !values.length) return;
+      const block = document.createElement("section");
+      block.className = "inspector-block";
+      const heading = document.createElement("h3");
+      heading.textContent = title;
+      block.appendChild(heading);
+      const list = document.createElement("ul");
+      list.className = "inspector-list";
+      values.slice(0, 4).forEach(function (value) {
+        const item = document.createElement("li");
+        item.textContent = String(value);
+        list.appendChild(item);
+      });
+      block.appendChild(list);
+      parent.appendChild(block);
+    }
+    function renderInspector() {
+      const root = byId("agent-inspector");
+      root.replaceChildren();
+      const agent = agentById.get(selectedAgent);
+      byId("clear-filter").hidden = !agent;
+      if (!agent) {
+        const empty = document.createElement("p");
+        empty.className = "feed-empty";
+        empty.textContent = agents.length ? "Select an agent in the network to inspect its profile and filter the event feed." : "This run has no synthetic agents.";
+        root.appendChild(empty);
+        return;
+      }
+      const title = document.createElement("h3");
+      title.className = "agent-name";
+      title.textContent = agent.name;
+      root.appendChild(title);
+      const id = document.createElement("div");
+      id.className = "agent-id";
+      id.textContent = agent.id;
+      root.appendChild(id);
+      const persona = document.createElement("p");
+      persona.className = "persona";
+      persona.textContent = (agent.profile && agent.profile.persona) || "No persona description was saved.";
+      root.appendChild(persona);
+      const agentEvents = events.filter(function (event) { return event.agent_id === agent.id && event.round <= selectedRound; });
+      const stats = document.createElement("div");
+      stats.className = "agent-stats";
+      [[agentEvents.length, "Actions"], [agentEvents.filter(function (event) { return event.action_type === "post" || event.action_type === "comment" || event.action_type === "reply"; }).length, "Posts & replies"]].forEach(function (item) {
+        const stat = document.createElement("div");
+        stat.className = "agent-stat";
+        const value = document.createElement("strong");
+        value.textContent = String(item[0]);
+        stat.appendChild(value);
+        stat.appendChild(document.createTextNode(item[1]));
+        stats.appendChild(stat);
+      });
+      root.appendChild(stats);
+      const profile = agent.profile || {};
+      addListBlock(root, "Beliefs", profile.beliefs);
+      addListBlock(root, "Goals", profile.goals);
+      addListBlock(root, "Simulation assumptions", profile.assumptions);
+      addListBlock(root, "Communities", agent.communities);
+      byId("clear-filter").textContent = selectedAgent ? "Clear selection" : "";
+    }
+
+    function renderTimeline() {
+      const total = Math.max(1, Number(run.total_rounds) || 1);
+      const current = Math.max(0, Number(run.current_round) || 0);
+      const slider = byId("round-slider");
+      slider.max = String(total);
+      slider.value = String(selectedRound);
+      slider.disabled = total <= 1;
+      setText("round-label", "R" + padRound(selectedRound) + " / " + padRound(total));
+      const bars = byId("round-bars");
+      bars.replaceChildren();
+      const counts = [];
+      for (let round = 1; round <= total; round += 1) counts.push(actionCount(round));
+      const maximum = Math.max(1, ...counts);
+      counts.forEach(function (count, index) {
+        const round = index + 1;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "round-bar" + (round === selectedRound ? " is-selected" : "");
+        button.dataset.round = padRound(round);
+        button.setAttribute("aria-label", "Round " + round + ": " + count + " action(s)");
+        button.title = "Round " + round + " · " + count + " action(s)";
+        const fill = document.createElement("span");
+        fill.className = "round-bar-fill";
+        fill.style.height = Math.max(3, (count / maximum) * 67) + "px";
+        button.appendChild(fill);
+        button.addEventListener("click", function () { selectRound(round); });
+        bars.appendChild(button);
+      });
+      byId("play-button").disabled = current < 2;
+    }
+
+    function selectRound(round) {
+      selectedRound = Math.min(Math.max(1, Number(round) || 1), Math.max(1, Number(run.total_rounds) || 1));
+      byId("round-slider").value = String(selectedRound);
+      renderTimeline();
+      renderNetwork();
+      renderInspector();
+      renderFeed();
+    }
+    function selectAgent(agentId) {
+      selectedAgent = agentId;
+      renderNetwork();
+      renderInspector();
+      renderFeed();
+    }
+    function targetLabel(event) {
+      if (event.action_type === "follow") {
+        const followed = agentById.get(event.target_id);
+        return followed ? "followed " + followed.name : "";
+      }
+      if (event.action_type === "comment" || event.action_type === "reply") {
+        const ownReply = contentById.get(event.target_id);
+        const parent = ownReply && contentById.get(ownReply.parent_id);
+        const author = parent && agentById.get(parent.author_id);
+        return author ? "replied to " + author.name : "replied";
+      }
+      const target = contentById.get(event.target_id);
+      const author = target && agentById.get(target.author_id);
+      return author && author.id !== event.agent_id ? "on " + author.name + "'s content" : "";
+    }
+    function eventDetail(event) {
+      const content = contentById.get(event.target_id);
+      if (event.action_type === "post" && content && content.community) return "community / " + content.community;
+      if (event.action_type === "join_community" && event.payload && event.payload.community) return "community / " + event.payload.community;
+      if (content && content.stance) return content.stance + " · " + (content.emotion || "neutral");
+      return "";
+    }
+    function renderFeed() {
+      const list = byId("feed-list");
+      list.replaceChildren();
+      const actionFilter = byId("action-filter").value;
+      const query = byId("feed-search").value.trim().toLocaleLowerCase();
+      const rows = events.filter(function (event) {
+        if (event.round !== selectedRound) return false;
+        if (actionFilter !== "all" && event.action_type !== actionFilter) return false;
+        if (selectedAgent && event.agent_id !== selectedAgent) return false;
+        if (!query) return true;
+        const agent = agentById.get(event.agent_id);
+        const target = targetAgent(event);
+        const haystack = [event.content, event.action_type, agent && agent.name, target && target.name, event.payload && event.payload.community].join(" ").toLocaleLowerCase();
+        return haystack.indexOf(query) >= 0;
+      });
+      setText("feed-count", rows.length + " of " + events.filter(function (event) { return event.round === selectedRound; }).length + " events");
+      if (!rows.length) {
+        const empty = document.createElement("p");
+        empty.className = "feed-empty";
+        empty.textContent = events.some(function (event) { return event.round === selectedRound; }) ? "No events match these filters." : "No actions were recorded in this round.";
+        list.appendChild(empty);
+        return;
+      }
+      rows.forEach(function (event) {
+        const agent = agentById.get(event.agent_id);
+        const row = document.createElement("article");
+        row.className = "feed-row";
+        const round = document.createElement("span");
+        round.className = "feed-round";
+        round.textContent = "R" + padRound(event.round);
+        row.appendChild(round);
+        const content = document.createElement("div");
+        content.className = "feed-content";
+        const meta = document.createElement("div");
+        meta.className = "feed-meta";
+        const name = document.createElement("button");
+        name.className = "feed-agent";
+        name.type = "button";
+        name.textContent = agent ? agent.name : event.agent_id;
+        name.addEventListener("click", function () { selectAgent(event.agent_id); });
+        meta.appendChild(name);
+        const action = document.createElement("span");
+        action.className = "feed-action";
+        action.textContent = formatAction(event.action_type);
+        meta.appendChild(action);
+        const target = targetLabel(event);
+        if (target) {
+          const targetNode = document.createElement("span");
+          targetNode.className = "feed-target";
+          targetNode.textContent = target;
+          meta.appendChild(targetNode);
+        }
+        content.appendChild(meta);
+        if (event.content) {
+          const text = document.createElement("p");
+          text.className = "feed-text";
+          text.textContent = event.content;
+          content.appendChild(text);
+        }
+        const detail = eventDetail(event);
+        if (detail) {
+          const note = document.createElement("div");
+          note.className = "feed-detail";
+          note.textContent = detail;
+          content.appendChild(note);
+        }
+        row.appendChild(content);
+        list.appendChild(row);
+      });
+    }
+
+    function initialize() {
+      setText("run-id", run.id || "unknown");
+      setText("run-title", run.title || "Untitled simulation");
+      setText("scenario", run.scenario || "No scenario description was saved.");
+      setText("run-status", String(run.status || "unknown").replace(/_/g, " "));
+      setText("run-platform", String(run.platform || "unknown") + " style");
+      setText("run-dates", (Number(run.current_round) || 0) + " / " + (Number(run.total_rounds) || 0) + " rounds");
+      setText("metric-agents", agents.length);
+      setText("metric-actions", events.length);
+      setText("metric-rounds", (Number(run.current_round) || 0) + " / " + (Number(run.total_rounds) || 0));
+      setText("metric-active", new Set(events.map(function (event) { return event.agent_id; })).size);
+      const filter = byId("action-filter");
+      const actions = Array.from(new Set(events.map(function (event) { return event.action_type; }))).sort();
+      const all = document.createElement("option");
+      all.value = "all";
+      all.textContent = "All actions";
+      filter.appendChild(all);
+      actions.forEach(function (actionType) {
+        const option = document.createElement("option");
+        option.value = actionType;
+        option.textContent = formatAction(actionType);
+        filter.appendChild(option);
+      });
+      byId("round-slider").addEventListener("input", function (event) { selectRound(event.target.value); });
+      byId("action-filter").addEventListener("change", renderFeed);
+      byId("feed-search").addEventListener("input", renderFeed);
+      byId("clear-filter").addEventListener("click", function () {
+        selectedAgent = null;
+        renderNetwork();
+        renderInspector();
+        renderFeed();
+      });
+      byId("play-button").addEventListener("click", function () {
+        if (playTimer) {
+          window.clearInterval(playTimer);
+          playTimer = null;
+          byId("play-button").textContent = "Play rounds";
+          return;
+        }
+        if (selectedRound >= Number(run.current_round)) selectRound(1);
+        byId("play-button").textContent = "Pause";
+        playTimer = window.setInterval(function () {
+          if (selectedRound >= Number(run.current_round)) {
+            window.clearInterval(playTimer);
+            playTimer = null;
+            byId("play-button").textContent = "Play rounds";
+            return;
+          }
+          selectRound(selectedRound + 1);
+        }, 950);
+      });
+      byId("export-button").addEventListener("click", function () {
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = (run.id || "flock-run") + "-data.json";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+      });
+      renderTimeline();
+      renderNetwork();
+      renderInspector();
+      renderFeed();
+    }
+    initialize();
+  </script>
+</body>
+</html>

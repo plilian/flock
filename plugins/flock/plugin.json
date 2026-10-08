@@ -1,28 +1,28 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "flock",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Build knowledge graphs and explore synthetic social simulations from inside Codex.",
   "author": {
     "name": "pili"
   },
   "license": "AGPL-3.0",
-  "homepage": "https://plilian.github.io/flock/",
+  "homepage": "https://flock.daalgp.com/",
   "repository": "https://github.com/plilian/flock",
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "Flock",
         "shortDescription": "Knowledge graphs & simulations",
-        "longDescription": "Turn source documents into a cited knowledge graph, simulate synthetic communities in Reddit-like or Twitter-like spaces, explore interactive local visualizations, and create reports—all from inside Codex. Codex performs model reasoning through each user's own ChatGPT account signed into Codex, subject to that account's plan and limits. Flock's model-free helper stores the graph and run history in the chosen Codex workspace. No separate LLM-provider API key, Zep key, external graph service, or separate local web app is required.",
+        "longDescription": "Turn source documents into a cited knowledge graph, simulate synthetic communities in Reddit-like or Twitter-like spaces, explore interactive local visualizations, and create reports inside a supported agent host. The active host session performs model reasoning, while each user configures their own host and provider access. Flock's model-free helper stores graph and run history in the chosen workspace. No separate Flock API key, Zep key, external graph service, or local web app is required.",
         "developerName": "pili",
         "category": "Productivity",
         "capabilities": [],
         "composerIcon": "./assets/flock.svg",
         "logo": "./assets/flock.svg",
-        "websiteURL": "https://plilian.github.io/flock/",
+        "websiteURL": "https://flock.daalgp.com/",
         "supportURL": "https://github.com/plilian/flock/issues",
-        "privacyPolicyURL": "https://plilian.github.io/flock/docs.html#privacy",
+        "privacyPolicyURL": "https://flock.daalgp.com/docs.html#privacy",
         "defaultPrompt": [
           "Use Flock to build a source-grounded graph or simulate a synthetic community in this workspace."
         ]

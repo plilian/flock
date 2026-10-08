@@ -1,0 +1,6 @@
+{
+  "name": "flock",
+  "description": "Source-grounded knowledge graphs and synthetic social simulations for Gemini CLI.",
+  "contextFileName": "GEMINI.md",
+  "version": "0.5.0"
+}

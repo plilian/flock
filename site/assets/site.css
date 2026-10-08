@@ -226,3 +226,23 @@ h1 em,h2 em { color: var(--coral); font-style: normal; }
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
 }
+
+/* Host options: a restrained install overview, not a second documentation page. */
+.hosts { background: var(--paper-deep); display: grid; gap: clamp(40px,8vw,120px); grid-template-columns: .85fr 1.15fr; }
+.hosts-heading { max-width: 430px; }
+.hosts-heading h2 { font-size: clamp(42px,5.4vw,66px); font-weight: 600; letter-spacing: -.075em; line-height: 1.02; margin: 0 0 18px; }
+.hosts-heading h2 em { color: #ed7058; font-style: normal; }
+.hosts-heading > p:last-child { color: #777971; font-size: 13px; line-height: 1.8; max-width: 390px; }
+.host-list { align-self: center; border-top: 1px solid #cbc8bf; }
+.host-row { align-items: center; border-bottom: 1px solid #cbc8bf; display: grid; gap: 17px; grid-template-columns: 34px minmax(140px,1fr) minmax(125px,.8fr) 18px; min-height: 66px; transition: background .25s ease, padding .25s ease; }
+.host-row:hover { background: rgba(255,255,255,.45); padding: 0 10px; }
+.host-index,.host-row > span:nth-child(3) { color: #85837b; font-family: var(--mono); font-size: 9px; letter-spacing: .07em; text-transform: uppercase; }
+.host-row strong { font-size: 14px; font-weight: 700; letter-spacing: -.025em; }
+.host-arrow { color: #ed7058; font-size: 18px; }
+.hosts-note { color: #85837b; font-size: 10px; line-height: 1.6; margin: 13px 0 0; }
+.host-install { border-top: 1px solid #dad8d1; margin-top: 42px; padding-top: 27px; scroll-margin-top: 25px; }
+.host-install-label { color: #9b9890 !important; font-family: var(--mono); font-size: 9px !important; letter-spacing: .12em; margin: 0 0 8px !important; }
+.host-install h3 { font-size: 19px; margin: 0 0 10px; }
+.host-install > p:not(.host-install-label) { margin-bottom: 10px; }
+.host-preview { border-top-color: #e2b7a9; }
+@media (max-width: 720px) { .hosts { display: block; }.hosts-heading { margin-bottom: 35px; }.host-row { gap: 9px; grid-template-columns: 25px minmax(105px,1fr) minmax(105px,.9fr) 14px; min-height: 61px; }.host-row strong { font-size: 12px; }.host-index,.host-row > span:nth-child(3) { font-size: 8px; } }
