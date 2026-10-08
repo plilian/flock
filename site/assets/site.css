@@ -162,9 +162,10 @@ h1 em,h2 em { color: var(--coral); font-style: normal; }
   .menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(3px) rotate(45deg); }.menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-3px) rotate(-45deg); }
   .main-nav { align-items: stretch; background: #111519; border-top: 1px solid rgba(255,255,255,.1); display: none; flex-direction: column; gap: 0; left: 0; padding: 10px 22px 19px; position: absolute; right: 0; top: 68px; }
   .main-nav.is-open { display: flex; }.main-nav a { padding: 14px 0; }.main-nav .nav-cta { border: 0; border-radius: 0; padding-left: 0; }
-  .hero { display: flex; flex-direction: column; justify-content: center; min-height: 910px; min-height: max(850px,100svh); padding: 102px 23px 88px; }
-  .hero-copy { margin-top: 13px; max-width: 560px; }.hero h1 { font-size: clamp(53px,13vw,79px); }.hero-lede { font-size: 14px; max-width: 460px; }
-  .hero-visual { align-self: center; margin: 5px -14vw 0 -12vw; max-width: 560px; width: 112vw; }.visual-caption { font-size: 8px; margin-left: 18px; margin-right: 20px; }.network-art { max-height: 310px; }
+  .hero { display: flex; flex-direction: column; justify-content: center; min-height: 790px; min-height: max(790px,100svh); padding: 93px 23px 80px; }
+  .hero-copy { margin-top: 0; max-width: 560px; }.hero h1 { font-size: clamp(47px,11vw,70px); }.hero-lede { font-size: 14px; max-width: 460px; }
+  .hero-footnote { color: #969c9f; }
+  .hero-visual { align-self: center; margin: 0 -12vw; max-width: 560px; width: 108vw; }.visual-caption { font-size: 8px; margin-left: 18px; margin-right: 20px; }.network-art { max-height: 260px; }
   .hero-bottom { bottom: 24px; flex-wrap: wrap; font-size: 8px; gap: 10px 20px; left: 23px; }
   .section-pad { padding: 78px 23px; }.section-heading { margin-bottom: 44px; }.section-heading h2,.closing h2 { font-size: clamp(43px,10vw,63px); }
   .workflow-row { align-items: start; gap: 13px; grid-template-columns: 33px 1fr; min-height: 134px; padding: 25px 0; }.workflow-row p { font-size: 12px; }.step-art { display: none; }
