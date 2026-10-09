@@ -18,3 +18,5 @@ Open a workspace and ask Claude to use Flock. Python 3.11+ must be available in 
 Flock does not request or store provider API keys. Claude account access, plan limits, and data policies remain controlled by Anthropic and the user's Claude Code setup. Simulation results are synthetic explorations, not forecasts.
 
 Ask Claude to audit graph provenance or compare a baseline against controlled alternatives with Flock's Scenario Lab. Each variant uses the same synthetic roster and keeps run history independent; the comparison view shows computed outcomes and replicate ranges.
+
+The Flock skill supports English, Japanese, Simplified Chinese, and Spanish. Ask in your preferred language; Flock writes questions, synthetic-agent content, audits, and reports in that language while preserving required commands and schema values.

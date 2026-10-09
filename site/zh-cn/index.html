@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e12">
+  <meta name="description" content="面向 Codex、Claude Code、Gemini CLI、Qwen Code 的开源多语言 AI 智能体插件，支持来源知识图谱、证据审计与社交模拟；DeepSeek Harness 版本为预览版。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://flock.daalgp.com/zh-cn/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Flock">
+  <meta property="og:title" content="Flock — AI 知识图谱与社交模拟">
+  <meta property="og:description" content="基于真实资料研究问题，审计图谱证据，并在 AI 智能体工作环境中比较合成场景。">
+  <meta property="og:url" content="https://flock.daalgp.com/zh-cn/">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Flock — AI 知识图谱与社交模拟">
+  <meta name="twitter:description" content="用于证据图谱和合成场景探索的本地开源 AI 智能体工作流。">
+  <title>Flock — AI 知识图谱与社交模拟</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="apple-touch-icon" href="../favicon.svg">
+  <link rel="stylesheet" href="../assets/site.css?v=0.7.0">
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Flock",
+  "url": "https://flock.daalgp.com/zh-cn/",
+  "description": "Flock 是开源 AI 智能体插件工作流，可用于构建有来源依据的知识图谱、审计证据、进行合成社交模拟并比较场景。",
+  "applicationCategory": "DeveloperApplication",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": 0,
+    "priceCurrency": "USD"
+  },
+  "inLanguage": "zh-CN",
+  "softwareVersion": "0.6.0",
+  "sameAs": "https://github.com/plilian/flock"
+}
+  </script>
+  <link rel="alternate" hreflang="en" href="https://flock.daalgp.com/">
+  <link rel="alternate" hreflang="ja" href="https://flock.daalgp.com/ja/">
+  <link rel="alternate" hreflang="es" href="https://flock.daalgp.com/es/">
+  <link rel="alternate" hreflang="zh-CN" href="https://flock.daalgp.com/zh-cn/">
+  <link rel="alternate" hreflang="x-default" href="https://flock.daalgp.com/">
+</head>
+<body class="landing-page">
+  <header class="site-header">
+    <a class="brand" href="/zh-cn/" aria-label="Flock 首页">
+      <svg class="brand-mark" viewBox="0 0 32 32" role="img" aria-label=""><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg>
+      <span>Flock</span>
+    </a>
+    <nav class="main-nav" aria-label="主导航">
+      <a href="#workflow">工作流</a>
+      <a href="#hosts">支持的平台</a>
+      <a href="#principles">设计原则</a>
+      <a href="docs.html">文档</a>
+      <a class="nav-cta" href="docs.html#install">安装插件 <span aria-hidden="true">↗</span></a>
+      <div class="language-nav" role="group" aria-label="语言"><a href="/" lang="en">English</a><a href="/ja/" lang="ja">日本語</a><a href="/zh-cn/" lang="zh-CN" aria-current="page">简体中文</a><a href="/es/" lang="es">Español</a></div>
+    </nav>
+    <button class="menu-toggle" aria-label="打开导航" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main>
+    <section class="hero full-bleed" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="live-dot"></span> 面向 AI 智能体的研究工作流</p>
+        <h1 id="hero-title">看看人群会如何<br><em>行动。</em></h1>
+        <p class="hero-lede">用真实资料研究问题，构建持续更新的知识图谱，并探索合成社群可能的反应——全部在你现有的 AI 工作环境中完成。</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="docs.html#install">开始使用 Flock <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="#workflow">查看工作流 <span aria-hidden="true">↓</span></a>
+        </div>
+        <p class="hero-footnote">无需 Flock API 密钥。仍适用所选 AI 智能体的登录、服务商配置、套餐和用量限制。</p>
+        <p class="hero-language-note">支持英语、日语、简体中文和西班牙语。</p>
+      </div>
+      <div class="hero-visual" aria-label="An illustrative knowledge graph connecting source material to a simulated community">
+        <svg class="network-art" viewBox="0 0 760 600" role="img" aria-labelledby="graph-title graph-desc">
+          <title id="graph-title">从证据到可能结果</title>
+          <desc id="graph-desc">来源文档通过知识图谱连接到合成智能体和场景结果。</desc>
+          <defs>
+            <radialGradient id="coreGlow"><stop stop-color="#ff7a62" stop-opacity=".22"/><stop offset="1" stop-color="#ff7a62" stop-opacity="0"/></radialGradient>
+            <linearGradient id="pathGlow" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffd2c8" stop-opacity=".3"/><stop offset=".52" stop-color="#ff755b"/><stop offset="1" stop-color="#f7bd79" stop-opacity=".65"/></linearGradient>
+          </defs>
+          <circle cx="408" cy="296" r="230" fill="url(#coreGlow)"/>
+          <g class="graph-lines" fill="none" stroke="url(#pathGlow)" stroke-width="1.35">
+            <path d="M108 139 257 201 356 132 465 223 609 166"/>
+            <path d="M108 139 175 327 257 201 309 396 465 223 543 363 609 166"/>
+            <path d="M175 327 309 396 403 303 543 363 652 285"/>
+            <path d="M257 201 403 303 465 223 652 285"/>
+            <path d="M309 396 403 303 465 223"/>
+            <path d="M356 132 403 303 543 363"/>
+            <path d="M108 139 356 132" class="trace-line"/>
+            <path d="M175 327 403 303 609 166" class="trace-line trace-delay"/>
+          </g>
+          <g class="graph-nodes">
+            <circle class="node node-small" cx="108" cy="139" r="7"/><circle class="node node-small" cx="257" cy="201" r="8"/>
+            <circle class="node node-small" cx="356" cy="132" r="6"/><circle class="node node-main" cx="403" cy="303" r="16"/>
+            <circle class="node node-agent" cx="465" cy="223" r="10"/><circle class="node node-small" cx="609" cy="166" r="7"/>
+            <circle class="node node-agent" cx="543" cy="363" r="11"/><circle class="node node-small" cx="652" cy="285" r="7"/>
+            <circle class="node node-small" cx="175" cy="327" r="8"/><circle class="node node-small" cx="309" cy="396" r="6"/>
+          </g>
+          <g class="graph-labels" font-family="'DM Mono', monospace" font-size="11" letter-spacing=".04em">
+            <text x="47" y="119">来源 01</text><text x="221" y="178">主张</text><text x="333" y="108">参与者</text>
+            <text x="364" y="339">证据图谱</text><text x="471" y="202">智能体 04</text>
+            <text x="589" y="142">场景</text><text x="542" y="394">社群</text>
+            <text x="622" y="311">结果</text><text x="128" y="358">来源 02</text>
+          </g>
+          <g class="art-annotations" font-family="'DM Mono', monospace" font-size="9" letter-spacing=".12em">
+            <text x="84" y="476">以来源为依据</text><text x="317" y="476">模拟可能性</text><text x="546" y="476">追溯结果</text>
+          </g>
+          <path class="orbit" d="M87 303c38-162 272-257 435-197 150 55 192 216 121 330" fill="none" stroke="#f3eee7" stroke-opacity=".13" stroke-dasharray="2 8"/>
+        </svg>
+        <div class="visual-caption"><span>探索可能性，而非预测</span><span>01 — 03</span></div>
+      </div>
+      <div class="hero-bottom"><span>知识图谱</span><span>社交模拟</span><span>5 款原生平台插件</span></div>
+    </section>
+
+    <section class="hosts section-pad" id="hosts">
+      <div class="hosts-heading reveal">
+        <p class="eyebrow dark-eyebrow">一个工作流，适配你常用的平台</p>
+        <h2>Flock融入你<br><em>现有的工作环境。</em></h2>
+        <p>安装适用于你所用智能体平台的软件包。推理由平台当前使用的模型完成；Flock 将图谱和运行数据保存在你指定的工作区。</p>
+      </div>
+      <div class="host-list">
+        <a class="host-row reveal" href="docs.html#codex"><span class="host-index">01</span><strong>Codex</strong><span>原生插件</span><span class="host-arrow" aria-hidden="true">↗</span></a>
+        <a class="host-row reveal" href="docs.html#claude-code"><span class="host-index">02</span><strong>Claude Code</strong><span>原生插件</span><span class="host-arrow" aria-hidden="true">↗</span></a>
+        <a class="host-row reveal" href="docs.html#gemini-cli"><span class="host-index">03</span><strong>Gemini CLI</strong><span>原生扩展</span><span class="host-arrow" aria-hidden="true">↗</span></a>
+        <a class="host-row reveal" href="docs.html#qwen-code"><span class="host-index">04</span><strong>Qwen Code</strong><span>原生扩展</span><span class="host-arrow" aria-hidden="true">↗</span></a>
+        <a class="host-row reveal" href="docs.html#deepseek-harness"><span class="host-index">05</span><strong>DeepSeek Harness</strong><span>开发者预览版</span><span class="host-arrow" aria-hidden="true">↗</span></a>
+        <p class="hosts-note">DeepSeek 支持面向 Harness 插件宿主，不适用于 DeepSeek 聊天网站或 API。</p>
+      </div>
+    </section>
+
+    <section class="intro section-pad" id="workflow">
+      <div class="section-heading reveal">
+        <p class="eyebrow dark-eyebrow">更清晰地探索不确定性</p>
+        <h2>从一组资料<br>到一个 <em>动态场景。</em></h2>
+      </div>
+      <div class="workflow-list">
+        <article class="workflow-row reveal">
+          <span class="step-index">01</span>
+          <div><h3>让问题有据可依</h3><p>加入重要的报告、文章和笔记。Flock 将每项主张与其来源关联保存。</p></div>
+          <span class="step-art step-document" aria-hidden="true"><i></i><i></i><i></i></span>
+        </article>
+        <article class="workflow-row reveal">
+          <span class="step-index">02</span>
+          <div><h3>梳理关系</h3><p>平台当前使用的模型会从资料中提取人物、群体、事件和关联，构建可供检查和提问的图谱。</p></div>
+          <span class="step-art step-network" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        </article>
+        <article class="workflow-row reveal">
+          <span class="step-index">03</span>
+          <div><h3>Scenario Lab：比较不同可能性</h3><p>构建合成社群，在多次相互独立的运行中比较基线场景和有针对性的替代方案。</p></div>
+          <span class="step-art step-ripple" aria-hidden="true"><i></i><i></i><i></i></span>
+        </article>
+        <article class="workflow-row reveal">
+          <span class="step-index">04</span>
+          <div><h3>Evidence Audit：追溯主张来源</h3><p>将事实主张追溯到简短的来源摘录，区分观察、推断和假设，并检查不同来源之间的分歧。</p></div>
+          <span class="step-art step-audit" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        </article>
+      </div>
+    </section>
+
+    <section class="principles full-bleed" id="principles">
+      <div class="principles-copy reveal">
+        <p class="eyebrow"><span class="live-dot"></span> 围绕你的平台会话构建</p>
+        <h2>无需 Flock 密钥。<br><em>平台由你选择，数据由你掌控。</em></h2>
+        <p>Flock 不会收集模型凭据。请登录或配置你选择的 AI 智能体；服务商设置、数据政策、套餐和限制由该平台决定。Flock 的 SQLite 图谱和模拟记录保存在所选工作区，不依赖 Zep 或 Flock 托管的数据服务。</p>
+        <a class="text-link light-link" href="docs.html#privacy">了解数据处理方式 <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="principles-diagram reveal" aria-hidden="true">
+        <div class="diagram-line"></div>
+        <div class="diagram-node"><span class="diagram-dot"></span><small>你的资料</small><b>工作区</b></div>
+        <div class="diagram-node"><span class="diagram-dot coral"></span><small>模型推理</small><b>你的平台会话</b></div>
+        <div class="diagram-node"><span class="diagram-dot gold"></span><small>你的图谱</small><b>SQLite · .flock/</b></div>
+        <p>每个阶段都清晰可见。<br>每次运行都会留下记录。</p>
+      </div>
+    </section>
+
+    <section class="closing section-pad">
+      <div class="closing-inner reveal">
+        <p class="eyebrow dark-eyebrow">帮助提出更好问题的工具</p>
+        <h2>为多种结果<br><em>留出空间。</em></h2>
+        <p>选择平台，安装对应的 Flock 软件包，从你信任的资料开始。</p>
+        <a class="button button-dark" href="docs.html#install">阅读安装指南 <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="closing-mark" aria-hidden="true">F.</div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="/zh-cn/"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg><span>Flock</span></a>
+    <p>探索可能性，让证据触手可及。</p>
+    <div><a href="docs.html">文档</a><a href="https://github.com/plilian/flock">GitHub</a><a href="https://github.com/plilian/flock/issues">支持</a></div>
+    <small>Flock 是基于 AGPL-3.0 发布、由独立团队大幅修改并维护的 MiroFish 衍生项目，与 MiroFish 维护者无隶属或认可关系。 <a href="docs.html#license">项目来源与许可证</a></small>
+  </footer>
+  <script src="../assets/site.js?v=0.7.0" defer></script>
+</body>
+</html>

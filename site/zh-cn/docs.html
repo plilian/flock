@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e12">
+  <meta name="description" content="了解如何为 Codex、Claude Code、Gemini CLI、Qwen Code 或 DeepSeek Harness 安装 Flock，以及如何使用 Evidence Audit、Scenario Lab 和本地知识图谱。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://flock.daalgp.com/zh-cn/docs.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Flock">
+  <meta property="og:title" content="Flock 文档 — 安装、图谱、审计与模拟">
+  <meta property="og:description" content="Flock 安装说明，以及知识图谱、Evidence Audit、Scenario Lab、模拟工作流和本地数据模型的实用指南。">
+  <meta property="og:url" content="https://flock.daalgp.com/zh-cn/docs.html">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Flock 文档">
+  <meta name="twitter:description" content="在 AI 智能体中安装和使用 Flock，了解证据审计、场景比较和本地图谱。">
+  <title>Flock 文档 — AI 智能体插件安装与使用指南</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="apple-touch-icon" href="../favicon.svg">
+  <link rel="stylesheet" href="../assets/site.css?v=0.7.0">
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Flock 文档：安装、Evidence Audit 与 Scenario Lab",
+  "description": "Flock 安装与工作流文档：介绍这款开源 AI 智能体插件如何支持有证据依据的知识图谱和合成社交模拟。",
+  "url": "https://flock.daalgp.com/zh-cn/docs.html",
+  "inLanguage": "zh-CN",
+  "about": {
+    "@type": "SoftwareApplication",
+    "name": "Flock",
+    "url": "https://flock.daalgp.com/",
+    "applicationCategory": "DeveloperApplication"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Flock",
+    "url": "https://flock.daalgp.com/"
+  }
+}
+  </script>
+  <link rel="alternate" hreflang="en" href="https://flock.daalgp.com/docs.html">
+  <link rel="alternate" hreflang="ja" href="https://flock.daalgp.com/ja/docs.html">
+  <link rel="alternate" hreflang="es" href="https://flock.daalgp.com/es/docs.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://flock.daalgp.com/zh-cn/docs.html">
+  <link rel="alternate" hreflang="x-default" href="https://flock.daalgp.com/docs.html">
+</head>
+<body class="docs-page">
+  <header class="site-header docs-header">
+    <a class="brand" href="/zh-cn/" aria-label="Flock 首页">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg>
+      <span>Flock</span>
+    </a>
+    <nav class="main-nav" aria-label="主导航">
+      <a href="/zh-cn/#workflow">工作流</a>
+      <a href="/zh-cn/#hosts">支持的平台</a>
+      <a href="docs.html" aria-current="page">文档</a>
+      <a class="nav-cta" href="#install">安装插件 <span aria-hidden="true">↗</span></a>
+      <div class="language-nav" role="group" aria-label="语言"><a href="/docs.html" lang="en">English</a><a href="/ja/docs.html" lang="ja">日本語</a><a href="/zh-cn/docs.html" lang="zh-CN" aria-current="page">简体中文</a><a href="/es/docs.html" lang="es">Español</a></div>
+    </nav>
+    <button class="menu-toggle" aria-label="打开导航" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main>
+    <section class="docs-hero">
+      <p class="eyebrow"><span class="live-dot"></span> FLOCK / 文档</p>
+      <h1>在你选择的<br><em>工作区中使用 Flock。</em></h1>
+      <p>安装适用于 AI 智能体平台的原生软件包，然后使用自己的资料和场景。Flock 是本地工作流，不是托管模拟服务。</p>
+    </section>
+
+    <div class="docs-layout">
+      <nav class="docs-toc" aria-label="文档章节">
+        <span>本页目录</span>
+        <a href="#install">安装</a>
+        <a href="#first-project">第一个项目</a>
+        <a href="#workflows">工作流</a>
+        <a href="#evidence-audit">Evidence Audit</a>
+        <a href="#scenario-lab">Scenario Lab</a>
+        <a href="#simulation">模拟引擎</a>
+        <a href="#faq">常见问题</a>
+        <a href="#privacy">隐私与数据</a>
+        <a href="#troubleshooting">故障排查</a>
+        <a href="#license">许可证</a>
+      </nav>
+
+      <article class="docs-content">
+        <section id="install">
+          <p class="eyebrow dark-eyebrow">01 / 安装</p>
+          <h2>为你的平台安装</h2>
+          <p>Flock 为每个受支持的智能体平台提供原生插件或扩展包。每个软件包都包含相同的工作流技能和不调用模型的 Python 辅助工具。平台会话负责推理；辅助工具负责验证并保存图谱和模拟数据。</p>
+          <p>所有软件包均可直接从公开 GitHub 仓库安装。Flock 不提供托管模型，也不需要 Flock API 密钥。请按所选平台的说明登录或配置；服务商选项和用量限制因平台而异。</p>
+          <h3>共同要求</h3>
+          <ul>
+            <li>Python 3.11 或更高版本，并可在平台环境中访问工作区和终端。</li>
+            <li>用于从公开仓库安装软件包的 Git。</li>
+            <li>Flock 数据目录： <code>.flock/</code></li>
+            <li>你自己的受支持平台安装和模型访问权限。Flock 不会共享开发者的账户。</li>
+          </ul>
+
+          <div class="host-install" id="codex">
+            <p class="host-install-label">01 / CODEX · 原生插件</p>
+            <h3>Codex</h3>
+            <p>添加 Flock 插件市场并安装插件：</p>
+            <pre><code>codex plugin marketplace add plilian/flock
+codex plugin add flock@flock</code></pre>
+            <p>打开或重启 Codex，然后让它使用 Flock，或调用以下技能： <code>$flock</code> 技能。</p>
+          </div>
+
+          <div class="host-install" id="claude-code">
+            <p class="host-install-label">02 / CLAUDE CODE · 原生插件</p>
+            <h3>Claude Code</h3>
+            <p>在 Claude Code 终端中添加 Flock 插件市场并安装：</p>
+            <pre><code>claude plugin marketplace add plilian/flock
+claude plugin install flock@flock</code></pre>
+            <p>如有需要，请重启或重新加载 Claude Code，打开工作区，然后让 Claude 使用以下技能： <code>flock</code> 技能。</p>
+          </div>
+
+          <div class="host-install" id="gemini-cli">
+            <p class="host-install-label">03 / GEMINI CLI · 原生扩展</p>
+            <h3>Gemini CLI</h3>
+            <p>从仓库 URL 安装 Flock：</p>
+            <pre><code>gemini extensions install https://github.com/plilian/flock</code></pre>
+            <p>如提示，请重启 CLI，然后让 Gemini CLI 使用 Flock 技能。Gemini CLI 的身份验证和模型访问由你的 Google/Gemini 设置决定。</p>
+          </div>
+
+          <div class="host-install" id="qwen-code">
+            <p class="host-install-label">04 / QWEN CODE · 原生扩展</p>
+            <h3>Qwen Code</h3>
+            <p>从仓库 URL 安装 Flock：</p>
+            <pre><code>qwen extensions install https://github.com/plilian/flock</code></pre>
+            <p>如有提示，请重启 CLI，然后调用 <code>/flock:flock</code> 或者让 Qwen Code 使用该技能。Qwen 登录、服务商配置和用量限制由 Qwen Code 设置管理。</p>
+          </div>
+
+          <div class="host-install host-preview" id="deepseek-harness">
+            <p class="host-install-label">05 / DEEPSEEK HARNESS · 开发者预览版</p>
+            <h3>DeepSeek Harness</h3>
+            <p>Harness 是独立的开发者预览版插件宿主。克隆仓库，并将 Flock 安装到 Harness 配置中：</p>
+            <pre><code>git clone https://github.com/plilian/flock.git
+cd flock
+dsh plugin --profile web add ./plugins/deepseek-harness</code></pre>
+            <p>此软件包仅适用于 DeepSeek Harness。它不是 DeepSeek 聊天网站的插件，也不会调用 DeepSeek API。Harness 的模型访问取决于其支持的服务商配置，可能需要单独设置。</p>
+          </div>
+          <p class="docs-note">这些软件包可从 GitHub 安装，但尚未列入各供应商管理的插件目录。“无需 Flock API 密钥”表示 Flock 没有独立凭据或模型服务；各平台要求的身份验证或服务商配置仍需完成。</p>
+        </section>
+
+        <section id="first-project">
+          <p class="eyebrow dark-eyebrow">02 / 第一个项目</p>
+          <h2>初始化工作区</h2>
+          <p>在希望保存 Flock 数据的工作区中打开平台。放入或附加来源文档，然后向智能体提出请求：</p>
+          <pre><code>使用 Flock 初始化一个名为“交通研究”的项目。</code></pre>
+          <p>Flock 将 SQLite 图数据库和运行记录保存在 <code>.flock/</code> 目录中。每个项目使用单独的工作区文件夹。辅助工具会添加忽略规则，避免图谱和运行数据被意外提交到 Git。来源文档保留在原位置；Flock 只保存来源名称和引用，不会复制全文。</p>
+        </section>
+
+        <section id="workflows">
+          <p class="eyebrow dark-eyebrow">03 / 工作流</p>
+          <h2>从证据到模拟运行</h2>
+          <h3>构建图谱</h3>
+          <p>让平台智能体从选定资料中提取图谱。当前模型识别本体、实体和关系；Flock 验证来源引用并存入 SQLite 图谱。你可以通过 Mermaid 图、搜索或图谱统计进行检查。</p>
+          <pre><code>使用 Flock 从 ./sources 构建知识图谱，并展示最重要的关系。</code></pre>
+          <h3>创建合成群体</h3>
+          <p>描述要研究的群体和问题。平台模型根据图谱实体生成个人资料，并标明哪些内容是推测而非来源事实。</p>
+          <h3>探索场景</h3>
+          <p>选择类似 Reddit 或 Twitter 的讨论方式，设定场景和轮数，并在运行前检查资料中的假设。平台模型生成每轮行动；Flock 验证行动并记录信息流、反应和互动次数。</p>
+          <h3>复核与访谈</h3>
+          <p>使用记录的时间线编写报告、回答问题，或模拟采访合成智能体。报告会将统计结果与定性解读分开。</p>
+          <h3>查看模拟运行</h3>
+          <p>每轮结束后，Flock 会更新以下位置的交互式 HTML 快照： <code>.flock/runs/&lt;run_id&gt;/visualization.html</code>。你可以浏览或播放轮次、查看合成资料、追踪回复和反应、搜索信息流并下载运行数据。它可直接在浏览器中打开，不会发起外部请求。</p>
+        </section>
+
+        <section id="evidence-audit">
+          <p class="eyebrow dark-eyebrow">04 / EVIDENCE AUDIT</p>
+          <h2>追溯主张的来源</h2>
+          <p>将图谱中的实体和关系标记为 <code>observed</code>, <code>inferred</code>、或 <code>assumption</code>。较早的记录在审核前保持 <code>unclassified</code> 。审计会检查来源引用覆盖情况、缺失的定位信息或摘录、未使用的来源以及未分类的图谱记录。</p>
+          <pre><code>python &lt;helper&gt; --workspace . graph audit</code></pre>
+          <p>辅助工具会将 JSON 审计保存到本地目录： <code>.flock/audits/</code>。让当前平台核对引用摘录与来源文档，找出分歧和缺失的观点，并在审计文件旁写下简洁的 Markdown 复核报告。引用意味着可以追溯，并不能验证主张或证明来源准确。</p>
+          <p>模拟中的事实类帖子可以带有图谱来源引用 <code>evidence_refs</code>。Flock 会验证这些 ID，并将原始来源名称、定位信息和简短摘录与事件一同保存，因此回放时可以查看合成智能体的事实主张来自哪里。</p>
+        </section>
+
+        <section id="scenario-lab">
+          <p class="eyebrow dark-eyebrow">05 / SCENARIO LAB</p>
+          <h2>比较基线与替代方案</h2>
+          <p>Scenario Lab 让每个变体和重复实验使用相同的合成资料、平台、轮数和空信息流。一次只更改一个主要条件，例如是否出现更正信息或版主是否介入。每次运行的历史彼此独立。</p>
+          <p>将实验规格保存到 <code>.flock/staging/experiment.json</code> ，并包含研究问题、共享的智能体列表、2–6 个变体、一个基线，以及每个变体 1–5 次重复。每个变体都要写明场景和假设。模型运行次数随变体数 × 重复数 × 轮数 × 智能体数增长。</p>
+          <pre><code>python &lt;helper&gt; --workspace . scenario validate --spec .flock/staging/experiment.json
+python &lt;helper&gt; --workspace . scenario create --spec .flock/staging/experiment.json
+python &lt;helper&gt; --workspace . scenario status --id &lt;experiment_id&gt;
+python &lt;helper&gt; --workspace . scenario compare --id &lt;experiment_id&gt;
+python &lt;helper&gt; --workspace . scenario visualize --id &lt;experiment_id&gt;
+python &lt;helper&gt; --workspace . scenario save-report --id &lt;experiment_id&gt; --input .flock/staging/report.md</code></pre>
+          <p>比较报告会列出行动次数、参与度、立场数量、每轮活动及相对基线的差异。它展示各项指标在已保存重复实验中的中位数、最小值和最大值，并在以下位置生成交互式比较页面： <code>.flock/experiments/&lt;experiment_id&gt;/comparison.html</code>，并提供每次运行的回放链接。</p>
+          <p class="docs-note">重复实验的范围仅汇总这些合成运行，不是置信区间或现实结果概率。请将统计次数与平台解读分开，并在结论中引用图谱来源和运行／事件 ID。</p>
+        </section>
+
+        <section id="simulation">
+          <p class="eyebrow dark-eyebrow">06 / 模拟引擎</p>
+          <h2>运行机制</h2>
+          <p>Flock 将模型推理与持久化状态分开。平台当前使用的模型读取所选证据和资料，提出智能体行动并撰写分析。Python 辅助工具保存图谱记录、检查行动格式、推进轮次并统计活动。</p>
+          <ul>
+            <li><strong>类似 Reddit 的行动：</strong> 发帖、评论、赞成票、反对票和加入社群。</li>
+            <li><strong>类似 Twitter 的行动：</strong> 发帖、回复、点赞、转发和关注。</li>
+            <li><strong>保存的内容：</strong> 证据状态和引用、结构审计文件、智能体资料、逐轮事件、事实行动的已验证来源、场景实验、交互式 HTML 对比、单次运行回放和 Markdown 报告。</li>
+          </ul>
+          <p class="docs-note">Flock 模拟是一种结构化思想实验，不是对真实人群的观察、民意调查或预测。结果取决于所选模型、提示、来源质量、资料和设置。</p>
+        </section>
+
+        <section id="faq">
+          <p class="eyebrow dark-eyebrow">快速问答</p>
+          <h2>关于 Flock 的常见问题</h2>
+          <h3>Flock 是什么？</h3>
+          <p>Flock 是开源 AI 智能体插件工作流，可用于构建有来源依据的知识图谱、审查证据、创建合成群体和探索社交场景。项目图谱和模拟运行数据保存在工作区本地的 SQLite 数据库中。</p>
+          <h3>Flock 能预测真实人群的行为吗？</h3>
+          <p>不能。Flock 使用合成智能体运行结构化思想实验。结果不是民意调查、对真实人群的观察或预测，重复实验范围也不代表现实概率。</p>
+          <h3>Flock 需要 AI API 密钥或 Zep 吗？</h3>
+          <p>Flock 没有独立 API 密钥、模型服务、托管图谱服务，也不依赖 Zep。模型访问由所选平台自身的登录和服务商设置管理；该平台的要求、套餐和用量限制仍然适用。</p>
+          <h3>Flock 支持哪些语言？</h3>
+          <p>Flock 技能支持英语、日语、简体中文（zh-CN）和西班牙语。它会使用你所用的语言回复，并以该语言撰写研究问题、合成智能体内容、审计和报告。命令、架构键、ID 和固定枚举值保持不变。</p>
+          <h3>哪些 AI 智能体平台可以使用 Flock？</h3>
+          <p>Flock 为 Codex、Claude Code、Gemini CLI 和 Qwen Code 提供可安装软件包。DeepSeek Harness 有独立的开发者预览包；它不集成 DeepSeek 聊天网站或 API。</p>
+          <h3>Flock 的图谱和模拟数据保存在哪里？</h3>
+          <p>Flock 将 SQLite 图谱、证据审计、场景实验、运行历史和可视化结果保存在 <code>.flock/</code> 目录中，该目录位于你选择的工作区内。Flock 网站不会收到项目数据。</p>
+        </section>
+
+        <section id="privacy">
+          <p class="eyebrow dark-eyebrow">07 / 隐私与数据</p>
+          <h2>你的工作区，你的平台</h2>
+          <ul>
+            <li>所选平台通过用户自己的活动会话和服务商设置处理来源摘录与提示。其账户设置、模型政策、套餐和限制均适用。</li>
+            <li>Flock Python 辅助工具不会发起网络或模型调用，也不会读取平台凭据。它会将图谱数据、证据审计、场景实验、可视化结果和报告保存在所选工作区内的 <code>.flock/</code> 文件夹中。</li>
+            <li>Flock 不需要独立的服务商 API 密钥、Zep 密钥或 Flock 账户。某些平台配置可能需要平台自己的服务商凭据。</li>
+            <li>公开网站提供信息和安装说明。模拟在每位用户的工作区运行；Flock 网站服务器不会收到项目资料、图谱或运行历史。</li>
+            <li>分享资料或生成的图谱前，请检查工作区备份和 Git 设置。</li>
+          </ul>
+        </section>
+
+        <section id="troubleshooting">
+          <p class="eyebrow dark-eyebrow">08 / 故障排查</p>
+          <h2>遇到问题时</h2>
+          <h3>平台找不到 Flock</h3>
+          <p>确认软件包已成功安装并重启平台。在 Codex 中运行 <code>codex plugin list</code>；在 Claude Code 中查看 <code>/plugin</code>；在 Gemini CLI 和 Qwen Code 中查看扩展列表。DeepSeek Harness 插件仍处于开发者预览阶段。</p>
+          <h3>Python 缺失或版本过旧</h3>
+          <p>安装 Python 3.11 或更高版本，并确认 <code>python</code> 在平台运行环境中可用。无需安装其他图谱或数据库软件包。</p>
+          <h3>图谱验证报告缺少来源</h3>
+          <p>请确认每个实体和关系引用使用的 <code>source_id</code> 存在于候选图谱的 <code>sources</code> 数组中。导入前请重新验证图谱。</p>
+          <h3>卸载 Flock</h3>
+          <p>使用平台的插件或扩展管理器卸载 Flock。卸载不会删除工作区数据。请先备份，或确认不再需要相关图谱和运行数据，然后再删除 <code>.flock/</code> 。</p>
+        </section>
+
+        <section id="license">
+          <p class="eyebrow dark-eyebrow">09 / 项目</p>
+          <h2>许可证与来源说明</h2>
+          <p>Flock 根据 <a href="https://github.com/plilian/flock/blob/main/LICENSE">AGPL-3.0</a>进行分发。它是对开源项目 <a href="https://github.com/666ghj/MiroFish">MiroFish</a> 的大幅修改版，由独立团队维护。Flock 用面向受支持智能体平台的原生软件包和工作区本地 SQLite 图谱，取代了早期网页应用及基于 Zep 的图谱工作流。Flock 与 MiroFish 及其维护者没有关联，也未获其认可。详情请参阅 <a href="https://github.com/plilian/flock/blob/main/ATTRIBUTION.md">归属声明</a> 了解项目来源。</p>
+          <p><a href="https://github.com/plilian/flock">在 GitHub 上查看源码 ↗</a> · <a href="https://github.com/plilian/flock/issues">报告问题 ↗</a></p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="docs-footer">
+    <a class="brand" href="/zh-cn/"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg><span>Flock</span></a>
+    <p>插件文档 · 简体中文 · AGPL-3.0</p>
+  </footer>
+  <script src="../assets/site.js?v=0.7.0" defer></script>
+</body>
+</html>
+

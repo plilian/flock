@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e12">
+  <meta name="description" content="Instala Flock para Codex, Claude Code, Gemini CLI, Qwen Code o DeepSeek Harness. Guía de Evidence Audit, Scenario Lab, grafos locales y simulación social sintética.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://flock.daalgp.com/es/docs.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Flock">
+  <meta property="og:title" content="Documentación de Flock — Instalación, grafos, auditorías y simulaciones">
+  <meta property="og:description" content="Guía práctica de instalación, grafos de conocimiento, Evidence Audit, Scenario Lab, simulaciones y almacenamiento local de Flock.">
+  <meta property="og:url" content="https://flock.daalgp.com/es/docs.html">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Documentación de Flock">
+  <meta name="twitter:description" content="Instala y usa Flock en tu agente de IA. Conoce las auditorías de evidencia, la comparación de escenarios y los grafos locales.">
+  <title>Documentación de Flock — Instalar y usar el complemento de agente de IA</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="apple-touch-icon" href="../favicon.svg">
+  <link rel="stylesheet" href="../assets/site.css?v=0.7.0">
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Documentación de Flock: instalación, Evidence Audit y Scenario Lab",
+  "description": "Documentación de instalación y uso de Flock, un complemento de agente de IA de código abierto para grafos de conocimiento con evidencia y simulaciones sociales sintéticas.",
+  "url": "https://flock.daalgp.com/es/docs.html",
+  "inLanguage": "es",
+  "about": {
+    "@type": "SoftwareApplication",
+    "name": "Flock",
+    "url": "https://flock.daalgp.com/",
+    "applicationCategory": "DeveloperApplication"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Flock",
+    "url": "https://flock.daalgp.com/"
+  }
+}
+  </script>
+  <link rel="alternate" hreflang="en" href="https://flock.daalgp.com/docs.html">
+  <link rel="alternate" hreflang="ja" href="https://flock.daalgp.com/ja/docs.html">
+  <link rel="alternate" hreflang="es" href="https://flock.daalgp.com/es/docs.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://flock.daalgp.com/zh-cn/docs.html">
+  <link rel="alternate" hreflang="x-default" href="https://flock.daalgp.com/docs.html">
+</head>
+<body class="docs-page">
+  <header class="site-header docs-header">
+    <a class="brand" href="/es/" aria-label="Inicio de Flock">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg>
+      <span>Flock</span>
+    </a>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="/es/#workflow">Flujo de trabajo</a>
+      <a href="/es/#hosts">Agentes compatibles</a>
+      <a href="docs.html" aria-current="page">Documentación</a>
+      <a class="nav-cta" href="#install">Instalar complemento <span aria-hidden="true">↗</span></a>
+      <div class="language-nav" role="group" aria-label="Idioma"><a href="/docs.html" lang="en">English</a><a href="/ja/docs.html" lang="ja">日本語</a><a href="/zh-cn/docs.html" lang="zh-CN">简体中文</a><a href="/es/docs.html" lang="es" aria-current="page">Español</a></div>
+    </nav>
+    <button class="menu-toggle" aria-label="Abrir navegación" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main>
+    <section class="docs-hero">
+      <p class="eyebrow"><span class="live-dot"></span> FLOCK / DOCUMENTACIÓN</p>
+      <h1>Flock, en el espacio<br><em> de trabajo que elijas.</em></h1>
+      <p>Instala el paquete nativo para tu agente de IA y trabaja con tus propias fuentes y escenarios. Flock se ejecuta localmente; no es un servicio de simulación alojado.</p>
+    </section>
+
+    <div class="docs-layout">
+      <nav class="docs-toc" aria-label="Secciones de documentación">
+        <span>EN ESTA PÁGINA</span>
+        <a href="#install">Instalación</a>
+        <a href="#first-project">Primer proyecto</a>
+        <a href="#workflows">Flujos de trabajo</a>
+        <a href="#evidence-audit">Evidence Audit</a>
+        <a href="#scenario-lab">Scenario Lab</a>
+        <a href="#simulation">Motor de simulación</a>
+        <a href="#faq">Preguntas frecuentes</a>
+        <a href="#privacy">Privacidad y datos</a>
+        <a href="#troubleshooting">Solución de problemas</a>
+        <a href="#license">Licencia</a>
+      </nav>
+
+      <article class="docs-content">
+        <section id="install">
+          <p class="eyebrow dark-eyebrow">01 / INSTALACIÓN</p>
+          <h2>Instala Flock en tu agente</h2>
+          <p>Flock se distribuye como complemento o extensión nativa para cada agente compatible. Todos los paquetes incluyen la misma habilidad de flujo de trabajo y un asistente Python que no usa modelos. La sesión activa del agente razona; el asistente valida y guarda los datos del grafo y la simulación.</p>
+          <p>Todos los paquetes se instalan directamente desde el repositorio público de GitHub. Flock no ofrece un modelo alojado ni requiere una clave API de Flock. Inicia sesión o configura el agente según sus instrucciones; los proveedores disponibles y los límites varían.</p>
+          <h3>Requisitos comunes</h3>
+          <ul>
+            <li>Python 3.11 o posterior y acceso al espacio de trabajo y la terminal del agente.</li>
+            <li>Git para instalar paquetes desde este repositorio público.</li>
+            <li>Carpeta de datos de Flock: <code>.flock/</code></li>
+            <li>Tu propia instalación de un agente compatible y acceso a un modelo. Flock nunca comparte la cuenta del desarrollador.</li>
+          </ul>
+
+          <div class="host-install" id="codex">
+            <p class="host-install-label">01 / CODEX · COMPLEMENTO NATIVO</p>
+            <h3>Codex</h3>
+            <p>Añade el marketplace de Flock e instala el complemento:</p>
+            <pre><code>codex plugin marketplace add plilian/flock
+codex plugin add flock@flock</code></pre>
+            <p>Abre o reinicia Codex y pídele que use Flock o invoca la habilidad <code>$flock</code> .</p>
+          </div>
+
+          <div class="host-install" id="claude-code">
+            <p class="host-install-label">02 / CLAUDE CODE · COMPLEMENTO NATIVO</p>
+            <h3>Claude Code</h3>
+            <p>Añade el marketplace de Flock e instala desde una terminal de Claude Code:</p>
+            <pre><code>claude plugin marketplace add plilian/flock
+claude plugin install flock@flock</code></pre>
+            <p>Si hace falta, reinicia Claude Code; abre tu espacio de trabajo y pídele a Claude que use la habilidad <code>flock</code> .</p>
+          </div>
+
+          <div class="host-install" id="gemini-cli">
+            <p class="host-install-label">03 / GEMINI CLI · EXTENSIÓN NATIVA</p>
+            <h3>Gemini CLI</h3>
+            <p>Instala Flock desde la URL del repositorio:</p>
+            <pre><code>gemini extensions install https://github.com/plilian/flock</code></pre>
+            <p>Si se te solicita, reinicia la CLI y pide a Gemini CLI que use la habilidad de Flock. La autenticación y el acceso a modelos dependen de tu configuración de Google/Gemini.</p>
+          </div>
+
+          <div class="host-install" id="qwen-code">
+            <p class="host-install-label">04 / QWEN CODE · EXTENSIÓN NATIVA</p>
+            <h3>Qwen Code</h3>
+            <p>Instala Flock desde la URL del repositorio:</p>
+            <pre><code>qwen extensions install https://github.com/plilian/flock</code></pre>
+            <p>Si se te solicita, reinicia la CLI y ejecuta <code>/flock:flock</code> o pide a Qwen Code que use esa habilidad. El inicio de sesión, los proveedores y los límites de uso se configuran en Qwen Code.</p>
+          </div>
+
+          <div class="host-install host-preview" id="deepseek-harness">
+            <p class="host-install-label">05 / DEEPSEEK HARNESS · VISTA PREVIA</p>
+            <h3>DeepSeek Harness</h3>
+            <p>Harness es un host de complementos independiente en vista previa para desarrolladores. Clona el repositorio e instala Flock en un perfil de Harness:</p>
+            <pre><code>git clone https://github.com/plilian/flock.git
+cd flock
+dsh plugin --profile web add ./plugins/deepseek-harness</code></pre>
+            <p>Este paquete es solo para DeepSeek Harness. No es un complemento del sitio de chat de DeepSeek y no llama a la API de DeepSeek. El acceso a modelos depende de los proveedores compatibles con Harness y puede requerir una configuración adicional.</p>
+          </div>
+          <p class="docs-note">Estos paquetes se instalan desde GitHub, pero no aparecen en los directorios de complementos administrados por cada proveedor. «Flock no requiere clave API» significa que no tiene credenciales ni servicio de modelos propios; cada agente puede seguir requiriendo su autenticación o configuración de proveedor.</p>
+        </section>
+
+        <section id="first-project">
+          <p class="eyebrow dark-eyebrow">02 / PRIMER PROYECTO</p>
+          <h2>Inicializar un espacio de trabajo</h2>
+          <p>Abre el agente en el espacio donde quieras guardar los datos de Flock. Coloca o adjunta los documentos fuente y pide al agente:</p>
+          <pre><code>Usa Flock para inicializar un proyecto llamado «Estudio de transporte».</code></pre>
+          <p>Flock guarda la base de datos SQLite del grafo y los registros de ejecución en la carpeta <code>.flock/</code> . Usa una carpeta de trabajo distinta para cada proyecto. El asistente añade una regla de exclusión para evitar que el grafo y las ejecuciones se incluyan por error en Git. Los documentos permanecen en su ubicación; Flock guarda sus nombres y citas, no copias completas.</p>
+        </section>
+
+        <section id="workflows">
+          <p class="eyebrow dark-eyebrow">03 / FLUJOS DE TRABAJO</p>
+          <h2>De la evidencia a una ejecución</h2>
+          <h3>Construir el grafo</h3>
+          <p>Pide al agente que extraiga un grafo de las fuentes seleccionadas. El modelo activo identifica la ontología, las entidades y las relaciones; Flock valida y guarda las referencias en su grafo SQLite. Inspecciónalo con un diagrama Mermaid, búsquedas o estadísticas.</p>
+          <pre><code>Usa Flock para crear un grafo de conocimiento a partir de ./sources y mostrar sus relaciones principales.</code></pre>
+          <h3>Crear una población sintética</h3>
+          <p>Describe la población y la pregunta que quieres explorar. El modelo del agente crea perfiles basados en entidades del grafo y marca como supuestos los detalles que no proceden de las fuentes.</p>
+          <h3>Explorar un escenario</h3>
+          <p>Elige un debate al estilo de Reddit o Twitter, define el escenario y el número de rondas, y revisa los supuestos de los perfiles antes de ejecutarlo. El modelo genera las acciones de cada ronda; Flock las valida y registra publicaciones, reacciones e interacciones.</p>
+          <h3>Revisar y entrevistar</h3>
+          <p>Usa la cronología para redactar un informe, responder preguntas o simular una entrevista con un agente sintético. Los informes separan los recuentos calculados de la interpretación cualitativa.</p>
+          <h3>Visualizar la ejecución</h3>
+          <p>Después de cada ronda, Flock actualiza una vista HTML interactiva en <code>.flock/runs/&lt;run_id&gt;/visualization.html</code>. Avanza o reproduce las rondas, consulta perfiles sintéticos, sigue respuestas y reacciones, busca en el feed y descarga los datos. Se abre directamente en el navegador y no realiza solicitudes externas.</p>
+        </section>
+
+        <section id="evidence-audit">
+          <p class="eyebrow dark-eyebrow">04 / EVIDENCE AUDIT</p>
+          <h2>Rastrear afirmaciones hasta sus fuentes</h2>
+          <p>Etiqueta cada entidad y relación del grafo como <code>observed</code>, <code>inferred</code>, o <code>assumption</code>. Los registros anteriores permanecen como <code>unclassified</code> hasta revisarlos. La auditoría comprueba la cobertura de referencias, las ubicaciones o citas que faltan, las fuentes sin usar y los registros sin clasificar.</p>
+          <pre><code>python &lt;helper&gt; --workspace . graph audit</code></pre>
+          <p>El asistente guarda una auditoría JSON local en <code>.flock/audits/</code>. Pide al agente que contraste las citas con los documentos seleccionados, detecte desacuerdos y perspectivas ausentes, y escriba una revisión breve en Markdown junto al archivo. Una cita permite rastrear la fuente, pero no verifica una afirmación ni demuestra que la fuente sea correcta.</p>
+          <p>Durante las simulaciones, las publicaciones factuales pueden incluir <code>evidence_refs</code>. Flock valida esos identificadores y guarda el nombre original de la fuente, su ubicación y un fragmento breve junto al evento. Así, la reproducción muestra el origen de cada afirmación factual sintética.</p>
+        </section>
+
+        <section id="scenario-lab">
+          <p class="eyebrow dark-eyebrow">05 / SCENARIO LAB</p>
+          <h2>Comparar una referencia con alternativas</h2>
+          <p>Scenario Lab inicia cada variante y repetición con los mismos perfiles sintéticos, plataforma, número de rondas y feed vacío. Cambia una condición principal cada vez, como mostrar una corrección o incorporar a un moderador. Mantén separadas las ejecuciones.</p>
+          <p>Guarda la especificación del experimento en <code>.flock/staging/experiment.json</code> con una pregunta de investigación, una lista de agentes compartida, entre 2 y 6 variantes, una referencia y de 1 a 5 repeticiones por variante. Cada variante incluye el escenario y sus supuestos explícitos. El total de ejecuciones del modelo aumenta según variantes × repeticiones × rondas × agentes.</p>
+          <pre><code>python &lt;helper&gt; --workspace . scenario validate --spec .flock/staging/experiment.json
+python &lt;helper&gt; --workspace . scenario create --spec .flock/staging/experiment.json
+python &lt;helper&gt; --workspace . scenario status --id &lt;experiment_id&gt;
+python &lt;helper&gt; --workspace . scenario compare --id &lt;experiment_id&gt;
+python &lt;helper&gt; --workspace . scenario visualize --id &lt;experiment_id&gt;
+python &lt;helper&gt; --workspace . scenario save-report --id &lt;experiment_id&gt; --input .flock/staging/report.md</code></pre>
+          <p>La comparación presenta recuentos de acciones, participación, posturas, actividad por ronda y diferencias respecto a la referencia. Muestra la mediana y los valores mínimo/máximo de cada métrica y crea una comparación interactiva en <code>.flock/experiments/&lt;experiment_id&gt;/comparison.html</code>, con enlaces a la reproducción de cada ejecución.</p>
+          <p class="docs-note">Los rangos de repetición solo resumen estas ejecuciones sintéticas. No son intervalos de confianza ni probabilidades de resultados reales. Separa los recuentos calculados de la interpretación del agente y cita las fuentes del grafo y los identificadores de ejecución y evento.</p>
+        </section>
+
+        <section id="simulation">
+          <p class="eyebrow dark-eyebrow">06 / MOTOR DE SIMULACIÓN</p>
+          <h2>Cómo funciona una ejecución</h2>
+          <p>Flock separa el razonamiento del modelo del estado persistente. El modelo activo del agente lee las evidencias y los perfiles, propone acciones y redacta el análisis. El asistente Python guarda el grafo, valida el formato de las acciones, avanza las rondas y calcula la actividad.</p>
+          <ul>
+            <li><strong>Acciones al estilo de Reddit:</strong> publicaciones, comentarios, votos positivos y negativos, y uniones a comunidades.</li>
+            <li><strong>Acciones al estilo de Twitter:</strong> publicaciones, respuestas, me gusta, republicaciones y seguimientos.</li>
+            <li><strong>Datos guardados:</strong> estados y citas de evidencia, auditorías estructurales, perfiles de agentes, eventos por ronda, referencias de fuentes validadas, experimentos de escenarios, comparaciones HTML interactivas, reproducciones e informes Markdown.</li>
+          </ul>
+          <p class="docs-note">Una simulación de Flock es un experimento mental estructurado. No observa a personas reales ni es una encuesta o un pronóstico. Los resultados dependen del modelo, las instrucciones, las fuentes, los perfiles y la configuración.</p>
+        </section>
+
+        <section id="faq">
+          <p class="eyebrow dark-eyebrow">RESPUESTAS RÁPIDAS</p>
+          <h2>Preguntas frecuentes sobre Flock</h2>
+          <h3>¿Qué es Flock?</h3>
+          <p>Flock es un flujo de trabajo de complemento de agente de IA de código abierto para crear grafos de conocimiento basados en fuentes, revisar evidencias, generar poblaciones sintéticas y explorar escenarios sociales. Guarda los grafos y las ejecuciones localmente en una base de datos SQLite del espacio de trabajo.</p>
+          <h3>¿Flock predice qué harán las personas reales?</h3>
+          <p>No. Flock ejecuta experimentos mentales estructurados con agentes sintéticos. Los resultados no son encuestas, observaciones de personas reales ni pronósticos; los rangos tampoco representan probabilidades del mundo real.</p>
+          <h3>¿Flock necesita una clave API de IA o Zep?</h3>
+          <p>Flock no requiere una clave API propia, un servicio de modelos o grafos alojado ni Zep. El acceso al modelo se gestiona con la cuenta y el proveedor del agente elegido; siguen aplicándose sus requisitos, planes y límites.</p>
+          <h3>¿Qué idiomas admite Flock?</h3>
+          <p>La habilidad de Flock admite inglés, japonés, chino simplificado (zh-CN) y español. Responde en el idioma que uses y redacta las preguntas de investigación, el contenido sintético, las auditorías y los informes en ese idioma. Los comandos, las claves de esquema, los identificadores y los valores enumerados no cambian.</p>
+          <h3>¿Qué agentes de IA admiten Flock?</h3>
+          <p>Flock ofrece paquetes instalables para Codex, Claude Code, Gemini CLI y Qwen Code. El paquete independiente para DeepSeek Harness está en vista previa para desarrolladores; no se integra con el sitio de chat ni la API de DeepSeek.</p>
+          <h3>¿Dónde se guardan los grafos y los datos de simulación?</h3>
+          <p>Flock guarda el grafo SQLite, las auditorías de evidencia, los experimentos, el historial y las visualizaciones en la carpeta <code>.flock/</code> del espacio de trabajo que elijas. El sitio web de Flock no recibe los datos del proyecto.</p>
+        </section>
+
+        <section id="privacy">
+          <p class="eyebrow dark-eyebrow">07 / PRIVACIDAD Y DATOS</p>
+          <h2>Tu espacio de trabajo, tu agente</h2>
+          <ul>
+            <li>El agente procesa fragmentos de fuentes e instrucciones en la sesión y con el proveedor del propio usuario. Se aplican la configuración de su cuenta, las políticas del modelo, el plan y los límites.</li>
+            <li>El asistente Python de Flock no realiza llamadas de red o a modelos ni lee credenciales del agente. Guarda los grafos, las auditorías, los experimentos, las visualizaciones y los informes en la carpeta <code>.flock/</code> del espacio de trabajo seleccionado.</li>
+            <li>Flock no necesita una clave API de proveedor, una clave de Zep ni una cuenta de Flock. Algunas configuraciones del agente pueden requerir sus propias credenciales.</li>
+            <li>El sitio público ofrece información e instrucciones de instalación. Las simulaciones se ejecutan en el espacio de trabajo de cada usuario; el servidor de Flock no recibe las fuentes, los grafos ni el historial.</li>
+            <li>Revisa las copias de seguridad y la configuración de Git antes de compartir fuentes o grafos generados.</li>
+          </ul>
+        </section>
+
+        <section id="troubleshooting">
+          <p class="eyebrow dark-eyebrow">08 / SOLUCIÓN DE PROBLEMAS</p>
+          <h2>Si algo no funciona</h2>
+          <h3>El agente no encuentra Flock</h3>
+          <p>Comprueba que el paquete se instaló correctamente y reinicia el agente. En Codex, consulta <code>codex plugin list</code>; en Claude Code, consulta <code>/plugin</code>; en Gemini CLI y Qwen Code, consulta la lista de extensiones. Los complementos de DeepSeek Harness siguen en vista previa para desarrolladores.</p>
+          <h3>Falta Python o su versión es antigua</h3>
+          <p>Instala Python 3.11 o posterior y asegúrate de que <code>python</code> esté disponible en el entorno del agente. No hace falta instalar paquetes adicionales de grafos o bases de datos.</p>
+          <h3>La validación del grafo indica que falta una fuente</h3>
+          <p>Comprueba que cada referencia de entidad y relación usa <code>source_id</code> que exista en el arreglo <code>sources</code> del grafo candidato. Vuelve a validar antes de importar.</p>
+          <h3>Desinstalar Flock</h3>
+          <p>Desinstala Flock desde el administrador de complementos o extensiones del agente. La desinstalación no elimina los datos del espacio de trabajo. Borra <code>.flock/</code> solo después de hacer una copia o confirmar que ya no necesitas esos grafos ni ejecuciones.</p>
+        </section>
+
+        <section id="license">
+          <p class="eyebrow dark-eyebrow">09 / PROYECTO</p>
+          <h2>Licencia y atribución</h2>
+          <p>Flock se distribuye bajo la licencia <a href="https://github.com/plilian/flock/blob/main/LICENSE">AGPL-3.0</a>. Es un proyecto derivado del proyecto de código abierto <a href="https://github.com/666ghj/MiroFish">MiroFish</a> . Flock reemplaza la aplicación web anterior y el flujo de grafos basado en Zep por paquetes nativos para agentes compatibles y un grafo SQLite local al espacio de trabajo. Flock no está afiliado ni respaldado por MiroFish ni sus responsables. Consulta el <a href="https://github.com/plilian/flock/blob/main/ATTRIBUTION.md">aviso de atribución</a> para conocer el origen del proyecto.</p>
+          <p><a href="https://github.com/plilian/flock">Ver el código en GitHub ↗</a> · <a href="https://github.com/plilian/flock/issues">Informar de un problema ↗</a></p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="docs-footer">
+    <a class="brand" href="/es/"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg><span>Flock</span></a>
+    <p>Documentación del complemento · Español · AGPL-3.0</p>
+  </footer>
+  <script src="../assets/site.js?v=0.7.0" defer></script>
+</body>
+</html>
+

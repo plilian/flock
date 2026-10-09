@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; upgrade-insecure-requests">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0e12">
-  <meta name="description" content="An open-source AI agent plugin for source-grounded knowledge graphs, evidence audits, and synthetic social simulations in Codex, Claude Code, Gemini CLI, and Qwen Code.">
+  <meta name="description" content="Multilingual open-source AI agent plugin for evidence-grounded graphs and social simulations. Packages for Codex, Claude Code, Gemini CLI, Qwen Code, and DeepSeek Harness (preview).">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://flock.daalgp.com/">
   <meta property="og:type" content="website">
@@ -16,11 +16,11 @@
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Flock — AI knowledge graphs and social simulations">
-  <meta name="twitter:description" content="A local, open-source AI agent workflow for evidence-grounded graphs and synthetic scenario exploration.">
+  <meta name="twitter:description" content="A local, open-source AI agent workflow for evidence-grounded graphs, scenario comparisons, and synthetic social simulations.">
   <title>Flock — AI Knowledge Graph &amp; Social Simulation Plugin</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="apple-touch-icon" href="favicon.svg">
-  <link rel="stylesheet" href="assets/site.css?v=0.6.1">
+  <link rel="stylesheet" href="assets/site.css?v=0.7.0">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -30,14 +30,31 @@
     "description": "An open-source AI agent plugin workflow for source-grounded knowledge graphs, evidence audits, synthetic social simulations, and controlled scenario comparisons.",
     "applicationCategory": "DeveloperApplication",
     "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": 0, "priceCurrency": "USD" },
+    "inLanguage": "en",
     "softwareVersion": "0.6.0",
     "sameAs": "https://github.com/plilian/flock"
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Flock",
+    "alternateName": "Flock AI agent plugin",
+    "url": "https://flock.daalgp.com/",
+    "inLanguage": ["en", "ja", "zh-CN", "es"]
+  }
+  </script>
+  <link rel="alternate" hreflang="en" href="https://flock.daalgp.com/">
+  <link rel="alternate" hreflang="ja" href="https://flock.daalgp.com/ja/">
+  <link rel="alternate" hreflang="es" href="https://flock.daalgp.com/es/">
+  <link rel="alternate" hreflang="zh-CN" href="https://flock.daalgp.com/zh-cn/">
+  <link rel="alternate" hreflang="x-default" href="https://flock.daalgp.com/">
 </head>
 <body class="landing-page">
   <header class="site-header">
-    <a class="brand" href="index.html" aria-label="Flock home">
+    <a class="brand" href="/" aria-label="Flock home">
       <svg class="brand-mark" viewBox="0 0 32 32" role="img" aria-label=""><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg>
       <span>Flock</span>
     </a>
@@ -47,6 +64,7 @@
       <a href="#principles">Principles</a>
       <a href="docs.html">Docs</a>
       <a class="nav-cta" href="docs.html#install">Install plugin <span aria-hidden="true">↗</span></a>
+      <div class="language-nav" role="group" aria-label="Language"><a href="/" lang="en" aria-current="page">English</a><a href="/ja/" lang="ja">日本語</a><a href="/zh-cn/" lang="zh-CN">简体中文</a><a href="/es/" lang="es">Español</a></div>
     </nav>
     <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
   </header>
@@ -63,6 +81,7 @@
           <a class="text-link" href="#workflow">See the workflow <span aria-hidden="true">↓</span></a>
         </div>
         <p class="hero-footnote">No Flock API key. Your AI host’s sign-in, provider setup, plan, and usage limits apply.</p>
+        <p class="hero-language-note">Available in English, Japanese, Simplified Chinese, and Spanish.</p>
       </div>
       <div class="hero-visual" aria-label="An illustrative knowledge graph connecting source material to a simulated community">
         <svg class="network-art" viewBox="0 0 760 600" role="img" aria-labelledby="graph-title graph-desc">
@@ -179,11 +198,11 @@
   </main>
 
   <footer class="site-footer">
-    <a class="brand footer-brand" href="index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg><span>Flock</span></a>
+    <a class="brand footer-brand" href="/"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg><span>Flock</span></a>
     <p>Explore possibilities. Keep the evidence close.</p>
     <div><a href="docs.html">Docs</a><a href="https://github.com/plilian/flock">GitHub</a><a href="https://github.com/plilian/flock/issues">Support</a></div>
     <small>Flock is an independent, substantially modified MiroFish derivative under AGPL-3.0. It is not affiliated with or endorsed by the MiroFish maintainers. <a href="docs.html#license">Lineage and license</a></small>
   </footer>
-  <script src="assets/site.js?v=0.6.1" defer></script>
+  <script src="assets/site.js?v=0.7.0" defer></script>
 </body>
 </html>

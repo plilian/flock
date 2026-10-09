@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e12">
+  <meta name="description" content="Codex、Claude Code、Gemini CLI、Qwen Code、DeepSeek Harness向けFlockの導入方法、Evidence Audit、Scenario Lab、ローカル知識グラフを解説します。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://flock.daalgp.com/ja/docs.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Flock">
+  <meta property="og:title" content="Flockドキュメント — 導入、知識グラフ、監査、シミュレーション">
+  <meta property="og:description" content="Flockのインストール、知識グラフ、Evidence Audit、Scenario Lab、ローカルデータの使い方を説明します。">
+  <meta property="og:url" content="https://flock.daalgp.com/ja/docs.html">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Flockドキュメント">
+  <meta name="twitter:description" content="AIエージェント環境へのFlockの導入方法と、証拠監査、シナリオ比較、ローカルグラフの仕組み。">
+  <title>Flockドキュメント — AIエージェントプラグインの導入と使い方</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="apple-touch-icon" href="../favicon.svg">
+  <link rel="stylesheet" href="../assets/site.css?v=0.7.0">
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Flockドキュメント：インストール、Evidence Audit、Scenario Lab",
+  "description": "Flockのインストールとワークフローに関するドキュメント。証拠に基づく知識グラフと合成ソーシャルシミュレーションを扱います。",
+  "url": "https://flock.daalgp.com/ja/docs.html",
+  "inLanguage": "ja",
+  "about": {
+    "@type": "SoftwareApplication",
+    "name": "Flock",
+    "url": "https://flock.daalgp.com/",
+    "applicationCategory": "DeveloperApplication"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Flock",
+    "url": "https://flock.daalgp.com/"
+  }
+}
+  </script>
+  <link rel="alternate" hreflang="en" href="https://flock.daalgp.com/docs.html">
+  <link rel="alternate" hreflang="ja" href="https://flock.daalgp.com/ja/docs.html">
+  <link rel="alternate" hreflang="es" href="https://flock.daalgp.com/es/docs.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://flock.daalgp.com/zh-cn/docs.html">
+  <link rel="alternate" hreflang="x-default" href="https://flock.daalgp.com/docs.html">
+</head>
+<body class="docs-page">
+  <header class="site-header docs-header">
+    <a class="brand" href="/ja/" aria-label="Flock ホーム">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg>
+      <span>Flock</span>
+    </a>
+    <nav class="main-nav" aria-label="メインナビゲーション">
+      <a href="/ja/#workflow">ワークフロー</a>
+      <a href="/ja/#hosts">対応AI</a>
+      <a href="docs.html" aria-current="page">ドキュメント</a>
+      <a class="nav-cta" href="#install">プラグインを導入 <span aria-hidden="true">↗</span></a>
+      <div class="language-nav" role="group" aria-label="言語"><a href="/docs.html" lang="en">English</a><a href="/ja/docs.html" lang="ja" aria-current="page">日本語</a><a href="/zh-cn/docs.html" lang="zh-CN">简体中文</a><a href="/es/docs.html" lang="es">Español</a></div>
+    </nav>
+    <button class="menu-toggle" aria-label="ナビゲーションを開く" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main>
+    <section class="docs-hero">
+      <p class="eyebrow"><span class="live-dot"></span> FLOCK / ドキュメント</p>
+      <h1>Flockを、選んだ<br><em>ワークスペースで。</em></h1>
+      <p>AIホスト用のネイティブパッケージを導入し、自分の資料やシナリオを使ってください。Flockはローカルで動くワークフローであり、ホスト型シミュレーションサービスではありません。</p>
+    </section>
+
+    <div class="docs-layout">
+      <nav class="docs-toc" aria-label="ドキュメントの各セクション">
+        <span>このページの内容</span>
+        <a href="#install">インストール</a>
+        <a href="#first-project">最初のプロジェクト</a>
+        <a href="#workflows">ワークフロー</a>
+        <a href="#evidence-audit">Evidence Audit</a>
+        <a href="#scenario-lab">Scenario Lab</a>
+        <a href="#simulation">シミュレーションの仕組み</a>
+        <a href="#faq">よくある質問</a>
+        <a href="#privacy">プライバシーとデータ</a>
+        <a href="#troubleshooting">トラブルシューティング</a>
+        <a href="#license">ライセンス</a>
+      </nav>
+
+      <article class="docs-content">
+        <section id="install">
+          <p class="eyebrow dark-eyebrow">01 / インストール</p>
+          <h2>ホストに合わせて導入</h2>
+          <p>Flockは対応するAIエージェントホストごとに、ネイティブプラグインまたは拡張機能として配布されています。各パッケージには共通のワークフロースキルと、モデルを呼び出さないPythonヘルパーが含まれます。推論はホストのセッションが行い、ヘルパーはグラフとシミュレーションデータを検証・保存します。</p>
+          <p>すべてのパッケージは公開GitHubリポジトリから直接インストールできます。Flockはホスト型モデルを提供せず、Flock専用APIキーも必要ありません。利用する製品の手順に従ってホストにログインまたは設定してください。プロバイダーの選択肢や利用上限はホストごとに異なります。</p>
+          <h3>共通要件</h3>
+          <ul>
+            <li>Python 3.11以降、およびホスト環境でのワークスペース／ターミナル利用。</li>
+            <li>公開リポジトリからパッケージを導入するためのGit。</li>
+            <li>Flockのデータフォルダー： <code>.flock/</code></li>
+            <li>対応ホストとモデルへのアクセスは各自で用意してください。Flockが開発者のアカウントを共有することはありません。</li>
+          </ul>
+
+          <div class="host-install" id="codex">
+            <p class="host-install-label">01 / CODEX · ネイティブプラグイン</p>
+            <h3>Codex</h3>
+            <p>Flockマーケットプレイスを追加し、プラグインをインストールします：</p>
+            <pre><code>codex plugin marketplace add plilian/flock
+codex plugin add flock@flock</code></pre>
+            <p>Codexを開くか再起動し、Flockを使うよう依頼するか、次のスキルを呼び出します： <code>$flock</code> スキル。</p>
+          </div>
+
+          <div class="host-install" id="claude-code">
+            <p class="host-install-label">02 / CLAUDE CODE · ネイティブプラグイン</p>
+            <h3>Claude Code</h3>
+            <p>Claude CodeのターミナルでFlockマーケットプレイスを追加してインストールします：</p>
+            <pre><code>claude plugin marketplace add plilian/flock
+claude plugin install flock@flock</code></pre>
+            <p>必要に応じてClaude Codeを再起動または再読み込みし、ワークスペースを開いてClaudeに次のスキルを使うよう依頼します： <code>flock</code> スキル。</p>
+          </div>
+
+          <div class="host-install" id="gemini-cli">
+            <p class="host-install-label">03 / GEMINI CLI · ネイティブ拡張</p>
+            <h3>Gemini CLI</h3>
+            <p>リポジトリURLからFlockをインストールします：</p>
+            <pre><code>gemini extensions install https://github.com/plilian/flock</code></pre>
+            <p>指示があればCLIを再起動し、Gemini CLIにFlockスキルを使うよう依頼します。Gemini CLIの認証とモデル利用はGoogle／Geminiの設定に従います。</p>
+          </div>
+
+          <div class="host-install" id="qwen-code">
+            <p class="host-install-label">04 / QWEN CODE · ネイティブ拡張</p>
+            <h3>Qwen Code</h3>
+            <p>リポジトリURLからFlockをインストールします：</p>
+            <pre><code>qwen extensions install https://github.com/plilian/flock</code></pre>
+            <p>指示があればCLIを再起動し、次を呼び出します： <code>/flock:flock</code> またはQwen Codeにそのスキルを使うよう依頼します。Qwenのログイン、プロバイダー設定、利用上限はQwen Code側で管理されます。</p>
+          </div>
+
+          <div class="host-install host-preview" id="deepseek-harness">
+            <p class="host-install-label">05 / DEEPSEEK HARNESS · 開発者向けプレビュー</p>
+            <h3>DeepSeek Harness</h3>
+            <p>Harnessは独立した開発者向けプレビューのプラグインホストです。リポジトリをクローンし、HarnessプロファイルにFlockをインストールします：</p>
+            <pre><code>git clone https://github.com/plilian/flock.git
+cd flock
+dsh plugin --profile web add ./plugins/deepseek-harness</code></pre>
+            <p>このパッケージはDeepSeek Harness専用です。DeepSeekのチャットサイト向けプラグインではなく、DeepSeek APIも呼び出しません。Harnessで利用できるモデルは、対応するプロバイダー設定に依存し、別途設定が必要な場合があります。</p>
+          </div>
+          <p class="docs-note">これらのパッケージはGitHubからインストールできますが、各社が管理するプラグインディレクトリへの掲載ではありません。「Flock APIキー不要」とは、Flock独自の認証情報やモデルサービスが不要という意味です。各ホストが求める認証やプロバイダー設定は別途必要です。</p>
+        </section>
+
+        <section id="first-project">
+          <p class="eyebrow dark-eyebrow">02 / 最初のプロジェクト</p>
+          <h2>ワークスペースを初期化</h2>
+          <p>Flockのデータを保存するワークスペースでホストを開きます。資料を配置または添付し、エージェントに次のように依頼します：</p>
+          <pre><code>Flockで「交通調査」というプロジェクトを初期化してください。</code></pre>
+          <p>FlockはSQLiteグラフデータベースと実行記録を <code>.flock/</code> フォルダーに保存します。プロジェクトごとに別のワークスペースフォルダーを使ってください。ヘルパーはグラフや実行データを誤ってGitにコミットしないようignoreルールを追加します。資料は元の場所に残り、Flockは資料名と引用情報だけを保存します。全文のコピーは保存しません。</p>
+        </section>
+
+        <section id="workflows">
+          <p class="eyebrow dark-eyebrow">03 / ワークフロー</p>
+          <h2>根拠からシミュレーションへ</h2>
+          <h3>グラフを構築</h3>
+          <p>選択した資料からグラフを抽出するよう、ホストのエージェントに依頼します。現在のモデルがオントロジー、エンティティ、関係を特定し、Flockが出典情報を検証してSQLiteグラフに保存します。Mermaid図、検索、グラフ統計で確認できます。</p>
+          <pre><code>Flockで./sourcesから知識グラフを作り、主要な関係を表示してください。</code></pre>
+          <h3>合成コミュニティを作成</h3>
+          <p>探索する集団と問いを説明します。ホストのモデルはグラフ内のエンティティをもとにプロフィールを作成し、資料に基づかない仮定を明示します。</p>
+          <h3>シナリオを探索</h3>
+          <p>Reddit風またはTwitter風の議論を選び、シナリオとラウンド数を決め、実行前にプロフィールの仮定を確認します。ホストのモデルが各ラウンドの行動を生成し、Flockが検証したうえで投稿、反応、エンゲージメント数を記録します。</p>
+          <h3>結果を確認し、インタビュー</h3>
+          <p>記録されたタイムラインを使ってレポートを作成したり、質問に答えたり、合成エージェントへのインタビューをロールプレイできます。レポートでは計算された件数と定性的な解釈を分けます。</p>
+          <h3>実行結果を見る</h3>
+          <p>各ラウンドの後、Flockは次の場所にあるインタラクティブなHTMLスナップショットを更新します： <code>.flock/runs/&lt;run_id&gt;/visualization.html</code>。ラウンドを移動または再生し、合成プロフィールを確認し、返信や反応をたどり、フィードを検索して実行データをダウンロードできます。ブラウザーで直接開き、外部通信は行いません。</p>
+        </section>
+
+        <section id="evidence-audit">
+          <p class="eyebrow dark-eyebrow">04 / EVIDENCE AUDIT</p>
+          <h2>主張を出典までたどる</h2>
+          <p>グラフ内の各エンティティと関係に、次のラベルを付けます： <code>observed</code>, <code>inferred</code>、または <code>assumption</code>。古い記録は確認されるまで <code>unclassified</code> のままです。監査では出典参照の網羅性、位置情報や引用の欠落、未使用の資料、未分類のグラフ記録を確認します。</p>
+          <pre><code>python &lt;helper&gt; --workspace . graph audit</code></pre>
+          <p>ヘルパーはローカルのJSON監査データを次の場所に保存します： <code>.flock/audits/</code>。引用箇所を選択した資料と照合し、意見の相違や不足している視点を見つけ、監査ファイルの隣に簡潔なMarkdownレビューを書くようホストに依頼してください。引用は追跡可能性を示しますが、主張の正しさや資料の正確性を証明するものではありません。</p>
+          <p>シミュレーションでは、事実に関する投稿にグラフ参照の <code>evidence_refs</code>を含められます。FlockはIDを検証し、元資料名、位置情報、短い引用をイベントとともに保存するため、再生時に合成エージェントの主張の出典を確認できます。</p>
+        </section>
+
+        <section id="scenario-lab">
+          <p class="eyebrow dark-eyebrow">05 / SCENARIO LAB</p>
+          <h2>基準シナリオと代替案を比較</h2>
+          <p>Scenario Labでは、各バリエーションと反復実行を同じ合成プロフィール、プラットフォーム、ラウンド数、空のフィードから開始します。訂正情報の提示やモデレーターの介入など、主な条件を一度に一つだけ変更します。実行履歴は分けて保管します。</p>
+          <p>次の場所に実験仕様を保存します： <code>.flock/staging/experiment.json</code> 。研究課題、共通エージェント一覧、2〜6個のバリエーション、1つの基準、各バリエーション1〜5回の反復を含めます。各バリエーションにはシナリオと明示的な仮定が必要です。ホストモデルの実行回数は、バリエーション数 × 反復数 × ラウンド数 × エージェント数で増えます。</p>
+          <pre><code>python &lt;helper&gt; --workspace . scenario validate --spec .flock/staging/experiment.json
+python &lt;helper&gt; --workspace . scenario create --spec .flock/staging/experiment.json
+python &lt;helper&gt; --workspace . scenario status --id &lt;experiment_id&gt;
+python &lt;helper&gt; --workspace . scenario compare --id &lt;experiment_id&gt;
+python &lt;helper&gt; --workspace . scenario visualize --id &lt;experiment_id&gt;
+python &lt;helper&gt; --workspace . scenario save-report --id &lt;experiment_id&gt; --input .flock/staging/report.md</code></pre>
+          <p>比較結果には、計算された行動数、参加率、立場別の件数、ラウンドごとの活動、基準との差が含まれます。各指標について保存済み反復の中央値と最小／最大値を示し、次の場所にインタラクティブな比較画面を作成します： <code>.flock/experiments/&lt;experiment_id&gt;/comparison.html</code>。各実行の再生画面へのリンクも表示します。</p>
+          <p class="docs-note">反復の範囲は、これらの合成実行だけを要約したものです。信頼区間でも、現実世界の結果の確率でもありません。計算された件数とホストの解釈を分け、結論にはグラフの出典と実行／イベントIDを引用してください。</p>
+        </section>
+
+        <section id="simulation">
+          <p class="eyebrow dark-eyebrow">06 / シミュレーションの仕組み</p>
+          <h2>実行の流れ</h2>
+          <p>Flockではモデルの推論と永続データを分離しています。ホストで選択中のモデルが資料とプロフィールを読み、エージェントの行動を提案して文章による分析を作成します。Pythonヘルパーはグラフ記録を保存し、行動形式を検証し、ラウンドを進めて活動数を計算します。</p>
+          <ul>
+            <li><strong>Reddit風の行動：</strong> 投稿、コメント、賛成票、反対票、コミュニティへの参加。</li>
+            <li><strong>Twitter風の行動：</strong> 投稿、返信、いいね、リポスト、フォロー。</li>
+            <li><strong>保存されるデータ：</strong> 証拠の状態と引用、構造監査ファイル、エージェントプロフィール、ラウンドごとのイベント、事実行動に付く検証済み出典参照、シナリオ実験、インタラクティブHTML比較、実行ごとの再生データ、Markdownレポート。</li>
+          </ul>
+          <p class="docs-note">Flockのシミュレーションは、構造化された思考実験です。実在する人々の観察、世論調査、予測ではありません。結果は選択したモデル、プロンプト、資料の品質、プロフィール、設定によって変わります。</p>
+        </section>
+
+        <section id="faq">
+          <p class="eyebrow dark-eyebrow">よくある質問</p>
+          <h2>Flockについてよくある質問</h2>
+          <h3>Flockとは何ですか？</h3>
+          <p>Flockは、出典に基づく知識グラフの構築、証拠の確認、合成集団の作成、ソーシャルシナリオの探索を行うオープンソースのAIエージェントプラグインです。プロジェクトのグラフとシミュレーション実行データは、ワークスペース内のSQLiteデータベースにローカル保存されます。</p>
+          <h3>Flockは実在する人々の行動を予測しますか？</h3>
+          <p>いいえ。Flockは合成エージェントを使った構造化思考実験を実行します。結果は世論調査、実在する人の観察、予測ではなく、反復範囲も現実の確率を表しません。</p>
+          <h3>AI APIキーやZepは必要ですか？</h3>
+          <p>Flock専用のAPIキー、モデルサービス、ホスト型グラフサービス、Zep依存はありません。モデルへのアクセスは選択したホストのログインとプロバイダー設定で行います。各ホストの要件、プラン、利用上限は引き続き適用されます。</p>
+          <h3>Flockはどの言語に対応していますか？</h3>
+          <p>Flockスキルは英語、日本語、中国語（簡体字、zh-CN）、スペイン語に対応しています。利用者が使う言語で応答し、研究課題、合成エージェントの文章、監査、レポートもその言語で作成します。コマンド、スキーマキー、ID、固定の列挙値は変更しません。</p>
+          <h3>Flockを使えるAIエージェントホストは？</h3>
+          <p>FlockはCodex、Claude Code、Gemini CLI、Qwen Code向けのインストール可能なパッケージを提供しています。DeepSeek Harness向けパッケージは別途開発者向けプレビューとして公開されています。DeepSeekのチャットサイトやAPIとの連携ではありません。</p>
+          <h3>グラフやシミュレーションデータはどこに保存されますか？</h3>
+          <p>FlockはSQLiteグラフ、証拠監査、シナリオ実験、実行履歴、可視化データを選択したワークスペース内の <code>.flock/</code> フォルダーに保存します。Flockのウェブサイトにプロジェクトデータが送信されることはありません。</p>
+        </section>
+
+        <section id="privacy">
+          <p class="eyebrow dark-eyebrow">07 / プライバシーとデータ</p>
+          <h2>あなたのワークスペース、あなたのホスト</h2>
+          <ul>
+            <li>選択したホストは、利用者自身のアクティブなセッションとプロバイダー設定を通じて、資料の抜粋とプロンプトを処理します。アカウント設定、モデルポリシー、プラン、上限はそのホストに従います。</li>
+            <li>FlockのPythonヘルパーはネットワークやモデルを呼び出さず、ホストの認証情報も読み取りません。グラフデータ、証拠監査、シナリオ実験、可視化、レポートを選択したワークスペース内の <code>.flock/</code> フォルダーに保存します。</li>
+            <li>Flock専用のプロバイダーAPIキー、Zepキー、Flockアカウントは不要です。ホストの構成によっては、そのホスト用のプロバイダー認証情報が必要です。</li>
+            <li>公開ウェブサイトは情報とインストール手順を提供します。シミュレーションは各利用者のワークスペースで実行され、Flockのウェブサーバーに資料、グラフ、実行履歴は届きません。</li>
+            <li>資料や生成したグラフを共有する前に、ワークスペースのバックアップとGit設定を確認してください。</li>
+          </ul>
+        </section>
+
+        <section id="troubleshooting">
+          <p class="eyebrow dark-eyebrow">08 / トラブルシューティング</p>
+          <h2>問題が起きたとき</h2>
+          <h3>ホストでFlockが見つからない</h3>
+          <p>パッケージが正常に導入されたことを確認し、ホストを再起動してください。Codexでは <code>codex plugin list</code>を確認します。Claude Codeでは <code>/plugin</code>を確認します。Gemini CLIとQwen Codeでは拡張機能一覧コマンドを使います。DeepSeek Harnessプラグインは開発者向けプレビューです。</p>
+          <h3>Pythonがない、または古い</h3>
+          <p>Python 3.11以降をインストールし、 <code>python</code> をホストの実行環境で利用できることを確認してください。追加のグラフ／データベースパッケージは不要です。</p>
+          <h3>グラフ検証で出典が見つからないと表示される</h3>
+          <p>各エンティティと関係の参照が、次の値を使い、 <code>source_id</code> 候補グラフの <code>sources</code> 配列に存在することを確認してください。インポート前にグラフを再検証します。</p>
+          <h3>Flockを削除する</h3>
+          <p>ホストのプラグイン／拡張機能マネージャーでFlockをアンインストールします。アンインストールしてもワークスペースデータは削除されません。次を削除するのは、バックアップ後、または不要だと確認してからにしてください： <code>.flock/</code> 。</p>
+        </section>
+
+        <section id="license">
+          <p class="eyebrow dark-eyebrow">09 / プロジェクト</p>
+          <h2>ライセンスと帰属表示</h2>
+          <p>Flockは次のライセンスで配布されています： <a href="https://github.com/plilian/flock/blob/main/LICENSE">AGPL-3.0</a>。Flockはオープンソースの <a href="https://github.com/666ghj/MiroFish">MiroFish</a> プロジェクトを大幅に改変し、独立して保守している派生プロジェクトです。以前のウェブアプリとZepを使ったグラフワークフローを、対応AIエージェントホスト向けのネイティブパッケージとワークスペース内のSQLiteグラフに置き換えています。FlockはMiroFishやその開発者と提携・承認関係にありません。詳細は <a href="https://github.com/plilian/flock/blob/main/ATTRIBUTION.md">帰属表示</a> をご覧ください。</p>
+          <p><a href="https://github.com/plilian/flock">GitHubでソースを見る ↗</a> · <a href="https://github.com/plilian/flock/issues">問題を報告 ↗</a></p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="docs-footer">
+    <a class="brand" href="/ja/"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg><span>Flock</span></a>
+    <p>プラグインのドキュメント · 日本語 · AGPL-3.0</p>
+  </footer>
+  <script src="../assets/site.js?v=0.7.0" defer></script>
+</body>
+</html>
+

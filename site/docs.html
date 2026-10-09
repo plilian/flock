@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; upgrade-insecure-requests">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0e12">
-  <meta name="description" content="Install Flock for Codex, Claude Code, Gemini CLI, Qwen Code, or DeepSeek Harness. Learn Evidence Audit, Scenario Lab, local graphs, and synthetic social simulations.">
+  <meta name="description" content="Install Flock for Codex, Claude Code, Gemini CLI, Qwen Code, or DeepSeek Harness. Explore evidence audits, scenario simulations, and workspace-local graphs.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://flock.daalgp.com/docs.html">
   <meta property="og:type" content="article">
@@ -20,7 +20,7 @@
   <title>Flock Docs — Install &amp; Use the AI Agent Plugin</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="apple-touch-icon" href="favicon.svg">
-  <link rel="stylesheet" href="assets/site.css?v=0.6.1">
+  <link rel="stylesheet" href="assets/site.css?v=0.7.0">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -42,18 +42,24 @@
     }
   }
   </script>
+  <link rel="alternate" hreflang="en" href="https://flock.daalgp.com/docs.html">
+  <link rel="alternate" hreflang="ja" href="https://flock.daalgp.com/ja/docs.html">
+  <link rel="alternate" hreflang="es" href="https://flock.daalgp.com/es/docs.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://flock.daalgp.com/zh-cn/docs.html">
+  <link rel="alternate" hreflang="x-default" href="https://flock.daalgp.com/docs.html">
 </head>
 <body class="docs-page">
   <header class="site-header docs-header">
-    <a class="brand" href="index.html" aria-label="Flock home">
+    <a class="brand" href="/" aria-label="Flock home">
       <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg>
       <span>Flock</span>
     </a>
     <nav class="main-nav" aria-label="Main navigation">
-      <a href="index.html#workflow">Workflow</a>
-      <a href="index.html#hosts">Hosts</a>
+      <a href="/#workflow">Workflow</a>
+      <a href="/#hosts">Hosts</a>
       <a href="docs.html" aria-current="page">Docs</a>
       <a class="nav-cta" href="#install">Install plugin <span aria-hidden="true">↗</span></a>
+      <div class="language-nav" role="group" aria-label="Language"><a href="/docs.html" lang="en" aria-current="page">English</a><a href="/ja/docs.html" lang="ja">日本語</a><a href="/zh-cn/docs.html" lang="zh-CN">简体中文</a><a href="/es/docs.html" lang="es">Español</a></div>
     </nav>
     <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span></button>
   </header>
@@ -90,7 +96,7 @@
           <ul>
             <li>Python 3.11 or newer and workspace/terminal access in the host environment.</li>
             <li>Git to install packages from this public repository.</li>
-            <li>A workspace where Flock can create a <code>.flock/</code> folder.</li>
+            <li>Flock data folder: <code>.flock/</code></li>
             <li>Your own supported host installation and model access. Flock never shares the developer's account.</li>
           </ul>
 
@@ -145,7 +151,7 @@ dsh plugin --profile web add ./plugins/deepseek-harness</code></pre>
           <h2>Initialize a workspace</h2>
           <p>Open the host in the workspace where you want Flock data stored. Place or attach the source documents, then ask its agent:</p>
           <pre><code>Use Flock to initialize a project named “Transit study”.</code></pre>
-          <p>Flock creates a SQLite graph database and run directory under <code>.flock/</code>. Use a separate workspace folder for each project. The helper adds an ignore rule so graph and run data are not accidentally committed to Git. Source documents stay where you put them; Flock stores source names and citations, not full copies.</p>
+          <p>Flock stores the SQLite graph database and run records in the <code>.flock/</code> folder. Use a separate workspace folder for each project. The helper adds an ignore rule so graph and run data are not accidentally committed to Git. Source documents stay where you put them; Flock stores source names and citations, not full copies.</p>
         </section>
 
         <section id="workflows">
@@ -209,10 +215,12 @@ python &lt;helper&gt; --workspace . scenario save-report --id &lt;experiment_id&
           <p>No. Flock runs structured thought experiments with synthetic agents. Results are not polls, observations of real people, or forecasts, and replicate ranges do not represent real-world probabilities.</p>
           <h3>Does Flock require an AI API key or Zep?</h3>
           <p>Flock has no separate API key, model service, hosted graph service, or Zep dependency. The selected host's own sign-in and provider setup handle model access; any requirements, plans, and usage limits from that host still apply.</p>
+          <h3>Which languages does Flock support?</h3>
+          <p>The Flock skill supports English, Japanese, Simplified Chinese (zh-CN), and Spanish. It replies in the language you use and writes natural-language research questions, synthetic-agent content, audits, and reports in that language. Commands, schema keys, IDs, and fixed enum values remain unchanged.</p>
           <h3>Which AI agent hosts can use Flock?</h3>
           <p>Flock has installable packages for Codex, Claude Code, Gemini CLI, and Qwen Code. A separate DeepSeek Harness package is marked as a developer preview; it is not an integration for the DeepSeek chat website or API.</p>
           <h3>Where are Flock's graphs and simulation data stored?</h3>
-          <p>Flock stores its SQLite graph, evidence audits, scenario experiments, run history, and visualizations under <code>.flock/</code> in the workspace you select. The Flock website does not receive this project data.</p>
+          <p>Flock saves its SQLite graph, evidence audits, scenario experiments, run history, and visualizations in the <code>.flock/</code> folder inside your selected workspace. The Flock website does not receive this project data.</p>
         </section>
 
         <section id="privacy">
@@ -220,7 +228,7 @@ python &lt;helper&gt; --workspace . scenario save-report --id &lt;experiment_id&
           <h2>Your workspace, your host</h2>
           <ul>
             <li>The selected host processes source excerpts and prompts through the user's own active session and provider setup. Its account settings, model policies, plan, and limits apply.</li>
-            <li>The Flock Python helper makes no network or model calls and does not read host credentials. It stores graph data, evidence audits, scenario experiments, visualizations, and reports in <code>.flock/</code> in the selected workspace.</li>
+            <li>The Flock Python helper makes no network or model calls and does not read host credentials. It saves graph data, evidence audits, scenario experiments, visualizations, and reports in the <code>.flock/</code> folder of the selected workspace.</li>
             <li>Flock requires no separate provider API key, Zep key, or Flock account. Some host configurations may require their own provider credentials.</li>
             <li>The public website serves information and installation instructions. Simulations run in each user's workspace; the Flock website server does not receive project sources, graphs, or run history.</li>
             <li>Review your workspace backups and Git settings before sharing source material or generated graphs.</li>
@@ -251,10 +259,10 @@ python &lt;helper&gt; --workspace . scenario save-report --id &lt;experiment_id&
   </main>
 
   <footer class="docs-footer">
-    <a class="brand" href="index.html"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg><span>Flock</span></a>
+    <a class="brand" href="/"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg><span>Flock</span></a>
     <p>Plugin docs · English · AGPL-3.0</p>
   </footer>
-  <script src="assets/site.js?v=0.6.1" defer></script>
+  <script src="assets/site.js?v=0.7.0" defer></script>
 </body>
 </html>
 

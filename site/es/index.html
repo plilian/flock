@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e12">
+  <meta name="description" content="Plugin de IA multilingüe para grafos con fuentes y simulaciones sociales. Disponible en Codex, Claude Code, Gemini CLI, Qwen Code y DeepSeek Harness (vista previa).">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://flock.daalgp.com/es/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Flock">
+  <meta property="og:title" content="Flock — Grafos de conocimiento y simulación social con IA">
+  <meta property="og:description" content="Investiga una pregunta con fuentes reales, audita la evidencia del grafo y compara escenarios sintéticos en tu entorno de agente de IA.">
+  <meta property="og:url" content="https://flock.daalgp.com/es/">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Flock — Grafos de conocimiento y simulación social con IA">
+  <meta name="twitter:description" content="Flujo local y de código abierto para grafos basados en evidencias y exploración de escenarios sintéticos.">
+  <title>Flock — Grafos de conocimiento y simulación social con IA</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="apple-touch-icon" href="../favicon.svg">
+  <link rel="stylesheet" href="../assets/site.css?v=0.7.0">
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Flock",
+  "url": "https://flock.daalgp.com/es/",
+  "description": "Flock es un flujo de trabajo de complemento de agente de IA de código abierto para grafos de conocimiento con fuentes, auditorías de evidencia, simulaciones sociales sintéticas y comparación de escenarios.",
+  "applicationCategory": "DeveloperApplication",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": 0,
+    "priceCurrency": "USD"
+  },
+  "inLanguage": "es",
+  "softwareVersion": "0.6.0",
+  "sameAs": "https://github.com/plilian/flock"
+}
+  </script>
+  <link rel="alternate" hreflang="en" href="https://flock.daalgp.com/">
+  <link rel="alternate" hreflang="ja" href="https://flock.daalgp.com/ja/">
+  <link rel="alternate" hreflang="es" href="https://flock.daalgp.com/es/">
+  <link rel="alternate" hreflang="zh-CN" href="https://flock.daalgp.com/zh-cn/">
+  <link rel="alternate" hreflang="x-default" href="https://flock.daalgp.com/">
+</head>
+<body class="landing-page">
+  <header class="site-header">
+    <a class="brand" href="/es/" aria-label="Inicio de Flock">
+      <svg class="brand-mark" viewBox="0 0 32 32" role="img" aria-label=""><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg>
+      <span>Flock</span>
+    </a>
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a href="#workflow">Flujo de trabajo</a>
+      <a href="#hosts">Agentes compatibles</a>
+      <a href="#principles">Principios</a>
+      <a href="docs.html">Documentación</a>
+      <a class="nav-cta" href="docs.html#install">Instalar complemento <span aria-hidden="true">↗</span></a>
+      <div class="language-nav" role="group" aria-label="Idioma"><a href="/" lang="en">English</a><a href="/ja/" lang="ja">日本語</a><a href="/zh-cn/" lang="zh-CN">简体中文</a><a href="/es/" lang="es" aria-current="page">Español</a></div>
+    </nav>
+    <button class="menu-toggle" aria-label="Abrir navegación" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main>
+    <section class="hero full-bleed" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="live-dot"></span> Un flujo de investigación para tu agente de IA</p>
+        <h1 id="hero-title">Descubre cómo<br><em> podría actuar un grupo.</em></h1>
+        <p class="hero-lede">Investiga una pregunta con fuentes reales. Construye un grafo de conocimiento vivo. Explora posibles reacciones con una comunidad sintética, todo en el espacio de IA que ya utilizas.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="docs.html#install">Configurar Flock <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="#workflow">Ver el flujo de trabajo <span aria-hidden="true">↓</span></a>
+        </div>
+        <p class="hero-footnote">Flock no requiere una clave API propia. Se aplican el inicio de sesión, la configuración del proveedor, el plan y los límites de tu agente de IA.</p>
+        <p class="hero-language-note">Disponible en inglés, japonés, chino simplificado y español.</p>
+      </div>
+      <div class="hero-visual" aria-label="An illustrative knowledge graph connecting source material to a simulated community">
+        <svg class="network-art" viewBox="0 0 760 600" role="img" aria-labelledby="graph-title graph-desc">
+          <title id="graph-title">De la evidencia a los resultados posibles</title>
+          <desc id="graph-desc">Los documentos fuente se conectan mediante un grafo de conocimiento con agentes sintéticos y resultados de escenarios.</desc>
+          <defs>
+            <radialGradient id="coreGlow"><stop stop-color="#ff7a62" stop-opacity=".22"/><stop offset="1" stop-color="#ff7a62" stop-opacity="0"/></radialGradient>
+            <linearGradient id="pathGlow" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffd2c8" stop-opacity=".3"/><stop offset=".52" stop-color="#ff755b"/><stop offset="1" stop-color="#f7bd79" stop-opacity=".65"/></linearGradient>
+          </defs>
+          <circle cx="408" cy="296" r="230" fill="url(#coreGlow)"/>
+          <g class="graph-lines" fill="none" stroke="url(#pathGlow)" stroke-width="1.35">
+            <path d="M108 139 257 201 356 132 465 223 609 166"/>
+            <path d="M108 139 175 327 257 201 309 396 465 223 543 363 609 166"/>
+            <path d="M175 327 309 396 403 303 543 363 652 285"/>
+            <path d="M257 201 403 303 465 223 652 285"/>
+            <path d="M309 396 403 303 465 223"/>
+            <path d="M356 132 403 303 543 363"/>
+            <path d="M108 139 356 132" class="trace-line"/>
+            <path d="M175 327 403 303 609 166" class="trace-line trace-delay"/>
+          </g>
+          <g class="graph-nodes">
+            <circle class="node node-small" cx="108" cy="139" r="7"/><circle class="node node-small" cx="257" cy="201" r="8"/>
+            <circle class="node node-small" cx="356" cy="132" r="6"/><circle class="node node-main" cx="403" cy="303" r="16"/>
+            <circle class="node node-agent" cx="465" cy="223" r="10"/><circle class="node node-small" cx="609" cy="166" r="7"/>
+            <circle class="node node-agent" cx="543" cy="363" r="11"/><circle class="node node-small" cx="652" cy="285" r="7"/>
+            <circle class="node node-small" cx="175" cy="327" r="8"/><circle class="node node-small" cx="309" cy="396" r="6"/>
+          </g>
+          <g class="graph-labels" font-family="'DM Mono', monospace" font-size="11" letter-spacing=".04em">
+            <text x="47" y="119">FUENTE 01</text><text x="221" y="178">AFIRMACIÓN</text><text x="333" y="108">ACTOR</text>
+            <text x="364" y="339">GRAFO DE EVIDENCIAS</text><text x="471" y="202">AGENTE 04</text>
+            <text x="589" y="142">ESCENARIO</text><text x="542" y="394">COMUNIDAD</text>
+            <text x="622" y="311">RESULTADO</text><text x="128" y="358">FUENTE 02</text>
+          </g>
+          <g class="art-annotations" font-family="'DM Mono', monospace" font-size="9" letter-spacing=".12em">
+            <text x="84" y="476">BASAR EN FUENTES</text><text x="317" y="476">MODELAR POSIBILIDADES</text><text x="546" y="476">RASTREAR EL RESULTADO</text>
+          </g>
+          <path class="orbit" d="M87 303c38-162 272-257 435-197 150 55 192 216 121 330" fill="none" stroke="#f3eee7" stroke-opacity=".13" stroke-dasharray="2 8"/>
+        </svg>
+        <div class="visual-caption"><span>UNA EXPLORACIÓN, NO UN PRONÓSTICO</span><span>01 — 03</span></div>
+      </div>
+      <div class="hero-bottom"><span>GRAFOS DE CONOCIMIENTO</span><span>SIMULACIONES SOCIALES</span><span>5 PAQUETES PARA AGENTES</span></div>
+    </section>
+
+    <section class="hosts section-pad" id="hosts">
+      <div class="hosts-heading reveal">
+        <p class="eyebrow dark-eyebrow">Un flujo de trabajo en tu agente preferido</p>
+        <h2>Flock encaja donde<br><em> ya trabajas.</em></h2>
+        <p>Instala el paquete para tu agente. El modelo activo del agente se encarga del razonamiento; Flock guarda el grafo y los datos de ejecución en el espacio de trabajo que elijas.</p>
+      </div>
+      <div class="host-list">
+        <a class="host-row reveal" href="docs.html#codex"><span class="host-index">01</span><strong>Codex</strong><span>Complemento nativo</span><span class="host-arrow" aria-hidden="true">↗</span></a>
+        <a class="host-row reveal" href="docs.html#claude-code"><span class="host-index">02</span><strong>Claude Code</strong><span>Complemento nativo</span><span class="host-arrow" aria-hidden="true">↗</span></a>
+        <a class="host-row reveal" href="docs.html#gemini-cli"><span class="host-index">03</span><strong>Gemini CLI</strong><span>Extensión nativa</span><span class="host-arrow" aria-hidden="true">↗</span></a>
+        <a class="host-row reveal" href="docs.html#qwen-code"><span class="host-index">04</span><strong>Qwen Code</strong><span>Extensión nativa</span><span class="host-arrow" aria-hidden="true">↗</span></a>
+        <a class="host-row reveal" href="docs.html#deepseek-harness"><span class="host-index">05</span><strong>DeepSeek Harness</strong><span>Vista previa para desarrolladores</span><span class="host-arrow" aria-hidden="true">↗</span></a>
+        <p class="hosts-note">La compatibilidad con DeepSeek es para el host de complementos Harness, no para el sitio de chat ni la API de DeepSeek.</p>
+      </div>
+    </section>
+
+    <section class="intro section-pad" id="workflow">
+      <div class="section-heading reveal">
+        <p class="eyebrow dark-eyebrow">Una forma más clara de explorar la incertidumbre</p>
+        <h2>De las fuentes <br>a un <em>escenario vivo.</em></h2>
+      </div>
+      <div class="workflow-list">
+        <article class="workflow-row reveal">
+          <span class="step-index">01</span>
+          <div><h3>Fundamentar la pregunta</h3><p>Añade informes, artículos y notas relevantes. Flock mantiene cada afirmación vinculada a su fuente.</p></div>
+          <span class="step-art step-document" aria-hidden="true"><i></i><i></i><i></i></span>
+        </article>
+        <article class="workflow-row reveal">
+          <span class="step-index">02</span>
+          <div><h3>Mapear las relaciones</h3><p>El modelo activo de tu agente extrae personas, grupos, acontecimientos y conexiones en un grafo que puedes inspeccionar y consultar.</p></div>
+          <span class="step-art step-network" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        </article>
+        <article class="workflow-row reveal">
+          <span class="step-index">03</span>
+          <div><h3>Scenario Lab: comparar posibilidades</h3><p>Define una comunidad sintética y compara un escenario de referencia con alternativas concretas en ejecuciones repetidas e independientes.</p></div>
+          <span class="step-art step-ripple" aria-hidden="true"><i></i><i></i><i></i></span>
+        </article>
+        <article class="workflow-row reveal">
+          <span class="step-index">04</span>
+          <div><h3>Evidence Audit: rastrear afirmaciones hasta sus fuentes</h3><p>Rastrea afirmaciones factuales hasta fragmentos breves de sus fuentes. Distingue lo observado, inferido o supuesto, e identifica desacuerdos entre fuentes.</p></div>
+          <span class="step-art step-audit" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        </article>
+      </div>
+    </section>
+
+    <section class="principles full-bleed" id="principles">
+      <div class="principles-copy reveal">
+        <p class="eyebrow"><span class="live-dot"></span> Diseñado para tu sesión del agente</p>
+        <h2>Sin clave de Flock.<br><em>Tu agente, tus datos.</em></h2>
+        <p>Flock no recopila credenciales de modelos. Inicia sesión o configura el agente de IA que elijas; se aplican sus proveedores, políticas de datos, plan y límites. El grafo SQLite y los registros de simulación permanecen en tu espacio de trabajo. Flock no usa Zep ni un servicio de datos alojado por Flock.</p>
+        <a class="text-link light-link" href="docs.html#privacy">Consultar cómo se gestionan los datos <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="principles-diagram reveal" aria-hidden="true">
+        <div class="diagram-line"></div>
+        <div class="diagram-node"><span class="diagram-dot"></span><small>TUS FUENTES</small><b>Espacio de trabajo</b></div>
+        <div class="diagram-node"><span class="diagram-dot coral"></span><small>RAZONAMIENTO DEL MODELO</small><b>Tu sesión del agente</b></div>
+        <div class="diagram-node"><span class="diagram-dot gold"></span><small>TU GRAFO</small><b>SQLite · .flock/</b></div>
+        <p>Cada etapa es visible.<br>Cada ejecución deja un rastro.</p>
+      </div>
+    </section>
+
+    <section class="closing section-pad">
+      <div class="closing-inner reveal">
+        <p class="eyebrow dark-eyebrow">Una herramienta para plantear mejores preguntas</p>
+        <h2>Deja espacio para<br><em> más de un resultado.</em></h2>
+        <p>Elige tu agente, instala el paquete de Flock y empieza con las fuentes en las que confías.</p>
+        <a class="button button-dark" href="docs.html#install">Leer la guía de instalación <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="closing-mark" aria-hidden="true">F.</div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="/es/"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg><span>Flock</span></a>
+    <p>Explora posibilidades. Mantén la evidencia a mano.</p>
+    <div><a href="docs.html">Documentación</a><a href="https://github.com/plilian/flock">GitHub</a><a href="https://github.com/plilian/flock/issues">Ayuda</a></div>
+    <small>Flock es un proyecto derivado de MiroFish, modificado sustancialmente y mantenido de forma independiente bajo AGPL-3.0. No está afiliado ni cuenta con el respaldo de los responsables de MiroFish. <a href="docs.html#license">Origen y licencia</a></small>
+  </footer>
+  <script src="../assets/site.js?v=0.7.0" defer></script>
+</body>
+</html>

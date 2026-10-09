@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e12">
+  <meta name="description" content="資料に基づく知識グラフ、証拠監査、合成シミュレーションを行う多言語AIエージェントプラグイン。Codex、Claude Code、Gemini CLI、Qwen Code、DeepSeek Harness（プレビュー）に対応。">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://flock.daalgp.com/ja/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Flock">
+  <meta property="og:title" content="Flock — AI知識グラフとソーシャルシミュレーション">
+  <meta property="og:description" content="資料から問いを調べ、グラフの根拠を監査し、AIエージェント環境で合成シナリオを比較できます。">
+  <meta property="og:url" content="https://flock.daalgp.com/ja/">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Flock — AI知識グラフとソーシャルシミュレーション">
+  <meta name="twitter:description" content="証拠に基づくグラフと合成シナリオを扱う、ローカル実行のオープンソースAIエージェントワークフロー。">
+  <title>Flock — AI知識グラフとソーシャルシミュレーション</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="apple-touch-icon" href="../favicon.svg">
+  <link rel="stylesheet" href="../assets/site.css?v=0.7.0">
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Flock",
+  "url": "https://flock.daalgp.com/ja/",
+  "description": "Flockは、出典に基づく知識グラフ、証拠監査、合成ソーシャルシミュレーション、シナリオ比較を行うオープンソースのAIエージェントプラグインです。",
+  "applicationCategory": "DeveloperApplication",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": 0,
+    "priceCurrency": "USD"
+  },
+  "inLanguage": "ja",
+  "softwareVersion": "0.6.0",
+  "sameAs": "https://github.com/plilian/flock"
+}
+  </script>
+  <link rel="alternate" hreflang="en" href="https://flock.daalgp.com/">
+  <link rel="alternate" hreflang="ja" href="https://flock.daalgp.com/ja/">
+  <link rel="alternate" hreflang="es" href="https://flock.daalgp.com/es/">
+  <link rel="alternate" hreflang="zh-CN" href="https://flock.daalgp.com/zh-cn/">
+  <link rel="alternate" hreflang="x-default" href="https://flock.daalgp.com/">
+</head>
+<body class="landing-page">
+  <header class="site-header">
+    <a class="brand" href="/ja/" aria-label="Flock ホーム">
+      <svg class="brand-mark" viewBox="0 0 32 32" role="img" aria-label=""><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg>
+      <span>Flock</span>
+    </a>
+    <nav class="main-nav" aria-label="メインナビゲーション">
+      <a href="#workflow">ワークフロー</a>
+      <a href="#hosts">対応AI</a>
+      <a href="#principles">設計方針</a>
+      <a href="docs.html">ドキュメント</a>
+      <a class="nav-cta" href="docs.html#install">プラグインを導入 <span aria-hidden="true">↗</span></a>
+      <div class="language-nav" role="group" aria-label="言語"><a href="/" lang="en">English</a><a href="/ja/" lang="ja" aria-current="page">日本語</a><a href="/zh-cn/" lang="zh-CN">简体中文</a><a href="/es/" lang="es">Español</a></div>
+    </nav>
+    <button class="menu-toggle" aria-label="ナビゲーションを開く" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main>
+    <section class="hero full-bleed" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="live-dot"></span> AIホストで使うリサーチワークフロー</p>
+        <h1 id="hero-title">集団はどう<br><em>動くのか。</em></h1>
+        <p class="hero-lede">実際の資料から問いを検討し、更新可能な知識グラフを構築。合成コミュニティの反応を探索します。使い慣れたAIワークスペース内ですべて完結します。</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="docs.html#install">Flockを始める <span aria-hidden="true">↗</span></a>
+          <a class="text-link" href="#workflow">ワークフローを見る <span aria-hidden="true">↓</span></a>
+        </div>
+        <p class="hero-footnote">Flock専用のAPIキーは不要です。AIホスト側のログイン、プロバイダー設定、プラン、利用上限が適用されます。</p>
+        <p class="hero-language-note">英語、日本語、中国語（簡体字）、スペイン語に対応しています。</p>
+      </div>
+      <div class="hero-visual" aria-label="An illustrative knowledge graph connecting source material to a simulated community">
+        <svg class="network-art" viewBox="0 0 760 600" role="img" aria-labelledby="graph-title graph-desc">
+          <title id="graph-title">根拠から考えられる結果へ</title>
+          <desc id="graph-desc">資料は知識グラフを介して合成エージェントやシナリオの結果につながります。</desc>
+          <defs>
+            <radialGradient id="coreGlow"><stop stop-color="#ff7a62" stop-opacity=".22"/><stop offset="1" stop-color="#ff7a62" stop-opacity="0"/></radialGradient>
+            <linearGradient id="pathGlow" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffd2c8" stop-opacity=".3"/><stop offset=".52" stop-color="#ff755b"/><stop offset="1" stop-color="#f7bd79" stop-opacity=".65"/></linearGradient>
+          </defs>
+          <circle cx="408" cy="296" r="230" fill="url(#coreGlow)"/>
+          <g class="graph-lines" fill="none" stroke="url(#pathGlow)" stroke-width="1.35">
+            <path d="M108 139 257 201 356 132 465 223 609 166"/>
+            <path d="M108 139 175 327 257 201 309 396 465 223 543 363 609 166"/>
+            <path d="M175 327 309 396 403 303 543 363 652 285"/>
+            <path d="M257 201 403 303 465 223 652 285"/>
+            <path d="M309 396 403 303 465 223"/>
+            <path d="M356 132 403 303 543 363"/>
+            <path d="M108 139 356 132" class="trace-line"/>
+            <path d="M175 327 403 303 609 166" class="trace-line trace-delay"/>
+          </g>
+          <g class="graph-nodes">
+            <circle class="node node-small" cx="108" cy="139" r="7"/><circle class="node node-small" cx="257" cy="201" r="8"/>
+            <circle class="node node-small" cx="356" cy="132" r="6"/><circle class="node node-main" cx="403" cy="303" r="16"/>
+            <circle class="node node-agent" cx="465" cy="223" r="10"/><circle class="node node-small" cx="609" cy="166" r="7"/>
+            <circle class="node node-agent" cx="543" cy="363" r="11"/><circle class="node node-small" cx="652" cy="285" r="7"/>
+            <circle class="node node-small" cx="175" cy="327" r="8"/><circle class="node node-small" cx="309" cy="396" r="6"/>
+          </g>
+          <g class="graph-labels" font-family="'DM Mono', monospace" font-size="11" letter-spacing=".04em">
+            <text x="47" y="119">資料 01</text><text x="221" y="178">主張</text><text x="333" y="108">主体</text>
+            <text x="364" y="339">根拠グラフ</text><text x="471" y="202">エージェント 04</text>
+            <text x="589" y="142">シナリオ</text><text x="542" y="394">コミュニティ</text>
+            <text x="622" y="311">結果</text><text x="128" y="358">資料 02</text>
+          </g>
+          <g class="art-annotations" font-family="'DM Mono', monospace" font-size="9" letter-spacing=".12em">
+            <text x="84" y="476">資料に基づく</text><text x="317" y="476">可能性をモデル化</text><text x="546" y="476">結果をたどる</text>
+          </g>
+          <path class="orbit" d="M87 303c38-162 272-257 435-197 150 55 192 216 121 330" fill="none" stroke="#f3eee7" stroke-opacity=".13" stroke-dasharray="2 8"/>
+        </svg>
+        <div class="visual-caption"><span>予測ではなく、可能性の探索</span><span>01 — 03</span></div>
+      </div>
+      <div class="hero-bottom"><span>知識グラフ</span><span>ソーシャルシミュレーション</span><span>5つのホスト向けパッケージ</span></div>
+    </section>
+
+    <section class="hosts section-pad" id="hosts">
+      <div class="hosts-heading reveal">
+        <p class="eyebrow dark-eyebrow">使い慣れたAIホストで使える一つのワークフロー</p>
+        <h2>Flockは、いつもの<br><em>作業環境に合います。</em></h2>
+        <p>利用するAIエージェントホスト向けのパッケージを導入してください。推論はホストで選択中のモデルが行い、グラフと実行データは指定したワークスペースに保存されます。</p>
+      </div>
+      <div class="host-list">
+        <a class="host-row reveal" href="docs.html#codex"><span class="host-index">01</span><strong>Codex</strong><span>ネイティブプラグイン</span><span class="host-arrow" aria-hidden="true">↗</span></a>
+        <a class="host-row reveal" href="docs.html#claude-code"><span class="host-index">02</span><strong>Claude Code</strong><span>ネイティブプラグイン</span><span class="host-arrow" aria-hidden="true">↗</span></a>
+        <a class="host-row reveal" href="docs.html#gemini-cli"><span class="host-index">03</span><strong>Gemini CLI</strong><span>ネイティブ拡張</span><span class="host-arrow" aria-hidden="true">↗</span></a>
+        <a class="host-row reveal" href="docs.html#qwen-code"><span class="host-index">04</span><strong>Qwen Code</strong><span>ネイティブ拡張</span><span class="host-arrow" aria-hidden="true">↗</span></a>
+        <a class="host-row reveal" href="docs.html#deepseek-harness"><span class="host-index">05</span><strong>DeepSeek Harness</strong><span>開発者向けプレビュー</span><span class="host-arrow" aria-hidden="true">↗</span></a>
+        <p class="hosts-note">DeepSeek対応はHarnessプラグインホスト向けです。DeepSeekのチャットサイトやAPIとの連携ではありません。</p>
+      </div>
+    </section>
+
+    <section class="intro section-pad" id="workflow">
+      <div class="section-heading reveal">
+        <p class="eyebrow dark-eyebrow">不確実性を探るための、より明確な方法</p>
+        <h2>資料から<br>生きた <em>シナリオへ。</em></h2>
+      </div>
+      <div class="workflow-list">
+        <article class="workflow-row reveal">
+          <span class="step-index">01</span>
+          <div><h3>問いを資料に結びつける</h3><p>重要なレポート、記事、メモを追加します。Flockは各主張を出典と結びつけて保管します。</p></div>
+          <span class="step-art step-document" aria-hidden="true"><i></i><i></i><i></i></span>
+        </article>
+        <article class="workflow-row reveal">
+          <span class="step-index">02</span>
+          <div><h3>関係をマッピングする</h3><p>ホストで選択中のモデルが人物、団体、出来事、つながりを抽出し、確認や質問ができるグラフにまとめます。</p></div>
+          <span class="step-art step-network" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        </article>
+        <article class="workflow-row reveal">
+          <span class="step-index">03</span>
+          <div><h3>Scenario Lab：可能性を比較する</h3><p>合成コミュニティを設計し、基準シナリオと焦点を絞った代替案を、独立した複数回の実行で比較します。</p></div>
+          <span class="step-art step-ripple" aria-hidden="true"><i></i><i></i><i></i></span>
+        </article>
+        <article class="workflow-row reveal">
+          <span class="step-index">04</span>
+          <div><h3>Evidence Audit：主張の出典をたどる</h3><p>事実に関する主張を短い引用箇所までたどります。観察、推論、仮定を区別し、資料間の食い違いを確認できます。</p></div>
+          <span class="step-art step-audit" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        </article>
+      </div>
+    </section>
+
+    <section class="principles full-bleed" id="principles">
+      <div class="principles-copy reveal">
+        <p class="eyebrow"><span class="live-dot"></span> あなたのホストセッションを中心に設計</p>
+        <h2>Flock用キーは不要。<br><em>ホストもデータもあなたのもの。</em></h2>
+        <p>Flockはモデル認証情報を収集しません。利用するAIホストにログインして設定してください。プロバイダー設定、データポリシー、プラン、上限は各ホストに従います。FlockのSQLiteグラフとシミュレーション記録は選択したワークスペースに保存され、ZepやFlock運営のデータサービスは使いません。</p>
+        <a class="text-link light-link" href="docs.html#privacy">データの取り扱いを見る <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="principles-diagram reveal" aria-hidden="true">
+        <div class="diagram-line"></div>
+        <div class="diagram-node"><span class="diagram-dot"></span><small>あなたの資料</small><b>ワークスペース</b></div>
+        <div class="diagram-node"><span class="diagram-dot coral"></span><small>モデルの推論</small><b>あなたのホストセッション</b></div>
+        <div class="diagram-node"><span class="diagram-dot gold"></span><small>あなたのグラフ</small><b>SQLite · .flock/</b></div>
+        <p>各段階を確認できます。<br>実行ごとに履歴が残ります。</p>
+      </div>
+    </section>
+
+    <section class="closing section-pad">
+      <div class="closing-inner reveal">
+        <p class="eyebrow dark-eyebrow">より良い問いを考えるためのツール</p>
+        <h2>複数の可能性を<br><em>考える余地をつくる。</em></h2>
+        <p>ホストを選び、対応するFlockパッケージを導入して、信頼できる資料から始めましょう。</p>
+        <a class="button button-dark" href="docs.html#install">導入ガイドを読む <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="closing-mark" aria-hidden="true">F.</div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="/ja/"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg><span>Flock</span></a>
+    <p>可能性を探り、根拠をすぐ確認できるように。</p>
+    <div><a href="docs.html">ドキュメント</a><a href="https://github.com/plilian/flock">GitHub</a><a href="https://github.com/plilian/flock/issues">サポート</a></div>
+    <small>FlockはAGPL-3.0のもとで公開された、独立して大幅に改変されたMiroFish派生プロジェクトです。MiroFishの開発者とは提携・承認関係にありません。 <a href="docs.html#license">由来とライセンス</a></small>
+  </footer>
+  <script src="../assets/site.js?v=0.7.0" defer></script>
+</body>
+</html>

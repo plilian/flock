@@ -1,6 +1,6 @@
 ---
 name: flock
-description: Build evidence-labeled knowledge graphs, audit source trails, compare controlled synthetic scenarios, and write linked reports. Use for graph research or scenario exploration in a supported agent host.
+description: Build evidence-labeled knowledge graphs, audit source trails, compare controlled synthetic scenarios, and write linked reports. Supports English, Japanese, Simplified Chinese, and Spanish.
 ---
 
 # Flock
@@ -8,6 +8,14 @@ description: Build evidence-labeled knowledge graphs, audit source trails, compa
 Flock is a native workflow for exploring how a synthetic community could respond to a scenario. The active host's model performs extraction, profile design, simulation actions, and narrative analysis. The bundled Python helper only validates and stores graph and simulation state; it never calls a model, network service, or provider API.
 
 Flock includes two higher-rigor workflows: **Evidence Audit** checks graph provenance and asks the active host to review source meaning; **Scenario Lab** compares controlled variants across repeated, isolated runs. Use them when the user asks to audit evidence, compare interventions, or examine robustness.
+
+## Language support
+
+- Reply in the language the user is using, unless they request another language. Flock explicitly supports English, Japanese, Simplified Chinese (`zh-CN`), and Spanish; use the same language for questions, explanations, audit reviews, reports, and other user-facing prose.
+- Write natural-language content in that language, including project and experiment titles, research questions, scenario descriptions, agent personas, beliefs, goals, assumptions, posts, comments, and report text. Keep synthetic agent language consistent with the requested scenario; do not silently mix languages.
+- Keep helper commands, paths, JSON keys, IDs, enum values, and schema labels exactly as required by the Flock format. Translate only natural-language field values. Keep IDs stable and ASCII-safe.
+- Preserve source quotations and proper names in their original form. Add a concise translation beside a quotation when it helps the reader; clearly distinguish the source text from its translation.
+- Use the requested language in generated reports and summaries while retaining the fixed field names and machine-readable formats needed by the helper.
 
 ## First use
 
