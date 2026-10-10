@@ -268,3 +268,49 @@ h1 em,h2 em { color: var(--coral); font-style: normal; }
 .host-install > p:not(.host-install-label) { margin-bottom: 10px; }
 .host-preview { border-top-color: #e2b7a9; }
 @media (max-width: 720px) { .hosts { display: block; }.hosts-heading { margin-bottom: 35px; }.host-row { gap: 9px; grid-template-columns: 25px minmax(105px,1fr) minmax(105px,.9fr) 14px; min-height: 61px; }.host-row strong { font-size: 12px; }.host-index,.host-row > span:nth-child(3) { font-size: 8px; } }
+
+@font-face { font-family: "Vazirmatn"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/Vazirmatn-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Vazirmatn"; font-style: normal; font-weight: 700; font-display: swap; src: url("fonts/Vazirmatn-Bold.ttf") format("truetype"); }
+
+html[dir="rtl"] body { font-family: "Vazirmatn", Tahoma, Arial, sans-serif; }
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3 { letter-spacing: 0; }
+html[dir="rtl"] .eyebrow,
+html[dir="rtl"] .hero-footnote,
+html[dir="rtl"] .hero-bottom,
+html[dir="rtl"] .visual-caption,
+html[dir="rtl"] .diagram-node small,
+html[dir="rtl"] .principles-diagram > p,
+html[dir="rtl"] .docs-toc span,
+html[dir="rtl"] .host-index,
+html[dir="rtl"] .host-install-label,
+html[dir="rtl"] .site-footer small { font-family: "Vazirmatn", Tahoma, Arial, sans-serif; letter-spacing: 0; }
+html[dir="rtl"] .hero-footnote { font-size: 11px; line-height: 1.7; }
+html[dir="rtl"] .language-nav { direction: ltr; margin-left: 0; margin-right: 2px; }
+html[dir="rtl"] .hero::after { background: radial-gradient(ellipse at 26% 42%,rgba(255,121,95,.11),transparent 34%), linear-gradient(270deg,var(--ink) 0%,rgba(11,14,18,.82) 44%,rgba(11,14,18,.16) 100%); }
+html[dir="rtl"] .hero h1 { margin-left: 0; margin-right: -5px; }
+html[dir="rtl"] .nav-cta span,
+html[dir="rtl"] .text-link span { margin-left: 0; margin-right: 9px; }
+html[dir="rtl"] .text-link:hover span { margin-left: 0; margin-right: 12px; }
+html[dir="rtl"] .hero-bottom { left: auto; right: clamp(24px,7.2vw,110px); }
+html[dir="rtl"] .hero-bottom span:first-child::before { margin: 0 0 1px 9px; }
+html[dir="rtl"] .visual-caption { direction: rtl; }
+html[dir="rtl"] .principles-diagram { border-left: 0; border-right: 1px solid rgba(255,255,255,.18); padding: 12px 39px 12px 0; }
+html[dir="rtl"] .diagram-line { border-left: 0; border-right: 1px dashed rgba(255,255,255,.22); left: auto; right: 43px; }
+html[dir="rtl"] .diagram-dot { left: auto; right: -2px; }
+html[dir="rtl"] .closing-mark { left: 1vw; right: auto; }
+html[dir="rtl"] .docs-toc { border-left: 1px solid #d8d6cf; border-right: 0; padding-left: 28px; padding-right: 0; }
+html[dir="rtl"] .docs-content ul,
+html[dir="rtl"] .docs-content ol { padding-left: 0; padding-right: 20px; }
+html[dir="rtl"] .docs-note { border-left: 0; border-right: 2px solid var(--coral); padding: 3px 16px 3px 0; }
+html[dir="rtl"] .docs-content pre,
+html[dir="rtl"] .docs-content code { direction: ltr; text-align: left; unicode-bidi: isolate; }
+html[dir="rtl"] .docs-content pre code { text-align: left; }
+html[dir="rtl"] .docs-content code[dir="rtl"] { direction: rtl; font-family: "Vazirmatn", Tahoma, Arial, sans-serif; text-align: right; }
+
+@media (max-width: 720px) {
+  html[dir="rtl"] .hero-bottom { left: auto; right: 23px; }
+  html[dir="rtl"] .principles-diagram { margin: 56px 8px 0 0; }
+  html[dir="rtl"] .docs-toc { border-left: 0; padding-left: 0; }
+}

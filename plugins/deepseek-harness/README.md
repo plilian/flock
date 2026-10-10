@@ -24,4 +24,4 @@ dsh plugin --profile web remove flock-deepseek-harness
 
 Ask the active agent to audit source references or compare a baseline with controlled scenario variants. Scenario Lab runs each variant independently from the same synthetic roster and produces a local comparison view under `.flock/experiments/`.
 
-The Flock skill supports English, Japanese, Simplified Chinese, and Spanish. It follows the user's language for natural-language work and reports while keeping required commands and data-schema values unchanged.
+The Flock skill supports English, Japanese, Simplified Chinese, Spanish, and Persian. It follows the user's language for natural-language work and reports while keeping required commands and data-schema values unchanged.

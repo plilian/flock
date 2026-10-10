@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e12">
+  <meta name="description" content="راهنمای نصب و استفاده از Flock در Codex، Claude Code، Gemini CLI، Qwen Code و DeepSeek Harness؛ همراه با گراف دانش محلی، بررسی شواهد و آزمایش سناریوها.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://flock.daalgp.com/fa/docs.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Flock">
+  <meta property="og:title" content="راهنمای Flock — نصب، گراف دانش، شواهد و شبیه‌سازی">
+  <meta property="og:description" content="روش نصب Flock و کار با گراف دانش، Evidence Audit، Scenario Lab، شبیه‌سازی و داده‌های محلی را ببین.">
+  <meta property="og:url" content="https://flock.daalgp.com/fa/docs.html">
+  <meta property="og:locale" content="fa_IR">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="راهنمای Flock">
+  <meta name="twitter:description" content="نصب Flock در محیط AI خودت و آشنایی با بررسی شواهد، مقایسهٔ سناریوها و گراف دانش محلی.">
+  <title>راهنمای Flock — نصب و استفاده از پلاگین هوش مصنوعی</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="apple-touch-icon" href="../favicon.svg">
+  <link rel="stylesheet" href="../assets/site.css?v=0.8.0">
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "راهنمای Flock: نصب، بررسی شواهد و آزمایش سناریوها",
+  "description": "راهنمای نصب و کار با Flock؛ ابزاری برای ساخت گراف دانش مستند و شبیه‌سازی اجتماعی با شخصیت‌های ساختگی.",
+  "url": "https://flock.daalgp.com/fa/docs.html",
+  "inLanguage": "fa",
+  "about": {
+    "@type": "SoftwareApplication",
+    "name": "Flock",
+    "url": "https://flock.daalgp.com/",
+    "applicationCategory": "DeveloperApplication"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Flock",
+    "url": "https://flock.daalgp.com/"
+  }
+}
+  </script>
+  <link rel="alternate" hreflang="en" href="https://flock.daalgp.com/docs.html">
+  <link rel="alternate" hreflang="ja" href="https://flock.daalgp.com/ja/docs.html">
+  <link rel="alternate" hreflang="es" href="https://flock.daalgp.com/es/docs.html">
+  <link rel="alternate" hreflang="zh-CN" href="https://flock.daalgp.com/zh-cn/docs.html">
+  <link rel="alternate" hreflang="fa" href="https://flock.daalgp.com/fa/docs.html">
+  <link rel="alternate" hreflang="x-default" href="https://flock.daalgp.com/docs.html">
+</head>
+<body class="docs-page">
+  <header class="site-header docs-header">
+    <a class="brand" href="/fa/" aria-label="صفحهٔ اصلی Flock">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg>
+      <span>Flock</span>
+    </a>
+    <nav class="main-nav" aria-label="ناوبری اصلی">
+      <a href="/fa/#workflow">روند کار</a>
+      <a href="/fa/#hosts">محیط‌های AI</a>
+      <a href="docs.html" aria-current="page">راهنما</a>
+      <a class="nav-cta" href="#install">نصب پلاگین <span aria-hidden="true">↗</span></a>
+      <div class="language-nav" role="group" aria-label="زبان"><a href="/docs.html" lang="en">English</a><a href="/ja/docs.html" lang="ja">日本語</a><a href="/zh-cn/docs.html" lang="zh-CN">简体中文</a><a href="/es/docs.html" lang="es">Español</a><a href="/fa/docs.html" lang="fa" aria-current="page">فارسی</a></div>
+    </nav>
+    <button class="menu-toggle" aria-label="باز کردن منو" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main>
+    <section class="docs-hero">
+      <p class="eyebrow"><span class="live-dot"></span> FLOCK / راهنما</p>
+      <h1>Flock برای<br><em>فضای کاری خودت.</em></h1>
+      <p>بستهٔ مخصوص محیط AI خودت را نصب کن و با منبع‌ها و سناریوهای خودت کار کن. Flock روی دستگاه و فضای کاری خودت اجرا می‌شود؛ سرویس شبیه‌سازی میزبانی‌شده نیست.</p>
+    </section>
+
+    <div class="docs-layout">
+      <nav class="docs-toc" aria-label="بخش‌های راهنما">
+        <span>توی این صفحه</span>
+        <a href="#install">نصب</a>
+        <a href="#first-project">اولین پروژه</a>
+        <a href="#workflows">روندهای کار</a>
+        <a href="#evidence-audit">بررسی شواهد</a>
+        <a href="#scenario-lab">آزمایش سناریوها</a>
+        <a href="#simulation">سازوکار شبیه‌سازی</a>
+        <a href="#faq">سؤال‌های رایج</a>
+        <a href="#privacy">حریم خصوصی و داده‌ها</a>
+        <a href="#troubleshooting">رفع مشکل</a>
+        <a href="#license">مجوز</a>
+      </nav>
+
+      <article class="docs-content">
+        <section id="install">
+          <p class="eyebrow dark-eyebrow">۰۱ / نصب</p>
+          <h2>نصب برای محیط AI خودت</h2>
+          <p>برای هر محیط AI، Flock به شکل پلاگین یا افزونهٔ اختصاصی ارائه می‌شود. هر بسته همان مهارت کاری و ابزار Python را دارد؛ ابزار Python خودش از مدل استفاده نمی‌کند. مدلِ نشست فعال تحلیل را انجام می‌دهد و ابزار، گراف و داده‌های شبیه‌سازی را بررسی و ذخیره می‌کند.</p>
+          <p>همهٔ بسته‌ها مستقیم از مخزن عمومی GitHub نصب می‌شوند. Flock نه مدل میزبانی‌شده دارد و نه برای خودش کلید API می‌خواهد. با حساب خودت وارد محیط AI انتخابی شو و همان‌جا دسترسی مدل را تنظیم کن؛ روش دسترسی و سقف مصرف به هر محیط بستگی دارد.</p>
+          <h3>پیش‌نیازهای مشترک</h3>
+          <ul>
+            <li>Python نسخهٔ ۳٫۱۱ یا جدیدتر و دسترسی به فضای کاری و ترمینال در محیط AI.</li>
+            <li>Git برای نصب بسته‌ها از این مخزن عمومی.</li>
+            <li>پوشهٔ داده‌های Flock: <code>.flock/</code></li>
+            <li>نصب محیط AI پشتیبانی‌شده و دسترسی مدل با حساب خودت. Flock از حساب سازنده استفاده نمی‌کند و آن را با کسی به اشتراک نمی‌گذارد.</li>
+          </ul>
+
+          <div class="host-install" id="codex">
+            <p class="host-install-label">۰۱ / CODEX · پلاگین اختصاصی</p>
+            <h3>Codex</h3>
+            <p>فهرست پلاگین‌های Flock را اضافه کن و پلاگین را نصب کن:</p>
+            <pre><code>codex plugin marketplace add plilian/flock
+codex plugin add flock@flock</code></pre>
+            <p>Codex را باز کن یا یک‌بار راه‌اندازی مجدد کن؛ بعد از آن بخواه از Flock استفاده کند یا مهارت <code>$flock</code> را اجرا کند.</p>
+          </div>
+
+          <div class="host-install" id="claude-code">
+            <p class="host-install-label">۰۲ / CLAUDE CODE · پلاگین اختصاصی</p>
+            <h3>Claude Code</h3>
+            <p>فهرست Flock را اضافه کن و از ترمینال Claude Code نصبش کن:</p>
+            <pre><code>claude plugin marketplace add plilian/flock
+claude plugin install flock@flock</code></pre>
+            <p>اگر لازم بود Claude Code را دوباره باز یا بارگذاری کن، وارد فضای کاری‌ات شو و از Claude بخواه مهارت <code>flock</code> را اجرا کند.</p>
+          </div>
+
+          <div class="host-install" id="gemini-cli">
+            <p class="host-install-label">۰۳ / GEMINI CLI · افزونهٔ اختصاصی</p>
+            <h3>Gemini CLI</h3>
+            <p>Flock را از نشانی مخزن نصب کن:</p>
+            <pre><code>gemini extensions install https://github.com/plilian/flock</code></pre>
+            <p>اگر پیامی دیدی، CLI را دوباره اجرا کن؛ بعد از Gemini CLI بخواه از مهارت Flock استفاده کند. ورود و دسترسی مدل طبق تنظیمات Google/Gemini خودت است.</p>
+          </div>
+
+          <div class="host-install" id="qwen-code">
+            <p class="host-install-label">۰۴ / QWEN CODE · افزونهٔ اختصاصی</p>
+            <h3>Qwen Code</h3>
+            <p>Flock را از نشانی مخزن نصب کن:</p>
+            <pre><code>qwen extensions install https://github.com/plilian/flock</code></pre>
+            <p>اگر پیام داده شد CLI را دوباره اجرا کن، بعد این مهارت را اجرا کن: <code>/flock:flock</code> یا از Qwen Code بخواه آن مهارت را اجرا کند. ورود به حساب، تنظیم سرویس‌دهنده و محدودیت مصرف را خود Qwen Code مدیریت می‌کند.</p>
+          </div>
+
+          <div class="host-install host-preview" id="deepseek-harness">
+            <p class="host-install-label">۰۵ / DEEPSEEK HARNESS · پیش‌نمایش توسعه‌دهندگان</p>
+            <h3>DeepSeek Harness</h3>
+            <p>Harness یک محیط جداگانه برای اجرای پلاگین‌هاست و نسخهٔ Flock برای آن هنوز در مرحلهٔ پیش‌نمایش توسعه‌دهندگان است. مخزن را دریافت کن و Flock را در یکی از پروفایل‌های Harness نصب کن:</p>
+            <pre><code>git clone https://github.com/plilian/flock.git
+cd flock
+dsh plugin --profile web add ./plugins/deepseek-harness</code></pre>
+            <p>این بسته فقط برای DeepSeek Harness است؛ پلاگین سایت گفت‌وگوی DeepSeek نیست و API آن را هم صدا نمی‌زند. دسترسی به مدل به سرویس‌دهنده‌هایی بستگی دارد که Harness پشتیبانی می‌کند و شاید نیاز به تنظیم جداگانه داشته باشد.</p>
+          </div>
+          <p class="docs-note">این بسته‌ها را می‌توان از GitHub نصب کرد؛ فعلاً در فهرست رسمی پلاگین‌های شرکت‌های سازنده قرار ندارند. «نداشتن کلید API برای Flock» یعنی Flock حساب یا سرویس مدل جداگانه ندارد؛ ورود به حساب یا تنظیم سرویس‌دهنده‌ای که محیط AI خودت لازم دارد همچنان برقرار است.</p>
+        </section>
+
+        <section id="first-project">
+          <p class="eyebrow dark-eyebrow">۰۲ / اولین پروژه</p>
+          <h2>ساخت پروژه در فضای کاری</h2>
+          <p>محیط AI را در همان فضایی باز کن که می‌خواهی داده‌های Flock آنجا بماند. اسناد منبع را اضافه کن، بعد از عامل آن بخواه:</p>
+          <pre><code lang="fa" dir="rtl">با Flock پروژه‌ای به نام «بررسی رفت‌وآمد شهری» بساز.</code></pre>
+          <p>Flock پایگاه دادهٔ گراف SQLite و سابقهٔ اجراها را در پوشهٔ <code>.flock/</code> نگه می‌دارد. برای هر پروژه از یک فضای کاری جدا استفاده کن. ابزار Flock یک قانون ignore اضافه می‌کند تا داده‌های گراف و اجراها تصادفی وارد Git نشوند. اسناد منبع همان‌جایی می‌مانند که گذاشته‌ای؛ Flock فقط نام منبع و ارجاع را ذخیره می‌کند، نه یک نسخهٔ کامل از سند.</p>
+        </section>
+
+        <section id="workflows">
+          <p class="eyebrow dark-eyebrow">۰۳ / روندهای کار</p>
+          <h2>از شواهد تا اجرای شبیه‌سازی</h2>
+          <h3>ساخت گراف</h3>
+          <p>از عامل محیط AI بخواه از منبع‌های انتخابی گراف بسازد. مدل فعال، ساختار، موجودیت‌ها و ارتباط‌ها را پیدا می‌کند؛ Flock آن‌ها را بررسی می‌کند و ارجاع به منبع‌ها را در گراف SQLite نگه می‌دارد. بعد می‌توانی گراف را با نمودار Mermaid، جست‌وجو یا آمار بررسی کنی.</p>
+          <pre><code lang="fa" dir="rtl">با Flock از ./sources گراف دانش بساز و مهم‌ترین ارتباط‌هایش را نشان بده.</code></pre>
+          <h3>ساخت جامعهٔ شبیه‌سازی‌شده</h3>
+          <p>جامعه و سؤالی را که می‌خواهی بررسی کنی توضیح بده. مدل محیط AI بر پایهٔ موجودیت‌های گراف، شخصیت‌ها را می‌سازد و چیزهایی را که فرض هستند از واقعیت‌های منبع جدا علامت می‌زند.</p>
+          <h3>بررسی یک سناریو</h3>
+          <p>نوع گفت‌وگو را شبیه Reddit یا Twitter انتخاب کن، سناریو و تعداد دورها را مشخص کن و قبل از اجرا فرض‌های مربوط به شخصیت‌ها را ببین. مدل میزبان رفتار هر دور را می‌سازد؛ Flock آن‌ها را بررسی می‌کند و نوشته‌ها، واکنش‌ها و تعداد تعامل‌ها را ثبت می‌کند.</p>
+          <h3>مرور و گفت‌وگو</h3>
+          <p>از روی خط زمانی ثبت‌شده گزارش بنویس، به سؤال‌ها جواب بده یا با یک عامل شبیه‌سازی‌شده گفت‌وگو کن. در گزارش، آمار محاسبه‌شده از برداشت و تحلیل جدا می‌ماند.</p>
+          <h3>دیدن اجرای شبیه‌سازی</h3>
+          <p>بعد از هر دور، Flock یک نمای HTML تعاملی را در مسیر <code>.flock/runs/&lt;run_id&gt;/visualization.html</code>به‌روز می‌کند. می‌توانی دورها را عقب‌وجلو کنی یا پخش کنی، شخصیت‌ها و واکنش‌ها را ببینی، نوشته‌ها را جست‌وجو کنی و داده‌های اجرا را بگیری. این فایل مستقیم در مرورگر باز می‌شود و به سایت دیگری وصل نمی‌شود.</p>
+        </section>
+
+        <section id="evidence-audit">
+          <p class="eyebrow dark-eyebrow">۰۴ / بررسی شواهد</p>
+          <h2>پیدا کردن منبع هر ادعا</h2>
+          <p>هر موجودیت و ارتباط گراف را با یکی از این برچسب‌ها مشخص کن: <code>observed</code>, <code>inferred</code>، یا <code>assumption</code>. موارد قدیمی تا زمان بررسی با برچسب <code>unclassified</code> می‌مانند. بررسی شواهد نشان می‌دهد کدام موردها منبع دارند، نشانی یا بخشی از منبع کم است، منبعی استفاده نشده یا داده‌ای هنوز دسته‌بندی نشده است.</p>
+          <pre><code>python &lt;helper&gt; --workspace . graph audit</code></pre>
+          <p>ابزار Flock نتیجهٔ بررسی را به شکل JSON در مسیر <code>.flock/audits/</code>ذخیره می‌کند. از مدل فعال بخواه نقل‌قول‌ها را با اسناد انتخابی بسنجد، اختلاف‌ها و دیدگاه‌های جاافتاده را پیدا کند و خلاصه‌ای در قالب Markdown کنار فایل بررسی بنویسد. ارجاع فقط مسیر رسیدن به منبع را نشان می‌دهد؛ درستی ادعا یا منبع را ثابت نمی‌کند.</p>
+          <p>در شبیه‌سازی، نوشته‌هایی که ادعای واقعی دارند می‌توانند ارجاع گرافی <code>evidence_refs</code> داشته باشند. Flock شناسه‌ها را بررسی می‌کند و نام منبع، محل دقیق و بخش کوتاهی از آن را کنار رویداد ذخیره می‌کند؛ بنابراین در بازپخش می‌توان دید ادعای عامل شبیه‌سازی‌شده از کجا آمده است.</p>
+        </section>
+
+        <section id="scenario-lab">
+          <p class="eyebrow dark-eyebrow">۰۵ / آزمایش سناریوها</p>
+          <h2>مقایسهٔ حالت پایه با گزینه‌های دیگر</h2>
+          <p>Scenario Lab هر حالت و تکرارش را با همان شخصیت‌های شبیه‌سازی‌شده، بستر گفت‌وگو، تعداد دورها و صفحهٔ خالی شروع می‌کند. هر بار فقط یک شرط اصلی را عوض کن؛ مثلاً ببین اصلاح یک خبر یا دخالت مدیر چه اثری می‌گذارد. سابقهٔ هر اجرا جدا می‌ماند.</p>
+          <p>مشخصات آزمایش را اینجا ذخیره کن: <code>.flock/staging/experiment.json</code> در آن سؤال پژوهش، فهرست مشترک شخصیت‌ها، ۲ تا ۶ حالت، یک حالت پایه و ۱ تا ۵ تکرار برای هر حالت را بنویس. هر حالت سناریو و فرض‌های روشن خودش را دارد. تعداد اجراهای مدل با ضرب تعداد حالت‌ها، تکرارها، دورها و شخصیت‌ها بیشتر می‌شود.</p>
+          <pre><code>python &lt;helper&gt; --workspace . scenario validate --spec .flock/staging/experiment.json
+python &lt;helper&gt; --workspace . scenario create --spec .flock/staging/experiment.json
+python &lt;helper&gt; --workspace . scenario status --id &lt;experiment_id&gt;
+python &lt;helper&gt; --workspace . scenario compare --id &lt;experiment_id&gt;
+python &lt;helper&gt; --workspace . scenario visualize --id &lt;experiment_id&gt;
+python &lt;helper&gt; --workspace . scenario save-report --id &lt;experiment_id&gt; --input .flock/staging/report.md</code></pre>
+          <p>گزارش مقایسه، تعداد رفتارها، میزان مشارکت، موضع‌ها، فعالیت هر دور و تفاوت با حالت پایه را نشان می‌دهد. برای هر شاخص، میانه و کمینه/بیشینهٔ تکرارهای ذخیره‌شده را حساب می‌کند و یک صفحهٔ مقایسهٔ تعاملی در مسیر <code>.flock/experiments/&lt;experiment_id&gt;/comparison.html</code>می‌سازد که به بازپخش هر اجرا هم لینک دارد.</p>
+          <p class="docs-note">بازهٔ تکرارها فقط همین اجراهای شبیه‌سازی‌شده را خلاصه می‌کند؛ نه فاصلهٔ اطمینان آماری است و نه احتمال نتیجه در دنیای واقعی. آمار محاسبه‌شده را از برداشت مدل جدا نگه دار و در نتیجه‌گیری‌ها به منبع‌های گراف و شناسهٔ اجرا و رویداد ارجاع بده.</p>
+        </section>
+
+        <section id="simulation">
+          <p class="eyebrow dark-eyebrow">۰۶ / سازوکار شبیه‌سازی</p>
+          <h2>هر اجرا چطور پیش می‌رود؟</h2>
+          <p>Flock تحلیل مدل را از ذخیره‌سازی داده جدا می‌کند. مدل فعال محیط AI شواهد و شخصیت‌های انتخابی را می‌خواند، رفتار عامل‌ها را پیشنهاد می‌دهد و تحلیل می‌نویسد. ابزار Python داده‌های گراف را نگه می‌دارد، قالب رفتارها را می‌سنجد، دورها را جلو می‌برد و آمار فعالیت را حساب می‌کند.</p>
+          <ul>
+            <li><strong>رفتارهای شبیه Reddit:</strong> نوشته، نظر، رأی مثبت و منفی و پیوستن به انجمن.</li>
+            <li><strong>رفتارهای شبیه Twitter:</strong> نوشته، پاسخ، پسندیدن، بازنشر و دنبال‌کردن.</li>
+            <li><strong>چیزهایی که ذخیره می‌شوند:</strong> وضعیت شواهد و ارجاع‌ها، فایل بررسی ساختار، مشخصات عامل‌ها، رویدادهای هر دور، منبع‌های بررسی‌شده برای ادعاهای واقعی، آزمایش سناریوها، مقایسه‌های HTML تعاملی، بازپخش هر اجرا و گزارش‌های Markdown.</li>
+          </ul>
+          <p class="docs-note">شبیه‌سازی Flock یک آزمایش فکری ساختاریافته است؛ نه مشاهدهٔ آدم‌های واقعی است، نه نظرسنجی و نه پیش‌بینی. نتیجه به مدل انتخابی، دستورها، کیفیت منبع‌ها، شخصیت‌ها و تنظیمات بستگی دارد.</p>
+        </section>
+
+        <section id="faq">
+          <p class="eyebrow dark-eyebrow">جواب‌های کوتاه</p>
+          <h2>سؤال‌های رایج دربارهٔ Flock</h2>
+          <h3>Flock چیست؟</h3>
+          <p>Flock یک ابزار متن‌باز برای پلاگین‌های هوش مصنوعی است: از منبع‌هایی که می‌دهی گراف دانش می‌سازد، شواهد را بررسی می‌کند، شخصیت‌های شبیه‌سازی‌شده می‌سازد و سناریوهای اجتماعی را می‌سنجد. گراف و اجراها در پایگاه SQLite فضای کاری خودت ذخیره می‌شوند.</p>
+          <h3>Flock می‌تواند رفتار آدم‌های واقعی را پیش‌بینی کند؟</h3>
+          <p>نه. Flock با عامل‌های شبیه‌سازی‌شده آزمایش فکری انجام می‌دهد. نتیجه‌ها نظرسنجی، مشاهدهٔ آدم‌های واقعی یا پیش‌بینی نیستند و بازهٔ تکرارها هم احتمال اتفاق‌های واقعی را نشان نمی‌دهد.</p>
+          <h3>برای Flock باید کلید API هوش مصنوعی یا Zep داشته باشم؟</h3>
+          <p>نه. Flock برای مدل زبانی کلید API جداگانه نمی‌خواهد و به Zep وابسته نیست؛ گراف خودش را هم در SQLite می‌سازد. مدل از حساب و دسترسی محیط AI خودت استفاده می‌کند. هر هزینه یا محدودیت مصرفی، طبق پلن همان محیط است.</p>
+          <h3>Flock از چه زبان‌هایی پشتیبانی می‌کند؟</h3>
+          <p>مهارت Flock از انگلیسی، ژاپنی، چینی ساده‌شده، اسپانیایی و فارسی پشتیبانی می‌کند. جواب‌ها، سؤال‌های پژوهش، محتوای شخصیت‌های شبیه‌سازی‌شده، بررسی‌ها و گزارش‌ها را به زبان خودت می‌نویسد؛ دستورها، کلیدهای ساختار داده و شناسه‌ها تغییر نمی‌کنند.</p>
+          <h3>Flock را در کدام محیط‌های هوش مصنوعی می‌توانم استفاده کنم؟</h3>
+          <p>برای Codex، Claude Code، Gemini CLI و Qwen Code بستهٔ قابل نصب Flock وجود دارد. بستهٔ جداگانهٔ DeepSeek Harness هنوز پیش‌نمایش توسعه‌دهندگان است؛ به سایت گفت‌وگوی DeepSeek یا API آن وصل نمی‌شود.</p>
+          <h3>گراف و اطلاعات شبیه‌سازی Flock کجا ذخیره می‌شوند؟</h3>
+          <p>Flock گراف SQLite، بررسی شواهد، آزمایش سناریوها، سابقهٔ اجرا و تصویرسازی‌ها را در پوشهٔ <code>.flock/</code> در فضای کاری انتخابی تو نگه می‌دارد. سایت Flock این داده‌های پروژه را دریافت نمی‌کند.</p>
+        </section>
+
+        <section id="privacy">
+          <p class="eyebrow dark-eyebrow">۰۷ / حریم خصوصی و داده‌ها</p>
+          <h2>فضای کاری تو، محیط AI خودت</h2>
+          <ul>
+            <li>بخش‌هایی از منبع و دستورها از طریق نشست فعال و تنظیمات سرویس‌دهندهٔ خودت در محیط AI پردازش می‌شوند. تنظیمات حساب، سیاست مدل، پلن و محدودیت‌های همان محیط برقرار است.</li>
+            <li>ابزار Pythonِ Flock نه به شبکه وصل می‌شود، نه مدلی را صدا می‌زند و نه اطلاعات ورود به محیط AI را می‌خواند. گراف، بررسی شواهد، آزمایش سناریوها، تصویرسازی و گزارش‌ها را در پوشهٔ <code>.flock/</code> فضای کاری انتخابی ذخیره می‌کند.</li>
+            <li>Flock نه کلید جداگانهٔ API سرویس‌دهنده می‌خواهد، نه کلید Zep و نه حساب Flock. بعضی تنظیمات محیط AI ممکن است اطلاعات ورود مخصوص خودشان را بخواهند.</li>
+            <li>سایت عمومی Flock اطلاعات و راهنمای نصب را نشان می‌دهد. شبیه‌سازی در فضای کاری هر کاربر اجرا می‌شود و سرور سایت منبع‌ها، گراف‌ها یا سابقهٔ اجرای پروژه را دریافت نمی‌کند.</li>
+            <li>قبل از به‌اشتراک‌گذاشتن منبع‌ها یا گراف‌های ساخته‌شده، از پشتیبان‌گیری و تنظیمات Git فضای کاری‌ات مطمئن شو.</li>
+          </ul>
+        </section>
+
+        <section id="troubleshooting">
+          <p class="eyebrow dark-eyebrow">۰۸ / رفع مشکل</p>
+          <h2>اگر چیزی درست کار نکرد</h2>
+          <h3>محیط AI، Flock را پیدا نمی‌کند</h3>
+          <p>مطمئن شو بسته درست نصب شده و محیط AI را دوباره باز کن. در Codex این را بررسی کن: <code>codex plugin list</code>؛ در Claude Code این را ببین: <code>/plugin</code>؛ در Gemini CLI و Qwen Code فهرست افزونه‌ها را ببین. پلاگین DeepSeek Harness هنوز پیش‌نمایش توسعه‌دهندگان است.</p>
+          <h3>نسخهٔ Python نصب نیست یا قدیمی است</h3>
+          <p>Python نسخهٔ ۳٫۱۱ یا جدیدتر را نصب کن و مطمئن شو دستور <code>python</code> در محیط اجرای AI کار می‌کند. برای گراف یا پایگاه داده لازم نیست بستهٔ دیگری نصب کنی.</p>
+          <h3>بررسی گراف می‌گوید منبعی پیدا نمی‌شود</h3>
+          <p>مطمئن شو ارجاع هر موجودیت و رابطه از شناسهٔ <code>source_id</code> استفاده می‌کند که در فهرست <code>sources</code> گراف پیشنهادی وجود دارد. پیش از واردکردن، گراف را دوباره بررسی کن.</p>
+          <h3>حذف Flock</h3>
+          <p>برای حذف Flock از مدیریت پلاگین‌ها یا افزونه‌های محیط AI استفاده کن. حذف پلاگین داده‌های فضای کاری را پاک نمی‌کند. پوشهٔ <code>.flock/</code> را فقط وقتی پاک کن که از اطلاعات پشتیبان گرفته‌ای یا مطمئنی دیگر به گراف‌ها و اجراها نیاز نداری.</p>
+        </section>
+
+        <section id="license">
+          <p class="eyebrow dark-eyebrow">۰۹ / پروژه</p>
+          <h2>مجوز و پیشینهٔ پروژه</h2>
+          <p>Flock با مجوز <a href="https://github.com/plilian/flock/blob/main/LICENSE">AGPL-3.0</a> منتشر می‌شود. این پروژه نسخه‌ای مستقل و به‌طور گسترده تغییرکرده بر پایهٔ پروژهٔ متن‌باز <a href="https://github.com/666ghj/MiroFish">MiroFish</a> است. Flock شیوهٔ وب‌اپ قبلی و گراف مبتنی بر Zep را کنار گذاشته و بسته‌های اختصاصی برای محیط‌های AI و گراف SQLite محلی ساخته است. Flock وابسته به MiroFish یا سازندگانش نیست و تأیید آن‌ها را ندارد. برای دیدن پیشینهٔ پروژه، <a href="https://github.com/plilian/flock/blob/main/ATTRIBUTION.md">یادداشت انتساب پروژه</a> را ببین.</p>
+          <p><a href="https://github.com/plilian/flock">دیدن کد در GitHub ↗</a> · <a href="https://github.com/plilian/flock/issues">گزارش مشکل ↗</a></p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="docs-footer">
+    <a class="brand" href="/fa/"><svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 21.6 14 8l3.4 6.2 3-4.5L27 21.6H7Z"/><circle cx="8" cy="24" r="2"/><circle cx="24" cy="24" r="2"/></svg><span>Flock</span></a>
+    <p>راهنمای پلاگین · فارسی · AGPL-3.0</p>
+  </footer>
+  <script src="../assets/site.js?v=0.7.0" defer></script>
+</body>
+</html>

@@ -2,7 +2,7 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "flock",
   "version": "0.6.0",
-  "description": "Build evidence-grounded graphs and compare synthetic scenarios in English, Japanese, Simplified Chinese, or Spanish.",
+  "description": "Build evidence-grounded graphs and compare synthetic scenarios in English, Japanese, Simplified Chinese, Spanish, or Persian.",
   "author": {
     "name": "pili"
   },
@@ -14,7 +14,7 @@
       "interface": {
         "displayName": "Flock",
         "shortDescription": "Multilingual knowledge graphs & simulations",
-          "longDescription": "Turn source documents into an evidence-labeled knowledge graph, audit its source trail, and compare controlled synthetic community scenarios with interactive local replays. Flock supports English, Japanese, Simplified Chinese, and Spanish for responses, synthetic content, audits, and reports while keeping commands and schema values stable. The active host session performs model reasoning, while each user configures their own host and provider access. Flock's model-free helper stores graph, audits, and experiment runs in the chosen workspace. No separate Flock API key, Zep key, external graph service, or local web app is required.",
+          "longDescription": "Turn source documents into an evidence-labeled knowledge graph, audit its source trail, and compare controlled synthetic community scenarios with interactive local replays. Flock supports English, Japanese, Simplified Chinese, Spanish, and Persian for responses, synthetic content, audits, and reports while keeping commands and schema values stable. The active host session performs model reasoning, while each user configures their own host and provider access. Flock's model-free helper stores graph, audits, and experiment runs in the chosen workspace. No separate Flock API key, Zep key, external graph service, or local web app is required.",
         "developerName": "pili",
         "category": "Productivity",
         "capabilities": [],

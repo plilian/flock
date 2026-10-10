@@ -6,7 +6,7 @@
 
 **A multi-host AI agent plugin for source-grounded knowledge graphs, evidence audits, and synthetic social simulations.**
 
-[Install](#install-as-a-plugin) · [How it works](#how-it-works) · [English docs](https://flock.daalgp.com/docs.html) · [日本語](https://flock.daalgp.com/ja/docs.html) · [简体中文](https://flock.daalgp.com/zh-cn/docs.html) · [Español](https://flock.daalgp.com/es/docs.html) · [Privacy](#privacy-and-data) · [License](#license-and-attribution)
+[Install](#install-as-a-plugin) · [How it works](#how-it-works) · [English docs](https://flock.daalgp.com/docs.html) · [日本語](https://flock.daalgp.com/ja/docs.html) · [简体中文](https://flock.daalgp.com/zh-cn/docs.html) · [Español](https://flock.daalgp.com/es/docs.html) · [فارسی](https://flock.daalgp.com/fa/docs.html) · [Privacy](#privacy-and-data) · [License](#license-and-attribution)
 
 ![AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-5e7656?style=flat-square)
 ![Agent hosts](https://img.shields.io/badge/agent%20hosts-5-171b20?style=flat-square)
@@ -20,7 +20,7 @@ Flock helps you explore a question by grounding it in source material, mapping t
 
 Flock itself requires **no Flock API key, Zep key, or Flock account**. Model access remains with the host you choose: each user signs in or configures that host separately, and its data policies, plan, and usage limits apply; some host configurations may require their own provider credentials. DeepSeek Harness support targets its developer-preview plugin host, not DeepSeek's chat website or API.
 
-Flock's plugin workflow and website support **English, Japanese, Simplified Chinese (`zh-CN`), and Spanish**. In any supported host, it follows the user's language for replies, research questions, synthetic-agent content, evidence reviews, and reports. Commands, schema keys, IDs, and fixed enum values remain stable. Choose a language in the website navigation or open its [localized setup guide](https://flock.daalgp.com/docs.html), [日本語](https://flock.daalgp.com/ja/docs.html), [简体中文](https://flock.daalgp.com/zh-cn/docs.html), or [español](https://flock.daalgp.com/es/docs.html).
+Flock's plugin workflow and website support **English, Japanese, Simplified Chinese (`zh-CN`), Spanish, and Persian**. In any supported host, it follows the user's language for replies, research questions, synthetic-agent content, evidence reviews, and reports. Commands, schema keys, IDs, and fixed enum values remain stable. Choose a language in the website navigation or open its [localized setup guide](https://flock.daalgp.com/docs.html), [日本語](https://flock.daalgp.com/ja/docs.html), [简体中文](https://flock.daalgp.com/zh-cn/docs.html), [español](https://flock.daalgp.com/es/docs.html), or [فارسی](https://flock.daalgp.com/fa/docs.html).
 
 > **A simulation is a structured thought experiment. It is not a poll, evidence about real people, or a forecast.**
 

@@ -1,6 +1,6 @@
 ---
 name: flock
-description: Build evidence-labeled knowledge graphs, audit source trails, compare controlled synthetic scenarios, and write linked reports. Supports English, Japanese, Simplified Chinese, and Spanish.
+description: Build evidence-labeled knowledge graphs, audit source trails, compare controlled synthetic scenarios, and write linked reports. Supports English, Japanese, Simplified Chinese, Spanish, and Persian.
 ---
 
 # Flock
@@ -11,7 +11,7 @@ Flock includes two higher-rigor workflows: **Evidence Audit** checks graph prove
 
 ## Language support
 
-- Reply in the language the user is using, unless they request another language. Flock explicitly supports English, Japanese, Simplified Chinese (`zh-CN`), and Spanish; use the same language for questions, explanations, audit reviews, reports, and other user-facing prose.
+- Reply in the language the user is using, unless they request another language. Flock explicitly supports English, Japanese, Simplified Chinese (`zh-CN`), Spanish, and Persian; use the same language for questions, explanations, audit reviews, reports, and other user-facing prose.
 - Write natural-language content in that language, including project and experiment titles, research questions, scenario descriptions, agent personas, beliefs, goals, assumptions, posts, comments, and report text. Keep synthetic agent language consistent with the requested scenario; do not silently mix languages.
 - Keep helper commands, paths, JSON keys, IDs, enum values, and schema labels exactly as required by the Flock format. Translate only natural-language field values. Keep IDs stable and ASCII-safe.
 - Preserve source quotations and proper names in their original form. Add a concise translation beside a quotation when it helps the reader; clearly distinguish the source text from its translation.

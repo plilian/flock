@@ -9,6 +9,7 @@
 - [日本語ホーム](https://flock.daalgp.com/ja/) · [日本語ドキュメント](https://flock.daalgp.com/ja/docs.html)
 - [简体中文主页](https://flock.daalgp.com/zh-cn/) · [简体中文文档](https://flock.daalgp.com/zh-cn/docs.html)
 - [Página en español](https://flock.daalgp.com/es/) · [Documentación en español](https://flock.daalgp.com/es/docs.html)
+- [صفحهٔ فارسی](https://flock.daalgp.com/fa/) · [راهنمای فارسی](https://flock.daalgp.com/fa/docs.html)
 - [Source repository](https://github.com/plilian/flock): Source code and release details.
 
 ## Product facts
@@ -19,4 +20,4 @@
 - Evidence Audit checks citation structure and supports a host-model review of source meaning; citations do not prove a claim is true.
 - Scenario Lab compares controlled variants and replicate runs using synthetic agents. Results are thought experiments, not polls, observations, or forecasts about real people.
 - Flock is licensed under AGPL-3.0 and is an independent, substantially modified derivative of MiroFish. See the documentation and repository attribution notice.
-- The Flock skill and website support English, Japanese, Simplified Chinese (`zh-CN`), and Spanish. The skill follows the user's language for natural-language responses and reports; fixed commands and schema values stay unchanged.
+- The Flock skill and website support English, Japanese, Simplified Chinese (`zh-CN`), Spanish, and Persian. The skill follows the user's language for natural-language responses and reports; fixed commands and schema values stay unchanged.

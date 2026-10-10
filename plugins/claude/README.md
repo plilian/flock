@@ -19,4 +19,4 @@ Flock does not request or store provider API keys. Claude account access, plan l
 
 Ask Claude to audit graph provenance or compare a baseline against controlled alternatives with Flock's Scenario Lab. Each variant uses the same synthetic roster and keeps run history independent; the comparison view shows computed outcomes and replicate ranges.
 
-The Flock skill supports English, Japanese, Simplified Chinese, and Spanish. Ask in your preferred language; Flock writes questions, synthetic-agent content, audits, and reports in that language while preserving required commands and schema values.
+The Flock skill supports English, Japanese, Simplified Chinese, Spanish, and Persian. Ask in your preferred language; Flock writes questions, synthetic-agent content, audits, and reports in that language while preserving required commands and schema values.
